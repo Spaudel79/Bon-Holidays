@@ -44,7 +44,9 @@ INSTALLED_APPS = [
     #custom apps
     'apps.accounts',
     'apps.blogs',
+    'apps.destination',
     'apps.enquiry',
+    'apps.notifications',
     'apps.packages',
     'apps.payment',
     'apps.reportings',
