@@ -155,7 +155,9 @@ MATERIAL_ADMIN_SITE = {
     'APP_ICONS': {  # Set icons for applications(lowercase), including 3rd party apps, {'application_name': 'material_icon_name', ...}
         'accounts': 'person',
         'blogs': '',
+        'destination': '',
         'enquiry': '',
+        'notifications': '',
         'packages': 'spa',
         'payment': '',
         'reportings': '',
