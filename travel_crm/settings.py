@@ -43,7 +43,7 @@ INSTALLED_APPS = [
 
     #custom apps
     'apps.accounts',
-    'apps.blog',
+    'apps.blogs',
     'apps.enquiry',
     'apps.packages',
     'apps.payment',
@@ -151,7 +151,12 @@ MATERIAL_ADMIN_SITE = {
     # 'NAVBAR_REVERSE': True,  # Hide side navbar by default
     'SHOW_COUNTS': True, # Show instances counts for each model
     'APP_ICONS': {  # Set icons for applications(lowercase), including 3rd party apps, {'application_name': 'material_icon_name', ...}
+        'accounts': 'person',
+        'blogs': '',
+        'enquiry': '',
         'packages': 'spa',
+        'payment': '',
+        'reportings': '',
     },
     'MODEL_ICONS': {  # Set icons for models(lowercase), including 3rd party models, {'model_name': 'material_icon_name', ...}
         # 'travels': 'room', eg: does not work
