@@ -154,13 +154,13 @@ MATERIAL_ADMIN_SITE = {
     'SHOW_COUNTS': True, # Show instances counts for each model
     'APP_ICONS': {  # Set icons for applications(lowercase), including 3rd party apps, {'application_name': 'material_icon_name', ...}
         'accounts': 'person',
-        'blogs': '',
-        'destination': '',
-        'enquiry': '',
-        'notifications': '',
+        'blogs': 'assignment',
+        'destination': 'beach_access',
+        'enquiry': 'video_call',
+        'notifications': 'alarm',
         'packages': 'spa',
-        'payment': '',
-        'reportings': '',
+        'payment': 'attach_money',
+        'reportings': 'bug_report',
     },
     'MODEL_ICONS': {  # Set icons for models(lowercase), including 3rd party models, {'model_name': 'material_icon_name', ...}
         # 'travels': 'room', eg: does not work
