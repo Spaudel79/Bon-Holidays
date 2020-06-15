@@ -1,3 +1,11 @@
-from django.shortcuts import render
+from rest_framework import viewsets
+from .models import Travel, Destination, Package
+from .serializers import TravelSerializer, PackageSerializer
 
-# Create your views here.
+class TravelViewSet(viewsets.ReadOnlyModelViewSet):
+    queryset = Travel.objects.all()
+    serializer_class = TravelSerializer
+
+class PackageViewSet(viewsets.ReadOnlyModelViewSet):
+    queryset = Package.objects.all()
+    serializer_class = PackageSerializer

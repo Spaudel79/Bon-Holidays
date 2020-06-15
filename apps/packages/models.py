@@ -10,3 +10,27 @@ class Travel(models.Model):
 
     def __str__(self):
         return f"{self.destination}:{self.duration}:{self.price}"
+
+class Destination(models.Model):
+    name = models.CharField(max_length=255)
+    description = models.CharField(max_length=255)
+    image = models.ImageField(blank=True)
+    date_created = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return self.name
+
+class Package(models.Model):
+    package_name = models.CharField(max_length=255)
+    price = models.IntegerField()
+    rating = models.IntegerField(choices=((1, 1),
+                                          (2, 2),
+                                          (3, 3),
+                                          (4, 4),
+                                          (5, 5))
+                                 )
+    image = models.ImageField(blank=True)
+    date_created = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return self.package_name
