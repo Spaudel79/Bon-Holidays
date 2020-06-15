@@ -1,12 +1,16 @@
 from django.contrib import admin
 from .models import Travel, Destination, Package
 from django.contrib.admin import ModelAdmin, register
-
+from imagekit.admin import AdminThumbnail
+from django.utils.html import format_html
 # Register your models here.
 
 @register(Travel)
 class TravelAdmin(ModelAdmin):
-    list_display = ('destination', 'duration', 'price', 'date_created')
+    list_display = ('image_display','destination', 'duration', 'price', 'date_created')
+    image_display = AdminThumbnail(image_field='thumbnail')
+    image_display.short_description = 'Image'
+    readonly_fields = ['image_display']
     icon_name = 'tram'
 
 class DestinationAdmin(ModelAdmin):
@@ -14,7 +18,17 @@ class DestinationAdmin(ModelAdmin):
     icon_name = 'tram'
 
 class PackageAdmin(ModelAdmin):
-    list_display = ('image', 'package_name', 'price', 'rating', 'date_created')
+
+    def edit(self, obj):
+        return format_html('<a class="btn-btn" href="/admin/packages/package/{}/change/">Change</a>', obj.id)
+
+    def delete(self, obj):
+        return format_html('<a class="btn-btn" href="/admin/packages/package/{}/delete/">Delete</a>', obj.id)
+
+    list_display = ('image_display','package_name', 'price', 'rating', 'date_created', 'edit', 'delete')
+    image_display = AdminThumbnail(image_field='thumbnail')
+    image_display.short_description = 'Image'
+    readonly_fields = ['image_display']
     icon_name = 'tram'
 
 admin.site.register(Destination, DestinationAdmin)

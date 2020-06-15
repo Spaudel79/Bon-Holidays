@@ -53,6 +53,7 @@ INSTALLED_APPS = [
 
     #third party apps
     'rest_framework',
+    'imagekit',
 ]
 
 MIDDLEWARE = [
@@ -134,6 +135,10 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.0/howto/static-files/
 
 STATIC_URL = '/static/'
+STATIC_ROOT = 'static/'
+
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 AUTH_USER_MODEL = 'accounts.User'
 

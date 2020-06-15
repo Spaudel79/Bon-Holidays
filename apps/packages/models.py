@@ -1,4 +1,7 @@
 from django.db import models
+from imagekit.models import ImageSpecField
+from imagekit.processors import ResizeToFill
+
 
 # Create your models here.
 class Travel(models.Model):
@@ -15,6 +18,10 @@ class Destination(models.Model):
     name = models.CharField(max_length=255)
     description = models.CharField(max_length=255)
     image = models.ImageField(blank=True)
+    thumbnail = ImageSpecField(source='image',
+                                      processors=[ResizeToFill(100, 50)],
+                                      format='JPEG',
+                                      options={'quality': 60})
     date_created = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
@@ -30,6 +37,10 @@ class Package(models.Model):
                                           (5, 5))
                                  )
     image = models.ImageField(blank=True)
+    thumbnail = ImageSpecField(source='image',
+                                      processors=[ResizeToFill(100, 50)],
+                                      format='JPEG',
+                                      options={'quality': 60})
     date_created = models.DateTimeField(auto_now_add=True)
 
     def __str__(self):
