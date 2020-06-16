@@ -33,6 +33,7 @@ class UsersAdmin(UserAdmin):
 
 class UserProfileAdmin(ModelAdmin):
     icon_name = 'person_pin'
+    search_fields = ['email',]
 
 admin.site.register(User, UsersAdmin)
 admin.site.register(UserProfile, UserProfileAdmin)
