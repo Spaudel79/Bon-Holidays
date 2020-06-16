@@ -8,6 +8,8 @@ from django.utils.html import format_html
 
 class DestinationAdmin(ModelAdmin):
 
+    search_fields = ['name']
+
     def edit(self, obj):
         return format_html('<a class="btn-btn" href="/admin/packages/package/{}/change/">Change</a>', obj.id)
 
@@ -21,6 +23,8 @@ class DestinationAdmin(ModelAdmin):
     icon_name = 'explore'
 
 class PackageAdmin(ModelAdmin):
+
+    autocomplete_fields = ['destination']
 
     def edit(self, obj):
         return format_html('<a class="btn-btn" href="/admin/packages/package/{}/change/">Change</a>', obj.id)
