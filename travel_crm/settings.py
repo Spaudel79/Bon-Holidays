@@ -54,7 +54,11 @@ INSTALLED_APPS = [
     #third party apps
     'rest_framework',
     'imagekit',
+    'ckeditor',
+    'ckeditor_uploader'
 ]
+
+CKEDITOR_UPLOAD_PATH = "uploads/"
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
