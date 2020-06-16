@@ -38,7 +38,7 @@ class UserProfileAdmin(ModelAdmin):
     search_fields = ['user__name']
     autocomplete_fields = ['user']
 
-    list_display = ('image_display', 'about', 'user_type', 'last_updated')
+    list_display = ('image_display', 'user', 'about', 'user_type', 'last_updated')
     image_display = AdminThumbnail(image_field='thumbnail')
     image_display.short_description = 'Image'
     readonly_fields = ['image_display']
