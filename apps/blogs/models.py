@@ -9,3 +9,8 @@ class BlogPost(models.Model):
 
     def __str__(self):
         return self.name
+
+    @property
+    def html_stripped(self):
+       from django.utils.html import strip_tags
+       return strip_tags(self.content)
