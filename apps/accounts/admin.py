@@ -34,6 +34,7 @@ class UsersAdmin(UserAdmin):
 class UserProfileAdmin(ModelAdmin):
     icon_name = 'person_pin'
     search_fields = ['user__name']
+    autocomplete_fields = ['user']
 
 admin.site.register(User, UsersAdmin)
 admin.site.register(UserProfile, UserProfileAdmin)
