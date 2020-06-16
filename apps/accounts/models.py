@@ -71,9 +71,9 @@ class UserProfile(models.Model):
                 current_avatar.delete()
         super(UserProfile, self).save(*args, **kwargs)
 
-    def get_absolute_url(self):
-        target = reverse('accounts:profile', args=[self.user.email])
-        return target
+    # def get_absolute_url(self):
+    #     target = reverse('accounts:profile', args=[self.user.email])
+    #     return target
 
     def is_admin(self):
         return self.user_type == 'a'
