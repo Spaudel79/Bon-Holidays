@@ -10,7 +10,7 @@ from apps.accounts import models
 # Register your models here.
 class UsersAdmin(UserAdmin):
     ordering = ['id']
-    list_display = ['email', 'name']
+    list_display = ['email', 'name', 'is_active', 'is_staff',]
     search_fields = ('email',)
     fieldsets = (
         (None, {'fields': ('email', 'password')}),
