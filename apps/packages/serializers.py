@@ -2,6 +2,8 @@ from rest_framework import serializers
 from .models import Package, Destination
 
 class PackageSerializer(serializers.ModelSerializer):
+    #destination name instead of foreigen key id
+    destination_name = serializers.ReadOnlyField(source='destination.name')
     class Meta:
         model = Package
-        fields = '__all__'
+        fields = ['destination_name', 'package_name', 'price', 'rating', 'image', 'date_created']
