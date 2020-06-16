@@ -2,6 +2,8 @@ from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin
 from .models import User, UserProfile
 from django.contrib.admin import ModelAdmin
+from imagekit.admin import AdminThumbnail
+from django.utils.html import format_html
 from django.utils.translation import gettext as _
 
 from apps.accounts import models
@@ -35,6 +37,11 @@ class UserProfileAdmin(ModelAdmin):
     icon_name = 'person_pin'
     search_fields = ['user__name']
     autocomplete_fields = ['user']
+
+    # list_display = ('image_display',)
+    # image_display = AdminThumbnail(image_field='thumbnail')
+    # image_display.short_description = 'Image'
+    # readonly_fields = ['image_display']
 
 admin.site.register(User, UsersAdmin)
 admin.site.register(UserProfile, UserProfileAdmin)
