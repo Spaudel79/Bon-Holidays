@@ -1,3 +1,9 @@
-from django.shortcuts import render
+from django.shortcuts import redirect
+from django.contrib.auth.decorators import login_required
+from django.views.generic import DetailView, ListView, UpdateView
 
-# Create your views here.
+from .models import UserProfile
+
+@login_required
+def profile_redirector(request):
+    return redirect('accounts:userprofile', username=request.user.email)
