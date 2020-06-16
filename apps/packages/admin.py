@@ -1,21 +1,24 @@
 from django.contrib import admin
-from .models import Travel, Destination, Package
+from .models import Destination, Package
 from django.contrib.admin import ModelAdmin, register
 from imagekit.admin import AdminThumbnail
 from django.utils.html import format_html
 # Register your models here.
 
-@register(Travel)
-class TravelAdmin(ModelAdmin):
-    list_display = ('image_display','destination', 'duration', 'price', 'date_created')
+
+class DestinationAdmin(ModelAdmin):
+
+    def edit(self, obj):
+        return format_html('<a class="btn-btn" href="/admin/packages/package/{}/change/">Change</a>', obj.id)
+
+    def delete(self, obj):
+        return format_html('<a class="btn-btn" href="/admin/packages/package/{}/delete/">Delete</a>', obj.id)
+
+    list_display = ('image_display', 'name', 'description', 'date_created')
     image_display = AdminThumbnail(image_field='thumbnail')
     image_display.short_description = 'Image'
     readonly_fields = ['image_display']
-    icon_name = 'tram'
-
-class DestinationAdmin(ModelAdmin):
-    list_display = ('image', 'name', 'description', 'date_created')
-    icon_name = 'tram'
+    icon_name = 'explore'
 
 class PackageAdmin(ModelAdmin):
 
@@ -29,7 +32,7 @@ class PackageAdmin(ModelAdmin):
     image_display = AdminThumbnail(image_field='thumbnail')
     image_display.short_description = 'Image'
     readonly_fields = ['image_display']
-    icon_name = 'tram'
+    icon_name = 'layers'
 
 admin.site.register(Destination, DestinationAdmin)
 admin.site.register(Package, PackageAdmin)

@@ -4,7 +4,6 @@ from rest_framework import routers
 from . import views
 
 router = routers.DefaultRouter()
-router.register(r'travel', views.TravelViewSet)
 router.register(r'packages', views.PackageViewSet)
 
 # Wire up our API using automatic URL routing.

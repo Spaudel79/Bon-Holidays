@@ -2,18 +2,6 @@ from django.db import models
 from imagekit.models import ImageSpecField
 from imagekit.processors import ResizeToFill
 
-
-# Create your models here.
-class Travel(models.Model):
-    destination = models.CharField(max_length=255)
-    duration = models.IntegerField(null=True)
-    no_of_persons = models.IntegerField()
-    date_created = models.DateTimeField(auto_now_add=True)
-    price = models.IntegerField()
-
-    def __str__(self):
-        return f"{self.destination}:{self.duration}:{self.price}"
-
 class Destination(models.Model):
     name = models.CharField(max_length=255)
     description = models.CharField(max_length=255)
@@ -28,6 +16,7 @@ class Destination(models.Model):
         return self.name
 
 class Package(models.Model):
+    destination = models.ForeignKey(Destination, on_delete=models.CASCADE)
     package_name = models.CharField(max_length=255)
     price = models.IntegerField()
     rating = models.IntegerField(choices=((1, 1),
