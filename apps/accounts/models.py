@@ -3,6 +3,8 @@ from django.conf import settings
 from django.urls import reverse
 from django.utils.translation import gettext_lazy as _
 from django.contrib.auth.models import BaseUserManager, AbstractBaseUser, PermissionsMixin
+from imagekit.models import ImageSpecField
+from imagekit.processors import ResizeToFill
 
 # Create your models here.
 
@@ -50,6 +52,10 @@ class UserProfile(models.Model):
     user = models.OneToOneField(settings.AUTH_USER_MODEL,
                                 related_name='profile', on_delete=models.CASCADE)
     avatar = models.ImageField(blank=True)
+    thumbnail = ImageSpecField(source='avatar',
+                                      processors=[ResizeToFill(100, 50)],
+                                      format='JPEG',
+                                      options={'quality': 60})
     about = models.TextField(blank=True)
     user_type = models.CharField(max_length=1, choices=USER_TYPES, default='g')
 
@@ -66,7 +72,7 @@ class UserProfile(models.Model):
         super(UserProfile, self).save(*args, **kwargs)
 
     def get_absolute_url(self):
-        target = reverse('accounts:profile', args=[self.user.username])
+        target = reverse('accounts:profile', args=[self.user.email])
         return target
 
     def is_admin(self):
