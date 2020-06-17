@@ -11,12 +11,12 @@ class DestinationAdmin(ModelAdmin):
     search_fields = ['name']
 
     def edit(self, obj):
-        return format_html('<a class="btn-btn" href="/admin/packages/package/{}/change/">Change</a>', obj.id)
+        return format_html('<a class="btn-btn" href="/admin/packages/destination/{}/change/">Change</a>', obj.id)
 
     def delete(self, obj):
-        return format_html('<a class="btn-btn" href="/admin/packages/package/{}/delete/">Delete</a>', obj.id)
+        return format_html('<a class="btn-btn" href="/admin/packages/destination/{}/delete/">Delete</a>', obj.id)
 
-    list_display = ('image_display', 'name', 'description', 'date_created')
+    list_display = ('image_display', 'name', 'description', 'discount', 'edit', 'delete')
     image_display = AdminThumbnail(image_field='thumbnail')
     image_display.short_description = 'Image'
     readonly_fields = ['image_display']
@@ -32,7 +32,7 @@ class PackageAdmin(ModelAdmin):
     def delete(self, obj):
         return format_html('<a class="btn-btn" href="/admin/packages/package/{}/delete/">Delete</a>', obj.id)
 
-    list_display = ('image_display','package_name', 'price', 'rating', 'date_created', 'edit', 'delete')
+    list_display = ('image_display','package_name', 'duration', 'price', 'discounted_price', 'savings',  'rating', 'date_created', 'edit', 'delete')
     image_display = AdminThumbnail(image_field='thumbnail')
     image_display.short_description = 'Image'
     readonly_fields = ['image_display']
