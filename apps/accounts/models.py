@@ -6,6 +6,9 @@ from django.contrib.auth.models import BaseUserManager, AbstractBaseUser, Permis
 from imagekit.models import ImageSpecField
 from imagekit.processors import ResizeToFill
 
+from django.contrib.auth.models import Group
+
+
 # Create your models here.
 
 class UserManager(BaseUserManager):
@@ -83,3 +86,7 @@ class UserProfile(models.Model):
 
     def is_customer(self):
         return self.user_type=='c'
+
+
+class UserGroup(models.Model):
+    group = models.OneToOneField(Group, on_delete=models.CASCADE)
