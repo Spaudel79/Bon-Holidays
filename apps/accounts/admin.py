@@ -1,10 +1,13 @@
 from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin
-from .models import User, UserProfile
+from .models import User, UserProfile, UserGroup
 from django.contrib.admin import ModelAdmin
 from imagekit.admin import AdminThumbnail
 from django.utils.html import format_html
 from django.utils.translation import gettext as _
+
+from django.contrib.auth.models import Group
+
 
 from apps.accounts import models
 # Register your models here.
@@ -43,7 +46,11 @@ class UserProfileAdmin(ModelAdmin):
     image_display.short_description = 'Image'
     readonly_fields = ['image_display']
 
+class UserGroupAdmin(ModelAdmin):
+    icon_name = 'people'
+
 admin.site.register(User, UsersAdmin)
 admin.site.register(UserProfile, UserProfileAdmin)
-
+admin.site.register(UserGroup, UserGroupAdmin)
+# admin.site.unregister(Group)
 
