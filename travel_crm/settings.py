@@ -44,7 +44,6 @@ INSTALLED_APPS = [
     #custom apps
     'apps.accounts',
     'apps.blogs',
-    'apps.destination',
     'apps.enquiry',
     'apps.notifications',
     'apps.packages',
@@ -164,7 +163,6 @@ MATERIAL_ADMIN_SITE = {
     'APP_ICONS': {  # Set icons for applications(lowercase), including 3rd party apps, {'application_name': 'material_icon_name', ...}
         'accounts': 'person',
         'blogs': 'assignment',
-        'destination': 'beach_access',
         'enquiry': 'video_call',
         'notifications': 'alarm',
         'packages': 'spa',
