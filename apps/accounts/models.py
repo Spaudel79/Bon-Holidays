@@ -90,3 +90,50 @@ class UserProfile(models.Model):
 
 class UserGroup(models.Model):
     group = models.OneToOneField(Group, on_delete=models.CASCADE)
+
+
+class PartnerApplication(models.Model):
+    first_name = models.CharField(max_length=255)
+    last_name = models.CharField(max_length=255)
+    company_name = models.CharField(max_length=255)
+    email_address = models.EmailField()
+    phone = models.CharField(max_length=255)
+    state = models.CharField(max_length=255)
+
+class BookmundiAccount(models.Model):
+
+    #personal details
+    title = models.CharField(max_length=255)
+    first_name = models.CharField(max_length=255)
+    middle_name = models.CharField(max_length=255, null=True)
+    last_name = models.CharField(max_length=255)
+    date_of_birth = models.DateField()
+    nationality = models.CharField(max_length=255)
+    spoken_languages = models.CharField(max_length=255)
+    occupation = models.CharField(max_length=255)
+    short_bio = models.TextField(max_length=255)
+    website_if_any = models.CharField(max_length=255, null=True)
+
+    #contact details
+    email = models.EmailField()
+    phone_number = models.CharField(max_length=255)
+
+    #passport details
+    passport_number = models.CharField(max_length=255)
+    issue_date = models.DateField()
+    expiry_date = models.DateField()
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

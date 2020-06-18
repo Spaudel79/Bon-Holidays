@@ -1,6 +1,6 @@
 from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin
-from .models import User, UserProfile, UserGroup
+from .models import User, UserProfile, UserGroup, PartnerApplication, BookmundiAccount
 from django.contrib.admin import ModelAdmin
 from imagekit.admin import AdminThumbnail
 from django.utils.html import format_html
@@ -49,8 +49,17 @@ class UserProfileAdmin(ModelAdmin):
 class UserGroupAdmin(ModelAdmin):
     icon_name = 'people'
 
+
+class PartnerApplicationAdmin(ModelAdmin):
+    icon_name = 'people'
+
+class BookmundiAccountAdmin(ModelAdmin):
+    icon_name = 'person'
+
 admin.site.register(User, UsersAdmin)
 admin.site.register(UserProfile, UserProfileAdmin)
 admin.site.register(UserGroup, UserGroupAdmin)
 # admin.site.unregister(Group)
 
+admin.site.register(PartnerApplication, PartnerApplicationAdmin)
+admin.site.register(BookmundiAccount, BookmundiAccountAdmin)
