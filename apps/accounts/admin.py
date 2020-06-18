@@ -51,9 +51,13 @@ class UserGroupAdmin(ModelAdmin):
 
 
 class PartnerApplicationAdmin(ModelAdmin):
+    list_display = ('first_name', 'last_name', 'company_name', 'email_address', 'phone', 'state')
     icon_name = 'people'
 
 class BookmundiAccountAdmin(ModelAdmin):
+    list_display = ('title', 'first_name', 'middle_name', 'last_name',
+                    'date_of_birth', 'nationality', 'occupation', 'email',
+                    'phone_number', 'passport_number', 'expiry_date')
     icon_name = 'person'
 
 admin.site.register(User, UsersAdmin)
