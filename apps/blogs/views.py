@@ -1,3 +1,11 @@
-from django.shortcuts import render
+from rest_framework import viewsets, mixins
+from .models import  BlogPost, Comment
+from .serializers import BlogPostSerializer, CommentSerializer
 
-# Create your views here.
+class BlogPostViewSet(viewsets.ReadOnlyModelViewSet):
+    queryset = BlogPost.objects.all()
+    serializer_class = BlogPostSerializer
+
+class CommentViewSet(mixins.CreateModelMixin, viewsets.GenericViewSet):
+    queryset = Comment.objects.all()
+    serializer_class = CommentSerializer
