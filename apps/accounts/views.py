@@ -6,7 +6,7 @@ class PartnerApplicationViewSet(mixins.CreateModelMixin, viewsets.GenericViewSet
     queryset = PartnerApplication.objects.all()
     serializer_class = PartnerApplicationSerializer
 
-class BookmundiAccountViewSet(mixins.CreateModelMixin, viewsets.GenericViewSet):
+class BookmundiAccountViewSet(mixins.CreateModelMixin, mixins.RetrieveModelMixin, viewsets.GenericViewSet):
     queryset = BookmundiAccount.objects.all()
     serializer_class = BookmundiAccountSerializer
 
