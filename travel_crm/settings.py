@@ -54,7 +54,8 @@ INSTALLED_APPS = [
     'rest_framework',
     'imagekit',
     'ckeditor',
-    'ckeditor_uploader'
+    'ckeditor_uploader',
+    'corsheaders',
 ]
 
 CKEDITOR_UPLOAD_PATH = "uploads/"
@@ -67,6 +68,25 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    # django cors headers
+    'corsheaders.middleware.CorsMiddleware',
+    'django.middleware.common.CommonMiddleware',
+]
+
+CORS_ORIGIN_WHITELIST = [
+    "https://example.com",
+    "https://sub.example.com",
+    "http://localhost:8080",
+    "http://127.0.0.1:9000"
+]
+
+CORS_ALLOW_METHODS = [
+    'DELETE',
+    'GET',
+    'OPTIONS',
+    'PATCH',
+    'POST',
+    'PUT',
 ]
 
 ROOT_URLCONF = 'travel_crm.urls'
