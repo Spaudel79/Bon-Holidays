@@ -6,6 +6,6 @@ class BlogPostViewSet(viewsets.ReadOnlyModelViewSet):
     queryset = BlogPost.objects.all()
     serializer_class = BlogPostSerializer
 
-class CommentViewSet(mixins.CreateModelMixin, viewsets.GenericViewSet):
+class CommentViewSet(mixins.CreateModelMixin, mixins.RetrieveModelMixin,viewsets.GenericViewSet):
     queryset = Comment.objects.all()
     serializer_class = CommentSerializer
