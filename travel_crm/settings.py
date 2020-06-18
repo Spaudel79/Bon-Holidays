@@ -193,3 +193,11 @@ MATERIAL_ADMIN_SITE = {
         # 'travels': 'room', eg: does not work
     }
 }
+
+
+#ckeditor configs #todo
+CKEDITOR_CONFIGS = {
+    'default': {
+        'toolbar': 'full',
+    },
+}
