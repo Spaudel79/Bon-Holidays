@@ -7,3 +7,8 @@ class PackageSerializer(serializers.ModelSerializer):
     class Meta:
         model = Package
         fields = ['destination_name', 'package_name', 'price', 'rating', 'image', 'date_created']
+
+class DestinationSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Destination
+        fields = '__all__'
