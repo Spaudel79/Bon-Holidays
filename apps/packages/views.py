@@ -1,6 +1,10 @@
 from rest_framework import viewsets, generics, filters
 from .models import  Destination, Package
-from .serializers import PackageSerializer
+from .serializers import PackageSerializer, DestinationSerializer
+
+class DestinationViewSet(generics.ListAPIView, generics.RetrieveAPIView, viewsets.GenericViewSet):
+    queryset = Destination.objects.all()
+    serializer_class = DestinationSerializer
 
 class PackageViewSet(generics.ListAPIView, generics.RetrieveAPIView, viewsets.GenericViewSet):
     queryset = Package.objects.all()
