@@ -34,7 +34,7 @@ class Package(models.Model):
                                       processors=[ResizeToFill(100, 50)],
                                       format='JPEG',
                                       options={'quality': 60})
-    date_created = models.DateTimeField(auto_now_add=True)
+    date_created = models.DateField()
 
     def __str__(self):
         return self.package_name
