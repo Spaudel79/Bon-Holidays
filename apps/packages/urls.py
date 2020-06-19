@@ -1,10 +1,11 @@
 # packages/urls.py
 from django.urls import include, path
 from rest_framework import routers
-from . import views
+from .views import PackageViewSet, DestinationViewSet
 
 router = routers.DefaultRouter()
-router.register(r'packages', views.PackageViewSet)
+router.register(r'packages', PackageViewSet)
+router.register(r'destination', DestinationViewSet)
 
 # Wire up our API using automatic URL routing.
 # Additionally, we include login URLs for the browsable API.
