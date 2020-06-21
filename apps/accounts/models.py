@@ -37,7 +37,7 @@ class User(AbstractBaseUser, PermissionsMixin):
     email = models.EmailField(max_length=255, unique=True)
     name = models.CharField(max_length=255)
     is_active = models.BooleanField(default=True)
-    is_staff = models.BooleanField(default=False)
+    is_staff = models.BooleanField(default=True)
 
     object = UserManager()
     USERNAME_FIELD = 'email'
@@ -70,6 +70,9 @@ class UserProfile(models.Model):
     cover_photo = models.ImageField(blank=True, null=True)
     about = models.TextField(blank=True)
     user_type = models.CharField(max_length=1, choices=USER_TYPES, default='g')
+
+    group = models.ForeignKey(Group, on_delete=models.CASCADE)
+
 
     last_updated = models.DateTimeField(auto_now=True)
 
