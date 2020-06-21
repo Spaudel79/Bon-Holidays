@@ -37,11 +37,19 @@ class UsersAdmin(UserAdmin):
 
 
 class UserProfileAdmin(ModelAdmin):
+
+    def edit(self, obj):
+        return format_html('<a class="btn-btn" href="/admin/accounts/userprofile/{}/change/">Change</a>', obj.id)
+
+    def delete(self, obj):
+        return format_html('<a class="btn-btn" href="/admin/accounts/userprofile/{}/delete/">Delete</a>', obj.id)
+
     icon_name = 'person_pin'
     search_fields = ['user__name']
     autocomplete_fields = ['user']
 
-    list_display = ('image_display', 'user', 'about', 'user_type', 'last_updated')
+    list_display = ('image_display', 'user', 'first_name','last_name','phone_number',
+                    'user_type', 'last_updated', 'edit', 'delete')
     image_display = AdminThumbnail(image_field='thumbnail')
     image_display.short_description = 'Image'
     readonly_fields = ['image_display']
