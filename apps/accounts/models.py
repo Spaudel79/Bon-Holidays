@@ -7,8 +7,6 @@ from imagekit.models import ImageSpecField
 from imagekit.processors import ResizeToFill
 
 from django.contrib.auth.models import Group
-
-
 # Create your models here.
 
 class UserManager(BaseUserManager):
@@ -44,6 +42,11 @@ class User(AbstractBaseUser, PermissionsMixin):
     object = UserManager()
     USERNAME_FIELD = 'email'
 
+
+# class Admin(models.Model):
+#     user = models.OneToOneField(settings.AUTH_USER_MODEL,
+#                                 related_name='profile', on_delete=models.CASCADE)
+
 class UserProfile(models.Model):
 
     USER_TYPES = (
@@ -52,6 +55,11 @@ class UserProfile(models.Model):
         ('c', 'Customer'),
     )
 
+    first_name = models.CharField(max_length=255, default="")
+    last_name = models.CharField(max_length=255, default="")
+    company_name = models.CharField(max_length=255, default="")
+    email_address = models.EmailField(default="abc@abc.com")
+    phone_number = models.CharField(max_length=255, default="")
     user = models.OneToOneField(settings.AUTH_USER_MODEL,
                                 related_name='profile', on_delete=models.CASCADE)
     avatar = models.ImageField(blank=True)
@@ -59,6 +67,7 @@ class UserProfile(models.Model):
                                       processors=[ResizeToFill(100, 50)],
                                       format='JPEG',
                                       options={'quality': 60})
+    cover_photo = models.ImageField(blank=True, null=True)
     about = models.TextField(blank=True)
     user_type = models.CharField(max_length=1, choices=USER_TYPES, default='g')
 
