@@ -99,9 +99,9 @@ class UserProfile(models.Model):
     def is_customer(self):
         return self.user_type=='c'
 
-
-class UserGroup(models.Model):
-    group = models.OneToOneField(Group, on_delete=models.CASCADE)
+#
+# class UserGroup(models.Model):
+#     group = models.OneToOneField(Group, on_delete=models.CASCADE)
 
 
 class PartnerApplication(models.Model):
