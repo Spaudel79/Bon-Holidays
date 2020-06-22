@@ -45,11 +45,8 @@ INSTALLED_APPS = [
     'apps.accounts',
     'apps.blogs',
     'apps.enquiry',
-    'apps.notifications',
     'apps.packages',
     'apps.payment',
-    'apps.reportings',
-
     #third party apps
     'rest_framework',
     'imagekit',
