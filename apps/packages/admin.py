@@ -46,7 +46,7 @@ class TopAttractionsAdmin(ModelAdmin):
     def delete(self, obj):
         return format_html('<a class="btn-btn" href="/admin/packages/topattractions/{}/delete/">Delete</a>', obj.id)
 
-    list_display = ('image_display','title',)
+    list_display = ('image_display','title','edit', 'delete')
     image_display = AdminThumbnail(image_field='thumbnail')
     image_display.short_description = 'Image'
     readonly_fields = ['image_display']
@@ -60,7 +60,7 @@ class TopActivitiesAdmin(ModelAdmin):
     def delete(self, obj):
         return format_html('<a class="btn-btn" href="/admin/packages/topactivities/{}/delete/">Delete</a>', obj.id)
 
-    list_display = ('image_display','title','description')
+    list_display = ('image_display','title','description', 'edit', 'delete')
     image_display = AdminThumbnail(image_field='thumbnail')
     image_display.short_description = 'Image'
     readonly_fields = ['image_display']
