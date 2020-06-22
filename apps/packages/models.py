@@ -38,3 +38,26 @@ class Package(models.Model):
 
     def __str__(self):
         return self.package_name
+
+class TopAttractions(models.Model):
+    image = models.ImageField(blank=True)
+    thumbnail = ImageSpecField(source='image',
+                                      processors=[ResizeToFill(100, 50)],
+                                      format='JPEG',
+                                      options={'quality': 60})
+    title = models.CharField(max_length=64)
+
+    def __str__(self):
+        return self.title
+
+class TopActivities(models.Model):
+    image = models.ImageField(blank=True)
+    thumbnail = ImageSpecField(source='image',
+                                      processors=[ResizeToFill(100, 50)],
+                                      format='JPEG',
+                                      options={'quality': 60})
+    title = models.CharField(max_length=64)
+    description = models.TextField(blank=True)
+
+    def __str__(self):
+        return self.title
