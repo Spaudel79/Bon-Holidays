@@ -12,7 +12,7 @@ class DestinationSerializer(serializers.ModelSerializer):
     class Meta:
         model = Destination
         fields = '__all__'
-        
+
 class TopActivitiesSerializer(serializers.ModelSerializer):
     class Meta:
         model = TopActivities
