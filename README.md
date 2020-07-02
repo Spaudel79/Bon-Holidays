@@ -6,7 +6,7 @@ Setup: <br>
 Environment Setup
 * `virtualenv -p </location/to/python3.7> venv` <br>
 * `pip install -r requirements.txt`
-
+w
 Database Migrations
 * `python manage.py makemigrations`
 * `python manage.py migrate`
