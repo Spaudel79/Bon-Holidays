@@ -25,12 +25,12 @@ SECRET_KEY = 'f)_sy=de0f7z*qs19&uodz1+vx@4i5**$xl=0hz&6qrrajqqqj'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = [ 'travelcrm-dev.ap-southeast-1.elasticbeanstalk.com', '127.0.0.1']
+ALLOWED_HOSTS = [ 'travel-env.eba-yzrmrpxx.ap-southeast-1.elasticbeanstalk.com', '127.0.0.1']
 
 
 # Application definition
 
-INSTALLED_APPS = [Laboriosam est max
+INSTALLED_APPS = [
     #django admin dashboard
     'material.admin',
     'material.admin.default',
@@ -75,7 +75,7 @@ CORS_ORIGIN_WHITELIST = [
     "https://sub.example.com",
     "http://localhost:8080",
     "http://127.0.0.1:9000",
-	"http://travelcrm-dev.ap-southeast-1.elasticbeanstalk.com",
+	"http://travel-env.eba-yzrmrpxx.ap-southeast-1.elasticbeanstalk.com",
 ]
 
 CORS_ALLOW_METHODS = [
@@ -212,7 +212,6 @@ MATERIAL_ADMIN_SITE = {
         # 'travels': 'room', eg: does not work
     }
 }
-
 
 #ckeditor configs #todo
 CKEDITOR_CONFIGS = {
