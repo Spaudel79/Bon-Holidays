@@ -25,7 +25,7 @@ SECRET_KEY = 'f)_sy=de0f7z*qs19&uodz1+vx@4i5**$xl=0hz&6qrrajqqqj'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['boncrm-dev.ap-southeast-1.elasticbeanstalk.com']
 
 
 # Application definition
