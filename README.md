@@ -1,6 +1,6 @@
-# Aakash-Backend
+# Travel CRM Backend
 
-Backend for Aakash CRM
+Backend for Travel CRM
 
 Setup: <br>
 Environment Setup
