@@ -25,7 +25,7 @@ SECRET_KEY = 'f)_sy=de0f7z*qs19&uodz1+vx@4i5**$xl=0hz&6qrrajqqqj'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['boncrm-dev.ap-southeast-1.elasticbeanstalk.com']
+ALLOWED_HOSTS = [ 'mountaincrm-dev.ap-southeast-1.elasticbeanstalk.com', '127.0.0.1']
 
 
 # Application definition
@@ -74,7 +74,8 @@ CORS_ORIGIN_WHITELIST = [
     "https://example.com",
     "https://sub.example.com",
     "http://localhost:8080",
-    "http://127.0.0.1:9000"
+    "http://127.0.0.1:9000",
+	"http://mountaincrm-dev.ap-southeast-1.elasticbeanstalk.com",
 ]
 
 CORS_ALLOW_METHODS = [
@@ -117,14 +118,26 @@ WSGI_APPLICATION = 'travel_crm.wsgi.application'
 #     }
 # }
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.mysql',
-        'OPTIONS': {
-            'read_default_file':  os.path.join(BASE_DIR, 'my.cnf'),
-        },
+if 'RDS_HOSTNAME' in os.environ:
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.mysql',
+            'NAME': os.environ['RDS_DB_NAME'],
+            'USER': os.environ['RDS_USERNAME'],
+            'PASSWORD': os.environ['RDS_PASSWORD'],
+            'HOST': os.environ['RDS_HOSTNAME'],
+            'PORT': os.environ['RDS_PORT'],
+        }
     }
-}
+else:
+	DATABASES = {
+		'default': {
+			'ENGINE': 'django.db.backends.mysql',
+			'OPTIONS': {
+				'read_default_file':  os.path.join(BASE_DIR, 'my.cnf'),
+			},
+		}
+	}
 
 
 # Password validation
