@@ -22,8 +22,6 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = 'f)_sy=de0f7z*qs19&uodz1+vx@4i5**$xl=0hz&6qrrajqqqj'
 
-# SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
 
 ALLOWED_HOSTS = [ 'travel-dev2.ap-southeast-1.elasticbeanstalk.com', 'crm.mountaintigernepal.com', '127.0.0.1']
 
@@ -39,6 +37,7 @@ INSTALLED_APPS = [
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
+
     'django.contrib.staticfiles',
 
     #custom apps
@@ -55,6 +54,7 @@ INSTALLED_APPS = [
     'ckeditor',
     'ckeditor_uploader',
     'corsheaders',
+    'storages',
 ]
 
 CKEDITOR_UPLOAD_PATH = "uploads/"
@@ -70,6 +70,7 @@ MIDDLEWARE = [
     # django cors headers
     'corsheaders.middleware.CorsMiddleware',
     'django.middleware.common.CommonMiddleware',
+
 ]
 
 CORS_ORIGIN_WHITELIST = [
@@ -175,16 +176,24 @@ USE_L10N = True
 USE_TZ = True
 
 
+# SECURITY WARNING: don't run with debug turned on in production!
+DEBUG = False
+
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/3.0/howto/static-files/
 
+AWS_ACCESS_KEY_ID = 'AKIAUXGRH6EV5AG4NR6P'
+AWS_SECRET_ACCESS_KEY = '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'
 
+AWS_STORAGE_BUCKET_NAME = 'travels3'
+AWS_S3_CUSTOM_DOMAIN = 'd22yiyd9cpltti.cloudfront.net'
 
-
+AWS_LOCATION = 'static'
+STATICFILES_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
+AWS_DEFAULT_ACL = None
 
 STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'static')
-
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
