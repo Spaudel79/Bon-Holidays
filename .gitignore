@@ -4,6 +4,7 @@
 my.cnf
 __pycache__/
 media/
+static/
 # Elastic Beanstalk Files
 .elasticbeanstalk/*
 !.elasticbeanstalk/*.cfg.yml
