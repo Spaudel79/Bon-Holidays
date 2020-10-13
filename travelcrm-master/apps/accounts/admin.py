@@ -54,6 +54,8 @@ class UserProfileAdmin(ModelAdmin):
     image_display.short_description = 'Image'
     readonly_fields = ['image_display']
 
+
+#already commented out
 # class UserGroupAdmin(ModelAdmin):
 #     icon_name = 'people'
 
@@ -70,6 +72,7 @@ class BookmundiAccountAdmin(ModelAdmin):
 
 admin.site.register(User, UsersAdmin)
 admin.site.register(UserProfile, UserProfileAdmin)
+#already commented out
 # admin.site.register(UserGroup, UserGroupAdmin)
 # admin.site.unregister(Group)
 

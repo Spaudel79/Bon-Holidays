@@ -42,7 +42,7 @@ class User(AbstractBaseUser, PermissionsMixin):
     object = UserManager()
     USERNAME_FIELD = 'email'
 
-
+#already commented out
 # class Admin(models.Model):
 #     user = models.OneToOneField(settings.AUTH_USER_MODEL,
 #                                 related_name='profile', on_delete=models.CASCADE)

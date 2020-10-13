@@ -1,6 +1,6 @@
 from django.db import models
 from ckeditor.fields import RichTextField
-from apps.accounts.models import *
+from apps.accounts.models import UserProfile
 from ckeditor_uploader.fields import RichTextUploadingField
 
 class BlogPost(models.Model):
