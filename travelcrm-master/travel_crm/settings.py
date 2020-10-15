@@ -123,7 +123,7 @@ WSGI_APPLICATION = 'travel_crm.wsgi.application'
 DATABASES = {
         'default': {
             'ENGINE': 'django.db.backends.mysql',
-            'NAME': 'djangodatabase',
+            'NAME': 'traveldb',
             'USER': 'dbadmin',
             'PASSWORD': '12345',
             'HOST': 'localhost',

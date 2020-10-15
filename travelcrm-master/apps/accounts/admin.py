@@ -1,6 +1,6 @@
 from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin
-from .models import (User, UserProfile, PartnerApplication, BookmundiAccount,) #UserGroup
+from .models import * #UserGroup
 from django.contrib.admin import ModelAdmin
 from imagekit.admin import AdminThumbnail
 from django.utils.html import format_html
@@ -13,7 +13,7 @@ from apps.accounts import models
 # Register your models here.
 class UsersAdmin(UserAdmin):
     ordering = ['id']
-    list_display = ['email', 'name', 'is_active', 'is_staff', 'is_superuser']
+    list_display = ['email', 'first_name', 'last_name', 'is_active', 'is_staff', 'is_superuser']
     search_fields = ('email',)
     fieldsets = (
         (None, {'fields': ('email', 'password')}),
@@ -72,9 +72,9 @@ class BookmundiAccountAdmin(ModelAdmin):
 
 admin.site.register(User, UsersAdmin)
 admin.site.register(UserProfile, UserProfileAdmin)
-#already commented out
-# admin.site.register(UserGroup, UserGroupAdmin)
-# admin.site.unregister(Group)
-
+# #already commented out
+# # admin.site.register(UserGroup, UserGroupAdmin)
+# # admin.site.unregister(Group)
+#
 admin.site.register(PartnerApplication, PartnerApplicationAdmin)
 admin.site.register(BookmundiAccount, BookmundiAccountAdmin)
