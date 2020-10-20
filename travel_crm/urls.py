@@ -27,4 +27,5 @@ urlpatterns = [
     path('', include('apps.enquiry.urls')),
     path('', include('apps.packages.urls')),
     path('ckeditor', include('ckeditor_uploader.urls')),
+    path('jet_api/', include('jet_django.urls')),
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

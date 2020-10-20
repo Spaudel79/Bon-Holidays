@@ -54,6 +54,7 @@ INSTALLED_APPS = [
     'ckeditor_uploader',
     'corsheaders',
     'storages',
+    'jet_django',
 ]
 
 CKEDITOR_UPLOAD_PATH = "uploads/"
@@ -240,3 +241,6 @@ REST_FRAMEWORK = {
     'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
     'PAGE_SIZE': 6
 }
+
+JET_PROJECT = 'rup'
+JET_TOKEN = '0f3cec84-5f4c-40cd-9d49-991b289f1ab1'
