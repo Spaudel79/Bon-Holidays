@@ -18,9 +18,10 @@ class BookmundiAccountSerializer(serializers.ModelSerializer):
 class RegisterUserSerializer(serializers.ModelSerializer):
     password = serializers.CharField(min_length=8, write_only=True)
 
+
     class Meta:
         model = User
-        fields = ['email', 'first_name', 'last_name', 'password', ]
+        fields = ['email', 'first_name', 'last_name', 'password']
 
     def validate(self, attrs):
         # email = attrs.get('email', '')
@@ -37,16 +38,16 @@ class RegisterUserSerializer(serializers.ModelSerializer):
 
 
 class UserLoginSerializer(serializers.ModelSerializer):
-    token = serializers.CharField(allow_blank=True, read_only=True)
+    # token = serializers.CharField(allow_blank=True, read_only=True)
     email = serializers.EmailField(label='Email Address')
 
     class Meta:
         model = User
         fields = [
-            'email', 'password', 'token'
+            'email', 'password',
         ]
         extra_kwargs = {"password":
-                            {"write_only":True}}
+                            {"write_only": True}}
 
     def validate(self, data):
         user_obj = None
@@ -62,7 +63,8 @@ class UserLoginSerializer(serializers.ModelSerializer):
         if user_obj:
             if not user_obj.check_password(password):
                 raise serializers.ValidationError("Incorrect password")
-            data["token"] = "Random Token genereated"
+
+        # data["token"] = "Random Token genereated"
 
         return data
 

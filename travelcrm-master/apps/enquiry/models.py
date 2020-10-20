@@ -30,4 +30,4 @@ class Feedback(models.Model):
     subject = models.CharField(max_length=255)
     message = models.TextField(null=True)
 
-
+# class About(models.Model):

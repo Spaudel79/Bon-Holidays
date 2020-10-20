@@ -19,13 +19,12 @@ from .import views
 
 urlpatterns = [
 
-        path('destinations/', views.DestinationListAPIView.as_view(), name='api-destinations'),
+        path('api/destinations', views.DestinationListAPIView.as_view(), name='api-destinations'),
 
         path('api/packages', views.PackageListAPIView.as_view(), name='api-packages'),
         path('api/packages/<int:pk>', views.PackageDetailsListAPIView.as_view(), name='api-packages_details'),
         path('api/activities/', views.TopActivitiesListAPIView.as_view(), name='api-activities'),
         path('api/activities/<int:pk>', views.TopActivitiesDetailsListAPIView.as_view(), name='api-activites_details'),
-
 
 ]
 

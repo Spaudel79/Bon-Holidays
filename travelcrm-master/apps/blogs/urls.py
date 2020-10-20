@@ -19,9 +19,10 @@ from .import views
 
 urlpatterns = [
 
-        path('blog-post/', views.BlogPostListAPIView.as_view(), name='api-blog-post'),
-        path('blog-post/<int:pk>', views.BlogPostDetailsListAPIView.as_view(), name='api-blog-post_details'),
-        path('comments/', views.CommentCreateAPIView.as_view(), name='api-comments'),
+        path('api/blog-post', views.BlogPostListAPIView.as_view(), name='api-blog-post'),
+        path('api/blog-post/<int:pk>', views.BlogPostDetailsListAPIView.as_view(), name='api-blog-post_details'),
+        path('api/comments/<int:blog>', views.CommentListAPIView.as_view(), name='api-comments'),
+        path('api/postcomment', views.CommentCreateAPIView.as_view(), name='api-postcomment'),
 
 
 ]

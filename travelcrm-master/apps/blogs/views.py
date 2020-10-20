@@ -38,8 +38,69 @@ class BlogPostDetailsListAPIView(ListAPIView):
             return BlogPost.objects.filter(pk=self.kwargs['pk'])
 
 
+
+
 class CommentCreateAPIView(CreateAPIView):
     queryset = Comment.objects.all()
-    serializer_class = CommentSerializer
+    serializer_class = BlogPostCommentSerializer
+
+    # def get_queryset(self):
+    #     return BlogPost.objects.filter(pk=self.kwargs['pk'])
+
+    # def get(self, request, id=None):
+    #     instance = self.get_object(id)
+    #     serailizer = BlogListSerializer(instance)
+    #     return Response(serailizer.data)
+
+    #def.....
+    # form.instance.blog_id = self.kwargs['pk']
+    # return super().form_valid(form)
+
+    # def get_object(self, id):
+    #     try:
+    #         return BlogPost.objects.get(id=id)
+    #     except BlogPost.DoesNotExist as e:
+    #         return Response({"error": "Given question object not found."}, status=404)
+
+    def post(self, request, format=None):
+        name = request.data.get("name")
+        email = request.data.get("email")
+        subject = request.data.get("subject")
+        comment = request.data.get("comment")
+
+        blog = request.data['blog']['id']
+        data = {'name': name, 'email': email, 'subject': subject, 'comment': comment, 'blog': blog}
+        serializer = BlogPostCommentSerializer(data=data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(serializer.data, status=serializers.status.HTTP_201_CREATED)
+        # else:
+        #     re
+
+
+
+    # def get_context_data(self, **kwargs):
+    #     context = super(CommentCreateAPIView, self).get_context_data(**kwargs)
+    #     pk = self.kwargs['pk']
+    #     context['post'] = BlogPost.objects.filter(id=pk)
+    #     return context
+
+
+
+    # def post(self, request):
+    #     data = request.data
+    #     serializer = CommentPostSerializer(data=data)
+    #     if serializer.is_valid():
+    #         serializer.save()
+    #         return Response(serializer.data, status=201)
+    #     return Response(serializer.erros, status=400)
+
+
+class CommentListAPIView(ListAPIView):
+    # queryset = Comment.objects.all()
+    serializer_class = CommentListSerializer
+
+    def get_queryset(self):
+        return Comment.objects.filter(blog=self.kwargs['blog'])
 
 

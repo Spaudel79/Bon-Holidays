@@ -14,15 +14,12 @@ from apps.accounts import models
 class UsersAdmin(UserAdmin):
     ordering = ['id']
     list_display = ['email', 'first_name', 'last_name', 'is_active', 'is_staff', 'is_superuser']
-    search_fields = ('email',)
+    search_fields = ('email', 'first_name', 'last_name')
     fieldsets = (
         (None, {'fields': ('email', 'password')}),
-        (_('Personal Info'), {'fields': ('name',)}),
-        (
-            _('Permissions'),
-            {'fields': ('is_active', 'is_staff')}
-        ),
-        (_('Important dates'), {'fields': ('last_login',)})
+        ('Personal Info', {'fields': ('first_name', 'last_name')}),
+        ('Permissions', {'fields': ('is_active', 'is_staff')}),
+        ('Important dates', {'fields': ('last_login',)})
     )
     add_fieldsets = (
         (None, {
