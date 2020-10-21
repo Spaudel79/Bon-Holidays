@@ -1,10 +1,9 @@
 /db.sqlite3
-.idea/
+/.idea
 /venv
 my.cnf
 __pycache__/
 media/
-static/
 # Elastic Beanstalk Files
 .elasticbeanstalk/*
 !.elasticbeanstalk/*.cfg.yml

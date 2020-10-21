@@ -1,6 +1,7 @@
 from django.db import models
 from imagekit.models import ImageSpecField
 from imagekit.processors import ResizeToFill
+# from django_random_queryset import RandomManager
 
 class Destination(models.Model):
     name = models.CharField(max_length=255)
@@ -40,6 +41,7 @@ class Package(models.Model):
         return self.package_name
 
 class TopAttractions(models.Model):
+
     image = models.ImageField(blank=True)
     thumbnail = ImageSpecField(source='image',
                                       processors=[ResizeToFill(100, 50)],
@@ -51,6 +53,8 @@ class TopAttractions(models.Model):
         return self.title
 
 class TopActivities(models.Model):
+
+    destination = models.ForeignKey(Destination, on_delete=models.CASCADE)
     image = models.ImageField(blank=True)
     thumbnail = ImageSpecField(source='image',
                                       processors=[ResizeToFill(100, 50)],
@@ -58,6 +62,7 @@ class TopActivities(models.Model):
                                       options={'quality': 60})
     title = models.CharField(max_length=64)
     description = models.TextField(blank=True)
+
 
     def __str__(self):
         return self.title

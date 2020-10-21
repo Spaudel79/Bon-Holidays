@@ -21,11 +21,10 @@ from django.conf.urls.static import static
 
 urlpatterns = [
     path('admin/', admin.site.urls),
-    path('/', admin.site.urls),
-    path('', include('apps.fronthome.urls')),
+    path('', include('apps.accounts.urls')),
     path('', include('apps.blogs.urls')),
     path('', include('apps.enquiry.urls')),
     path('', include('apps.packages.urls')),
     path('ckeditor', include('ckeditor_uploader.urls')),
-    path('jet_api/', include('jet_django.urls')),
-] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+
+              ]+static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)

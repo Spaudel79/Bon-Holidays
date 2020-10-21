@@ -2,13 +2,13 @@ from django.db import models
 from django.conf import settings
 from django.urls import reverse
 from django.utils.translation import gettext_lazy as _
-from django.contrib.auth.models import BaseUserManager, AbstractBaseUser, PermissionsMixin
+from django.contrib.auth.models import BaseUserManager, AbstractBaseUser, PermissionsMixin,Permission
 from imagekit.models import ImageSpecField
 from imagekit.processors import ResizeToFill
 
 from django.contrib.auth.models import Group
-# Create your models here.
-
+# # Create your models here.
+#
 class UserManager(BaseUserManager):
 
     def create_user(self, email, password=None, **kwargs):
@@ -29,24 +29,25 @@ class UserManager(BaseUserManager):
         user.save(using=self._db)
 
         return user
-
-
+#
+#
 class User(AbstractBaseUser, PermissionsMixin):
     """ Custom user model that supports using email instead of username """
 
     email = models.EmailField(max_length=255, unique=True)
-    name = models.CharField(max_length=255)
+    first_name = models.CharField(max_length=255)
+    last_name = models.CharField(max_length=255)
     is_active = models.BooleanField(default=True)
     is_staff = models.BooleanField(default=True)
 
-    object = UserManager()
+    objects = UserManager()
     USERNAME_FIELD = 'email'
-
-
-# class Admin(models.Model):
-#     user = models.OneToOneField(settings.AUTH_USER_MODEL,
-#                                 related_name='profile', on_delete=models.CASCADE)
-
+#
+# #already commented out
+# # class Admin(models.Model):
+# #     user = models.OneToOneField(settings.AUTH_USER_MODEL,
+# #                                 related_name='profile', on_delete=models.CASCADE)
+#
 class UserProfile(models.Model):
 
     USER_TYPES = (
@@ -98,11 +99,11 @@ class UserProfile(models.Model):
 
     def is_customer(self):
         return self.user_type=='c'
-
 #
-# class UserGroup(models.Model):
-#     group = models.OneToOneField(Group, on_delete=models.CASCADE)
-
+# #already commented out
+# # class UserGroup(models.Model):
+# #     group = models.OneToOneField(Group, on_delete=models.CASCADE)
+#
 
 class PartnerApplication(models.Model):
     first_name = models.CharField(max_length=255)
@@ -134,18 +135,18 @@ class BookmundiAccount(models.Model):
     passport_number = models.CharField(max_length=255)
     issue_date = models.DateField()
     expiry_date = models.DateField()
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
+#
