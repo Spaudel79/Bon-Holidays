@@ -19,7 +19,7 @@ from .import views
 
 urlpatterns = [
 
-        path('api/destinations', views.DestinationListAPIView.as_view(), name='api-destinations'),
+        path('api/destinations', views.DestinationFrontListAPIView.as_view(), name='api-destinations'),
 
         path('api/packages', views.PackageListAPIView.as_view(), name='api-packages'),
         path('api/packages/<int:pk>', views.PackageDetailsListAPIView.as_view(), name='api-packages_details'),

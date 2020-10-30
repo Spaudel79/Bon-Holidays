@@ -9,10 +9,11 @@ class PackageSerializer(serializers.ModelSerializer):
         # fields = ['destination_name', 'package_name', 'price', 'rating', 'image', 'date_created']
         fields = '__all__'
 
-class DestinationSerializer(serializers.ModelSerializer):
+class DestinationFrontSerializer(serializers.ModelSerializer):
     class Meta:
         model = Destination
-        fields = '__all__'
+        # fields = '__all__'
+        fields = ['id', 'name', 'image']
 
 class TopActivitiesSerializer(serializers.ModelSerializer):
     destination= serializers.StringRelatedField()

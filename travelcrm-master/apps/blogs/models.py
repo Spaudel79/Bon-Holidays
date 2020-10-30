@@ -37,6 +37,7 @@ class BlogPost(models.Model):
 
 class Comment(models.Model):
     # blog = models.ForeignKey(BlogPost, on_delete=models.CASCADE, default=1)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
     blog = models.ForeignKey(BlogPost, on_delete=models.CASCADE, related_name='comments')
     name = models.CharField(max_length=255)
     email = models.EmailField()

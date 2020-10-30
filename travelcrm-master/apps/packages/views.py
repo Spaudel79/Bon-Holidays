@@ -28,9 +28,9 @@ RetrieveUpdateAPIView, RetrieveAPIView
 #     queryset = TopActivities.objects.all()
 #     serializer_class = TopActivitiesSerializer
 
-class DestinationListAPIView(ListAPIView,RetrieveAPIView):
+class DestinationFrontListAPIView(ListAPIView):
     queryset = Destination.objects.all()
-    serializer_class = DestinationSerializer
+    serializer_class = DestinationFrontSerializer
 
 
 class PackageListAPIView(generics.ListAPIView):

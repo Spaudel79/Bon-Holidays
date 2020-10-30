@@ -49,6 +49,7 @@ INSTALLED_APPS = [
     'apps.payment',
     #third party apps
     'rest_framework',
+    'rest_framework.authtoken',
     'imagekit',
     'ckeditor',
     'ckeditor_uploader',
@@ -239,8 +240,16 @@ CKEDITOR_CONFIGS = {
 
 #REST Framework settings
 REST_FRAMEWORK = {
+'DEFAULT_AUTHENTICATION_CLASSES': (
+        'rest_framework.authentication.TokenAuthentication',
+    ),
+# 'DEFAULT_PERMISSION_CLASSES': (
+#         'rest_framework.permissions.IsAuthenticated', ),
+
+
     #for pagination
     'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
     'PAGE_SIZE': 6,
+    #for filter
     'DEFAULT_FILTER_BACKENDS': ['django_filters.rest_framework.DjangoFilterBackend']
 }

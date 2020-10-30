@@ -7,6 +7,7 @@ class Destination(models.Model):
     name = models.CharField(max_length=255)
     description = models.CharField(max_length=255)
     discount = models.CharField(max_length=255, default="5% OFF")
+    featured = models.BooleanField(default=False)
     image = models.ImageField(blank=True)
     thumbnail = ImageSpecField(source='image',
                                       processors=[ResizeToFill(100, 50)],
@@ -19,6 +20,7 @@ class Destination(models.Model):
 class Package(models.Model):
     destination = models.ForeignKey(Destination, on_delete=models.CASCADE)
     package_name = models.CharField(max_length=255)
+    # featured = models.BooleanField(default=False)
     price = models.IntegerField()
     duration = models.IntegerField(default=5)
     discount = models.CharField(max_length=255, default="15% OFF")
@@ -39,6 +41,9 @@ class Package(models.Model):
 
     def __str__(self):
         return self.package_name
+
+    # def is_featured(self):
+    #     return self.featured
 
 class TopAttractions(models.Model):
 
