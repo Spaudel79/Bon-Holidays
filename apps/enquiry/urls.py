@@ -18,9 +18,9 @@ from .import views
 urlpatterns = [
 
         path('api/contactinfo', views.ContactListAPIView.as_view(), name='api-contactinfo'),
-        path('api/contact/', views.ContactCreateAPIView.as_view(), name='api-contact'),
+        path('api/contact', views.ContactCreateAPIView.as_view(), name='api-contact'),
         # path('blog-post/<int:pk>', views.BlogPostDetailsListAPIView.as_view(), name='api-blog-post_details'),
-        path('api/feedback/', views.FeedbackListAPIView.as_view(), name='api-comments'),
+        path('api/feedback', views.FeedbackListAPIView.as_view(), name='api-feedback'),
 
 
 ]

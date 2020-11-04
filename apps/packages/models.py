@@ -4,11 +4,12 @@ from imagekit.processors import ResizeToFill
 # from django_random_queryset import RandomManager
 
 class Destination(models.Model):
-    name = models.CharField(max_length=255)
-    description = models.CharField(max_length=255)
-    discount = models.CharField(max_length=255, default="5% OFF")
-    image = models.ImageField(blank=True)
-    thumbnail = ImageSpecField(source='image',
+    name = models.CharField(max_length=255, unique=True)
+    # description = models.CharField(max_length=255)
+    # discount = models.CharField(max_length=255, default="5% OFF")
+    # featured = models.BooleanField(default=False)
+    dest_image = models.ImageField(blank=True)
+    thumbnail = ImageSpecField(source='dest_image',
                                       processors=[ResizeToFill(100, 50)],
                                       format='JPEG',
                                       options={'quality': 60})
@@ -16,14 +17,21 @@ class Destination(models.Model):
     def __str__(self):
         return self.name
 
+    @property
+    def packages(self):
+        return self.package_set.all()
+
+
 class Package(models.Model):
     destination = models.ForeignKey(Destination, on_delete=models.CASCADE)
     package_name = models.CharField(max_length=255)
+    featured = models.BooleanField(default=False)
     price = models.IntegerField()
     duration = models.IntegerField(default=5)
     discount = models.CharField(max_length=255, default="15% OFF")
     discounted_price = models.IntegerField(default=230)
     savings = models.IntegerField(default=230)
+    special_discount = models.BooleanField(default=False)
     rating = models.IntegerField(choices=((1, 1),
                                           (2, 2),
                                           (3, 3),
@@ -35,10 +43,21 @@ class Package(models.Model):
                                       processors=[ResizeToFill(100, 50)],
                                       format='JPEG',
                                       options={'quality': 60})
+    content =models.CharField(max_length=255)
+    highlights = models.CharField(max_length=255)
+    itinerary =models.CharField(max_length=255)
+    reviews = models.CharField(max_length=255)
+    image_1= models.ImageField(blank=True,null = True)
+    image_2= models.ImageField(blank=True,null = True)
+    image_3= models.ImageField(blank=True,null = True)
     date_created = models.DateField()
+
 
     def __str__(self):
         return self.package_name
+
+    # def is_featured(self):
+    #     return self.featured
 
 class TopAttractions(models.Model):
 

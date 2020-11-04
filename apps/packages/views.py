@@ -8,6 +8,7 @@ CreateAPIView, DestroyAPIView,
 ListAPIView, UpdateAPIView,
 RetrieveUpdateAPIView, RetrieveAPIView
 )
+from django_filters.rest_framework import DjangoFilterBackend
 
 # class DestinationViewSet(generics.ListAPIView, generics.RetrieveAPIView, viewsets.GenericViewSet):
 #     queryset = Destination.objects.all()
@@ -28,19 +29,27 @@ RetrieveUpdateAPIView, RetrieveAPIView
 #     queryset = TopActivities.objects.all()
 #     serializer_class = TopActivitiesSerializer
 
-class DestinationListAPIView(ListAPIView,RetrieveAPIView):
+class DestinationFrontListAPIView(ListAPIView):
+    queryset = Destination.objects.all().order_by('?')[:4]
+    # queryset = Package.objects.all().order_by('-date_created')[:4]
+    serializer_class = DestinationFrontSerializer
+
+
+
+class DestinationPackageListAPIView(RetrieveAPIView):
     queryset = Destination.objects.all()
-    serializer_class = DestinationSerializer
+    serializer_class = DestinationwithPackageSerializer
 
 
-class PackageListAPIView(generics.ListAPIView):
-    queryset = Package.objects.all().order_by('-date_created')[:4]
-    serializer_class = PackageSerializer
-
-
-class PackageDetailsListAPIView(RetrieveAPIView):
+class AllPackageAPIView(ListAPIView):
     queryset = Package.objects.all()
     serializer_class = PackageSerializer
+    filter_backends = [DjangoFilterBackend]
+    filterset_fields = ['featured', 'special_discount']
+
+class AllPackageDetailAPIView(RetrieveAPIView):
+    queryset = Package.objects.all()
+    serializer_class = PackageDetailSerializer
 
 
 class TopActivitiesListAPIView(ListAPIView):

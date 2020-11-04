@@ -19,10 +19,13 @@ from .import views
 
 urlpatterns = [
 
-        path('api/destinations', views.DestinationListAPIView.as_view(), name='api-destinations'),
+        # path('api/destinations', views.DestinationFrontListAPIView.as_view(), name='api-destinations'),
+        # path('api/traveldeals', views.DestinationFrontListAPIView.as_view(), name='api-traveldeals'),
 
-        path('api/packages', views.PackageListAPIView.as_view(), name='api-packages'),
-        path('api/packages/<int:pk>', views.PackageDetailsListAPIView.as_view(), name='api-packages_details'),
+        path('api/destinations', views.DestinationFrontListAPIView.as_view(), name='api-destinations'),
+        path('api/destinations/<int:pk>', views.DestinationPackageListAPIView.as_view(), name='api-destinations-packages'),
+        path('api/allpackages', views.AllPackageAPIView.as_view(), name='api-allpackages'),
+        path('api/allpackages/<int:pk>', views.AllPackageDetailAPIView.as_view(), name='api-package-detail'),
         path('api/activities/', views.TopActivitiesListAPIView.as_view(), name='api-activities'),
         path('api/activities/<int:pk>', views.TopActivitiesDetailsListAPIView.as_view(), name='api-activites_details'),
 

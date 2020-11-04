@@ -49,6 +49,7 @@ INSTALLED_APPS = [
     'apps.payment',
     #third party apps
     'rest_framework',
+    'rest_framework.authtoken',
     'imagekit',
     'ckeditor',
     'ckeditor_uploader',
@@ -112,6 +113,12 @@ WSGI_APPLICATION = 'travel_crm.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/3.0/ref/settings/#databases
 
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.sqlite3',
+#         'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
+#     }
+# }
 
 
 if 'RDS_HOSTNAME' in os.environ:
@@ -126,15 +133,16 @@ if 'RDS_HOSTNAME' in os.environ:
         }
     }
 else:
-	DATABASES = {
-		'default': {
-			'ENGINE': 'django.db.backends.mysql',
-			'OPTIONS': {
-				'read_default_file':  os.path.join(BASE_DIR, 'my.cnf'),
-			},
-		}
-	}
-	
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.mysql',
+            'NAME': 'traveldb',
+            'USER': 'dbadmin',
+            'PASSWORD': '12345',
+            'HOST': 'localhost',
+            'PORT': '3306',
+        }
+    }
 
 
 # Password validation
@@ -224,8 +232,16 @@ CKEDITOR_CONFIGS = {
 
 #REST Framework settings
 REST_FRAMEWORK = {
+'DEFAULT_AUTHENTICATION_CLASSES': (
+        'rest_framework.authentication.TokenAuthentication',
+    ),
+# 'DEFAULT_PERMISSION_CLASSES': (
+#         'rest_framework.permissions.IsAuthenticated', ),
+
+
     #for pagination
     'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
     'PAGE_SIZE': 6,
+    #for filter
     'DEFAULT_FILTER_BACKENDS': ['django_filters.rest_framework.DjangoFilterBackend']
 }
