@@ -43,21 +43,21 @@ class BlogPostDetailsListAPIView(ListAPIView):
     permission_classes = [AllowAny]
     # queryset = BlogPost.objects.all()
     serializer_class = BlogPostDetailSerializer
+
     # pagination_class = CommentPageNumberPagination
     def get_queryset(self):
             return BlogPost.objects.filter(pk=self.kwargs['pk'])
 
 
-
-
 class CommentCreateAPIView(CreateAPIView):
+    permission_classes= [IsAuthenticated]
     queryset = Comment.objects.all()
     serializer_class = CommentListSerializer
 
     def perform_create(self, serializer):
-        user = self.request.user
+        # user = self.request.user
         blog = get_object_or_404(BlogPost, pk= self.kwargs['pk'])
-        serializer.save(user=user,blog=blog)
+        serializer.save(blog=blog)
     # def get_queryset(self):
     #     return BlogPost.objects.filter(pk=self.kwargs['pk'])
 

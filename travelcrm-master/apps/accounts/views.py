@@ -17,6 +17,11 @@ from rest_framework.authtoken.models import Token
 from rest_framework.authentication import TokenAuthentication
 from rest_framework.response import Response
 
+class Homepage(GenericAPIView):
+    def get(self,request):
+        return Response(status=status.HTTP_200_OK)
+
+
 class PartnerApplicationViewSet(mixins.CreateModelMixin, viewsets.GenericViewSet):
     queryset = PartnerApplication.objects.all()
     serializer_class = PartnerApplicationSerializer
@@ -56,20 +61,20 @@ class LoginUserView(GenericAPIView):
         # return response.Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
-class Logout(GenericAPIView):
-    def get(self, request, format=None):
-        auth.logout(request)
-        return Response(status=status.HTTP_200_OK)
-
-
 # class Logout(GenericAPIView):
-#     permission_classes = [IsAuthenticated]
-#     # authentication_classes = [TokenAuthentication]
-#
-#     def post(self, request, format=None):
-#         # simply delete the token to force a login
-#         request.user.auth_token.delete()
+#     def get(self, request, format=None):
+#         auth.logout(request)
 #         return Response(status=status.HTTP_200_OK)
+
+
+class Logout(GenericAPIView):
+    permission_classes = [IsAuthenticated]
+    authentication_classes = [TokenAuthentication]
+
+    def get(self, request, format=None):
+        # simply delete the token to force a login
+        request.user.auth_token.delete()
+        return Response(status=status.HTTP_200_OK)
 
 # class Logout(GenericAPIView):
 #     def logout(self, request):
