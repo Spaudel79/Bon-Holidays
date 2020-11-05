@@ -138,7 +138,7 @@ else:
             'ENGINE': 'django.db.backends.mysql',
             'NAME': 'traveldb',
             'USER': 'root',
-            'PASSWORD': '1234',
+            'PASSWORD': 'root',
             'HOST': 'localhost',
             'PORT': '3306',
         }
