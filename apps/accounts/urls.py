@@ -16,7 +16,7 @@ from .import views
 # ]
 
 urlpatterns = [
-        path('', views.Homepage.as_view(), name='home'),
+        # path('', views.Homepage.as_view(), name='home'),
         path('api/register', views.RegisterUserView.as_view(), name='api-register'),
         path('api/login', views.LoginUserView.as_view(), name='api-login'),
         path('api/logout', views.Logout.as_view(), name='api-logout'),
