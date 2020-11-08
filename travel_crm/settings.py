@@ -47,6 +47,7 @@ INSTALLED_APPS = [
     'apps.enquiry',
     'apps.packages',
     'apps.payment',
+    'apps.booking',
     #third party apps
     'rest_framework',
     'rest_framework.authtoken',
@@ -76,6 +77,9 @@ CORS_ORIGIN_WHITELIST = [
     "https://example.com",
     "https://sub.example.com",
     "http://localhost:8080",
+    "http://localhost:3000",
+    "http://27.34.13.130"     
+    "http://192.168.1.178:3000",
     "http://127.0.0.1:9000",
 	"http://crm.mountaintigernepal.com",
 ]
