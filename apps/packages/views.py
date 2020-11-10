@@ -30,8 +30,8 @@ from django_filters.rest_framework import DjangoFilterBackend
 #     serializer_class = TopActivitiesSerializer
 
 class DestinationFrontListAPIView(ListAPIView):
-    queryset = Destination.objects.all().order_by('?')[:4]
-    # queryset = Package.objects.all().order_by('-date_created')[:4]
+    # queryset = Destination.objects.all().order_by('?')[:4]
+    queryset = Destination.objects.all().order_by('-date_created')[:4]
     serializer_class = DestinationFrontSerializer
 
 

@@ -50,6 +50,8 @@ class BlogPostDetailsListAPIView(ListAPIView):
 
 
 
+
+
 class CommentCreateAPIView(CreateAPIView):
     permission_classes= [IsAuthenticated]
     queryset = Comment.objects.all()
