@@ -9,7 +9,7 @@ class Booking(models.Model):
     name = models.CharField(max_length=255)
     email = models.EmailField()
     phone = models.CharField(max_length=255)
-    bookedfor = models.DateField
+    bookedfor = models.DateField()
     created_at = models.DateTimeField(auto_now_add=True)
 
 

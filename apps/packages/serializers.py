@@ -23,7 +23,7 @@ class PackageSerializer(serializers.ModelSerializer):
     class Meta:
         model = Package
         fields = ['id', 'destination', 'package_name', 'duration', 'featured', 'price', 'discounted_price',
-                            'savings', 'special_discount', 'rating','date_created']
+                            'savings', 'special_discount', 'rating', 'image', 'date_created']
         # fields = '__all__'
         # depth = 1
 

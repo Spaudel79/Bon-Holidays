@@ -45,15 +45,7 @@ class BlogPostDetailSerializer(serializers.HyperlinkedModelSerializer):
         fields = ['id', 'url', 'image', 'categories', 'description', 'content', 'tags', 'date_created', 'comments']
         # fields = '__all__'
 
-        # def get_comments(self, obj):
-        #     content_type = obj.get_content_type
-        #     object_id = obj.id
-        #     c_qs = Comment.objects.filter_by_instance()
-        #     comments = CommentSerializer(c_qs, many=True).data
-        #     return comments
 
-        # def create(self, validated_data):
-        #     comments = validated_data.pop('commnets')
 
 
 

@@ -78,7 +78,7 @@ CORS_ORIGIN_WHITELIST = [
     "https://sub.example.com",
     "http://localhost:8080",
     "http://localhost:3000",
-    "http://27.34.13.130"     
+    "http://27.34.13.130",
     "http://192.168.1.178:3000",
     "http://127.0.0.1:9000",
 	"http://crm.mountaintigernepal.com",
@@ -141,8 +141,8 @@ else:
         'default': {
             'ENGINE': 'django.db.backends.mysql',
             'NAME': 'traveldb',
-            'USER': 'root',
-            'PASSWORD': 'root',
+            'USER': 'dbadmin',
+            'PASSWORD': '12345',
             'HOST': 'localhost',
             'PORT': '3306',
         }
@@ -195,6 +195,7 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'static/')
 
 MEDIA_URL = '/media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media/')
+# MEDIA_ROOT = os.path.join(os.path.dirname(BASE_DIR), "media_cdn")
 
 AUTH_USER_MODEL = 'accounts.User'
 
