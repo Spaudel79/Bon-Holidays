@@ -21,6 +21,8 @@ class Destination(models.Model):
     def packages(self):
         return self.package_set.all()
 
+    # date_created = models.DateField()
+
 
 class Package(models.Model):
     destination = models.ForeignKey(Destination, on_delete=models.CASCADE)
