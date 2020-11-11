@@ -82,14 +82,14 @@ MIDDLEWARE = [
 ]
 
 CORS_ORIGIN_WHITELIST = [
-    "https://example.com",
-    "https://sub.example.com",
     "http://localhost:8080",
     "http://localhost:3000",
+<<<<<<< HEAD
     "http://27.34.13.130",
     "http://192.168.1.178:3000",
+=======
+>>>>>>> 4adbceec04b7ced4d1717d06a463337e914ce07a
     "http://127.0.0.1:9000",
-	"http://crm.mountaintigernepal.com",
 ]
 
 CORS_ALLOW_METHODS = [
