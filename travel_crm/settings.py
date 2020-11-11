@@ -11,7 +11,7 @@ https://docs.djangoproject.com/en/3.0/ref/settings/
 """
 
 import os
-
+import datetime
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
 BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
@@ -41,7 +41,10 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
 
-    #custom apps
+    # storage for S3
+    'storages',
+
+    # custom apps
     'apps.accounts',
     'apps.blogs',
     'apps.enquiry',
@@ -84,11 +87,6 @@ MIDDLEWARE = [
 CORS_ORIGIN_WHITELIST = [
     "http://localhost:8080",
     "http://localhost:3000",
-<<<<<<< HEAD
-    "http://27.34.13.130",
-    "http://192.168.1.178:3000",
-=======
->>>>>>> 4adbceec04b7ced4d1717d06a463337e914ce07a
     "http://127.0.0.1:9000",
 ]
 
@@ -239,7 +237,7 @@ MATERIAL_ADMIN_SITE = {
 
 
 
-#REST Framework settings
+# REST Framework settings
 REST_FRAMEWORK = {
 'DEFAULT_AUTHENTICATION_CLASSES': (
         'rest_framework.authentication.TokenAuthentication',
@@ -248,9 +246,34 @@ REST_FRAMEWORK = {
 #         'rest_framework.permissions.IsAuthenticated', ),
 
 
-    #for pagination
+    # for pagination
     'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
     'PAGE_SIZE': 6,
-    #for filter
+    # for filter
     'DEFAULT_FILTER_BACKENDS': ['django_filters.rest_framework.DjangoFilterBackend']
+}
+
+AWS_ACCESS_KEY_ID = "AKIAYYG2ZHHZQ3PZ5VOT"
+AWS_SECRET_ACCESS_KEY = "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"
+AWS_FILE_EXPIRE = 200
+AWS_PRELOAD_METADATA = True
+AWS_QUERYSTRING_AUTH = True
+
+DEFAULT_FILE_STORAGE = 'travel_crm.utils.MediaRootS3BotoStorage'
+STATICFILES_STORAGE = 'travel_crm.utils.StaticRootS3BotoStorage'
+AWS_STORAGE_BUCKET_NAME = 'bonbonstage'
+S3DIRECT_REGION = 'ap-southeast-1'
+S3_URL = '//%s.s3.amazonaws.com/' % AWS_STORAGE_BUCKET_NAME
+MEDIA_URL = '//%s.s3.amazonaws.com/media/' % AWS_STORAGE_BUCKET_NAME
+MEDIA_ROOT = MEDIA_URL
+STATIC_URL = S3_URL + 'static/'
+ADMIN_MEDIA_PREFIX = STATIC_URL + 'admin/'
+
+two_months = datetime.timedelta(days=61)
+date_two_months_later = datetime.date.today() + two_months
+expires = date_two_months_later.strftime("%A, %d %B %Y 20:00:00 GMT")
+
+AWS_HEADERS = {
+    'Expires': expires,
+    'Cache-Control': 'max-age=%d' % (int(two_months.total_seconds()), ),
 }
