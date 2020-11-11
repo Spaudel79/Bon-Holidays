@@ -39,5 +39,5 @@ class BookingCreateAPIView(CreateAPIView):
                                              )
         new_booking.save()
         serializer = BookingSerializer(new_booking)
-        return Response(serializer.data,status=status.HTTP_200_OK)
+        return Response(serializer.data, status=status.HTTP_200_OK)
 

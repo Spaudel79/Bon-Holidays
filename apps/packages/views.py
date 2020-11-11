@@ -4,11 +4,12 @@ from .serializers import *
 from django.db.models import Q
 from django_filters.rest_framework import DjangoFilterBackend
 from rest_framework.generics import (
-CreateAPIView, DestroyAPIView,
+CreateAPIView, DestroyAPIView, ListCreateAPIView,
 ListAPIView, UpdateAPIView,
 RetrieveUpdateAPIView, RetrieveAPIView
 )
 from django_filters.rest_framework import DjangoFilterBackend
+
 
 # class DestinationViewSet(generics.ListAPIView, generics.RetrieveAPIView, viewsets.GenericViewSet):
 #     queryset = Destination.objects.all()
@@ -31,8 +32,8 @@ from django_filters.rest_framework import DjangoFilterBackend
 
 class DestinationFrontListAPIView(ListAPIView):
     # queryset = Destination.objects.all().order_by('?')[:4]
-    # queryset = Destination.objects.all().order_by('-date_created')[:4]
-    queryset = Destination.objects.all()
+    queryset = Destination.objects.all().order_by('-date_created')[:4]
+    # queryset = Destination.objects.all()
     serializer_class = DestinationFrontSerializer
 
 
@@ -47,6 +48,25 @@ class AllPackageAPIView(ListAPIView):
     serializer_class = PackageSerializer
     filter_backends = [DjangoFilterBackend]
     filterset_fields = ['featured', 'special_discount']
+
+class PackageCountAPIView(ListCreateAPIView):
+    queryset = Package.objects.all()
+    serializer_class = PackageCountSerializer
+    # p_count = Package.objects.all().count()
+
+    # def get_queryset(self):
+    #         p_count=Package.objects.all().count()
+    #         return[p_count]
+
+    # def get_(self, request, *args, **kwargs):
+    #     p_count = Package.objects.all().count()
+    #     return self.list(request, {'p_count': p_count})
+
+    # def get_queryset(self, *args, **kwargs):
+    #
+    #     p_count = Package.objects.all().count()
+    #     return {'p_count': p_count}
+
 
 class AllPackageDetailAPIView(RetrieveAPIView):
     queryset = Package.objects.all()

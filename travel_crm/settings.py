@@ -59,6 +59,14 @@ INSTALLED_APPS = [
 ]
 
 CKEDITOR_UPLOAD_PATH = "uploads/"
+#ckeditor configs #todo
+CKEDITOR_CONFIGS = {
+    'default': {
+        'toolbar': 'full',
+        'width': 1000,
+        'height': 400
+    },
+}
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -228,12 +236,8 @@ MATERIAL_ADMIN_SITE = {
     }
 }
 
-#ckeditor configs #todo
-CKEDITOR_CONFIGS = {
-    'default': {
-        'toolbar': 'full',
-    },
-}
+
+
 
 #REST Framework settings
 REST_FRAMEWORK = {
@@ -245,8 +249,8 @@ REST_FRAMEWORK = {
 
 
     #for pagination
-    'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
-    'PAGE_SIZE': 6,
+    # 'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
+    # 'PAGE_SIZE': 6,
     #for filter
     'DEFAULT_FILTER_BACKENDS': ['django_filters.rest_framework.DjangoFilterBackend']
 }

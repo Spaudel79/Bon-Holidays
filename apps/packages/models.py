@@ -2,6 +2,7 @@ from django.db import models
 from imagekit.models import ImageSpecField
 from imagekit.processors import ResizeToFill
 # from django_random_queryset import RandomManager
+from ckeditor.fields import RichTextField
 
 class Destination(models.Model):
     name = models.CharField(max_length=255, unique=True)
@@ -21,7 +22,7 @@ class Destination(models.Model):
     def packages(self):
         return self.package_set.all()
 
-    # date_created = models.DateField()
+    date_created = models.DateField()
 
 
 class Package(models.Model):
@@ -45,10 +46,10 @@ class Package(models.Model):
                                       processors=[ResizeToFill(100, 50)],
                                       format='JPEG',
                                       options={'quality': 60})
-    content =models.CharField(max_length=255)
-    highlights = models.CharField(max_length=255)
-    itinerary =models.CharField(max_length=255)
-    reviews = models.CharField(max_length=255)
+    content =RichTextField()
+    highlights = RichTextField()
+    itinerary = RichTextField()
+    reviews = RichTextField()
     image_1= models.ImageField(blank=True,null = True)
     image_2= models.ImageField(blank=True,null = True)
     image_3= models.ImageField(blank=True,null = True)

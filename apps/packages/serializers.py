@@ -1,7 +1,10 @@
 from rest_framework import serializers
 from .models import *
 
-
+class PackageCountSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Package
+        fields = '__all__'
 
 
 
@@ -10,19 +13,19 @@ class PackageDetailSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Package
-        fields = ['id', 'destination', 'package_name', 'duration', 'featured', 'content', 'highlights', 'reviews',
+        fields = ['id', 'destination', 'package_name', 'image', 'duration', 'featured', 'content', 'highlights', 'reviews',
                   'image_1', 'image_2', 'image_3', 'itinerary','date_created']
 
 
 
 class PackageSerializer(serializers.ModelSerializer):
     #destination name instead of foreigen key id
-    destination = serializers.StringRelatedField()
+    # destination = serializers.StringRelatedField()
     # destination = serializers.ReadOnlyField(source='destination.name')
     # url = serializers.HyperlinkedIdentityField(view_name='api-packages', read_only=True)
     class Meta:
         model = Package
-        fields = ['id', 'destination', 'package_name', 'duration', 'featured', 'price', 'discounted_price',
+        fields = ['id', 'destination', 'package_name', 'duration', 'featured', 'price', 'discount', 'discounted_price',
                             'savings', 'special_discount', 'rating', 'image', 'date_created']
         # fields = '__all__'
         # depth = 1
@@ -51,7 +54,7 @@ class DestinationFrontSerializer(serializers.ModelSerializer):
         model = Destination
         # fields = ['id', 'package']
         fields = '__all__'
-        # depth = 1
+        depth = 1
 
 
 class AllpackageSerializer(serializers.ModelSerializer):
