@@ -13,7 +13,7 @@ class BlogPost(models.Model):
         ('places_to_go', 'Places to Go'),
     )
     image = models.ImageField(blank=True, null=True)
-    titile = models.CharField(max_length=255)
+    title = models.CharField(max_length=255)
     categories = models.CharField(max_length=64, choices=CATEGORY_CHOICES, default='travel_news')
     description = RichTextField()
     content = RichTextUploadingField()

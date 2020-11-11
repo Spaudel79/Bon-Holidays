@@ -15,7 +15,7 @@ class BlogPostAdmin(ModelAdmin):
     def delete(self, obj):
         return format_html('<a class="btn-btn" href="/admin/blogs/blogpost/{}/delete/">Delete</a>', obj.id)
 
-    list_display = ('categories', 'html_stripped', 'date_created','edit', 'delete')
+    list_display = ('categories', 'html_stripped', 'title', 'date_created','edit', 'delete')
     icon_name = 'assignment'
 
 @register(Comment)
