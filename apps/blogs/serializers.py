@@ -13,7 +13,7 @@ class BlogPostFrontPageSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = BlogPost
-        fields = ['id', 'image', 'categories', 'tags', 'date_created']
+        fields = ['id', 'image', 'title', 'categories', 'tags', 'date_created']
         # fields = '__all__'
 
 
@@ -21,7 +21,7 @@ class BlogPostAllSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = BlogPost
-        fields = ['id', 'image', 'categories', 'tags', 'date_created', ]
+        fields = ['id', 'image', 'title', 'categories', 'tags', 'date_created', ]
         # fields = '__all__'
 
         # def get_comments(self, obj):
@@ -42,7 +42,7 @@ class BlogPostDetailSerializer(serializers.HyperlinkedModelSerializer):
     comments= CommentListSerializer (many=True)
     class Meta:
         model = BlogPost
-        fields = ['id', 'url', 'image', 'categories', 'description', 'content', 'tags', 'date_created', 'comments']
+        fields = ['id', 'url', 'image', 'title', 'categories', 'description', 'content', 'tags', 'date_created', 'comments']
         # fields = '__all__'
 
 
