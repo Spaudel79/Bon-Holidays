@@ -61,11 +61,11 @@ class Package(models.Model):
     # def is_featured(self):
     #     return self.featured
 
-# class Review(models.Model):
-#     package = models.ForeignKey(Package, on_delete=models.CASCADE, related_name='review')
-#     full_name = models.CharField(max_length=255)
-#     review = RichTextField()
-#     created_at = models.DateTimeField(auto_now_add=True)
+class Review(models.Model):
+    package = models.ForeignKey(Package, on_delete=models.CASCADE, related_name='review')
+    full_name = models.CharField(max_length=255)
+    review = RichTextField()
+    created_at = models.DateTimeField(auto_now_add=True)
 
 
     class Meta:

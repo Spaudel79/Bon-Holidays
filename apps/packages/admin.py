@@ -34,7 +34,23 @@ class PackageAdmin(ModelAdmin):
 
     list_display = ('image_display','package_name', 'duration', 'featured', 'price', 'discounted_price',
                     'savings', 'special_discount', 'rating',
-                    'content', 'highlights', 'reviews', 'image_1', 'image_2', 'image_3', 'itinerary','date_created', 'edit', 'delete')
+                    'content', 'highlights',  'image_1', 'image_2', 'image_3', 'itinerary','date_created', 'edit', 'delete')
+    image_display = AdminThumbnail(image_field='thumbnail')
+    image_display.short_description = 'Image'
+    readonly_fields = ['image_display']
+    icon_name = 'explore'
+
+class ReviewAdmin(ModelAdmin):
+
+    # autocomplete_fields = ['destination']
+
+    def edit(self, obj):
+        return format_html('<a class="btn-btn" href="/admin/packages/review/{}/change/">Change</a>', obj.id)
+
+    def delete(self, obj):
+        return format_html('<a class="btn-btn" href="/admin/packages/review/{}/delete/">Delete</a>', obj.id)
+
+    list_display = ('full_name', 'review', 'created_at', 'edit', 'delete')
     image_display = AdminThumbnail(image_field='thumbnail')
     image_display.short_description = 'Image'
     readonly_fields = ['image_display']
@@ -72,4 +88,5 @@ class TopActivitiesAdmin(ModelAdmin):
 
 admin.site.register(Destination, DestinationAdmin)
 admin.site.register(Package, PackageAdmin)
+admin.site.register(Review, ReviewAdmin)
 admin.site.site_header = 'Travel CRM'
