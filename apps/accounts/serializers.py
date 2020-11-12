@@ -61,8 +61,9 @@ class UserLoginSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
         fields = [
-            'email', 'password',
+            'id', 'email', 'password',
         ]
+        # fields = '__all__'
         extra_kwargs = {"password":
                             {"write_only": True}}
 
@@ -96,6 +97,12 @@ class UserLoginSerializer(serializers.ModelSerializer):
 
         return data
         # data["token"] = "Random Token genereated"
+
+
+class UserListSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = User
+        fields = '__all__'
 
 
 

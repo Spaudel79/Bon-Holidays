@@ -4,7 +4,7 @@ from apps.packages.models import Package
 
 # Create your models here.
 class Booking(models.Model):
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    # user = models.ForeignKey(User, on_delete=models.CASCADE)
     package = models.ForeignKey(Package, on_delete=models.CASCADE, related_name='package')
     name = models.CharField(max_length=255)
     email = models.EmailField()

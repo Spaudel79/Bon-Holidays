@@ -4,12 +4,17 @@ from rest_framework.permissions import AllowAny
 from rest_framework.authtoken.views import obtain_auth_token
 from rest_framework.permissions import IsAuthenticated
 from django.contrib import auth
+from rest_framework.authtoken.models import Token
+from rest_framework.permissions import (
+AllowAny, IsAuthenticated, IsAdminUser, IsAuthenticatedOrReadOnly,
+)
+from rest_framework.authentication import TokenAuthentication
 
 from .models import *
 from .serializers import *
 from django.contrib.auth.models import Permission
 from rest_framework.generics import (GenericAPIView,
-CreateAPIView, DestroyAPIView,
+CreateAPIView, DestroyAPIView, ListCreateAPIView,
 ListAPIView, UpdateAPIView,
 RetrieveUpdateAPIView, RetrieveAPIView
 )
@@ -55,9 +60,12 @@ class LoginUserView(GenericAPIView):
         serializer.is_valid(raise_exception=True)
         new_data = serializer.data
         user = serializer.validated_data["user"]
+        serializer = self.get_serializer(user)
         token, created = Token.objects.get_or_create(user=user)
         # return response.Response(new_data, status=status.HTTP_200_OK)
-        return response.Response({"token": token.key}, status=status.HTTP_200_OK)
+        return response.Response({"token": token.key,
+                                  "serializer.data": serializer.data},
+                                   status=status.HTTP_200_OK)
         # return response.Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
 
 
@@ -85,6 +93,66 @@ class Logout(GenericAPIView):
 #
 #         # django_logout(request)
 #         return Response(status=status.HTTP_200_OK)
+
+# class UsersListView(ListAPIView):
+#     queryset = User.objects.all()
+#     serializer_class = UserListSerializer
+
+
+class UsersListView(ListAPIView):
+    # serializer_class = UserListSerializer
+
+    # def get(self, request, *args, **kwargs):
+    #     user = Token.objects.get(key="token").user
+    #     # if user.exists():
+    #     #     user =user.last().user
+    #     return self.list(request, user)
+
+    def get(self, request, *args, **kwargs):
+        serializer = UserListSerializer(request.user)
+        return Response({"user": serializer.data})
+
+    # def get_queryset(self):
+    #
+    #
+    #     user_id = Token.objects.get(key=self.request.auth.key).user_id
+    #     return User.objects.filter(user=User.objects.get(id=user_id))
+    #     # return self.list(self.request, user)
+
+
+
+
+
+
+    # def get_queryset(self):
+    #     # user = Token.objects.get(key="token")
+    #     # return User.objects.filter(user= user)
+    #     return User.objects.filter(user =Token.objects.get(key="token").user)
+
+    # def post(self, request, *args, **kwargs):
+    #     serializer = self.get_serializer(data=request.data)
+    #
+    #     if serializer.is_valid():
+    #         user = serializer.object.get('user') or request.user
+    #         token = serializer.object.get('token')
+    #         response_data = {
+    #             'token': token,
+    #             'user': UserListSerializer(user).data
+    #         }
+    #         response = Response(response_data, status=status.HTTP_200_OK)
+
+# class UsersListView(ListCreateAPIView):
+#     permission_classes = (IsAuthenticated,)
+#     authentication_classes = (TokenAuthentication,)
+#
+#     queryset = User.objects.all()
+#     serializer_class = UserListSerializer
+#
+#     def get_queryset(self):
+#         return self.queryset.filter(user=self.request.user)
+
+
+
 
 
 
