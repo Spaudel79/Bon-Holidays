@@ -17,3 +17,17 @@ class BookingAdmin(ModelAdmin):
 
     list_display = ('name', 'email', 'phone', 'bookedfor', 'created_at', 'edit', 'delete')
     icon_name = 'assignment'
+
+
+@register(Test)
+class TestAdmin(ModelAdmin):
+
+    # autocomplete_fields = ['author']
+    def edit(self, obj):
+        return format_html('<a class="btn-btn" href="/admin/booking/test/{}/change/">Change</a>', obj.id)
+
+    def delete(self, obj):
+        return format_html('<a class="btn-btn" href="/admin/booking/test/{}/delete/">Delete</a>', obj.id)
+
+    list_display = ('email', 'name', 'edit', 'delete')
+    icon_name = 'assignment'

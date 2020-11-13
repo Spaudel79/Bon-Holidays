@@ -40,21 +40,21 @@ class PackageAdmin(ModelAdmin):
     readonly_fields = ['image_display']
     icon_name = 'explore'
 
+    # class Media:
+    #     js = ('ckeditor.js','configuration-ckeditor.js')
+
+@register(Review)
 class ReviewAdmin(ModelAdmin):
 
-    # autocomplete_fields = ['destination']
-
+    # autocomplete_fields = ['author']
     def edit(self, obj):
-        return format_html('<a class="btn-btn" href="/admin/packages/review/{}/change/">Change</a>', obj.id)
+        return format_html('<a class="btn-btn" href="/admin/package/review/{}/change/">Change</a>', obj.id)
 
     def delete(self, obj):
-        return format_html('<a class="btn-btn" href="/admin/packages/review/{}/delete/">Delete</a>', obj.id)
+        return format_html('<a class="btn-btn" href="/admin/package/review/{}/delete/">Delete</a>', obj.id)
 
     list_display = ('full_name', 'review', 'created_at', 'edit', 'delete')
-    image_display = AdminThumbnail(image_field='thumbnail')
-    image_display.short_description = 'Image'
-    readonly_fields = ['image_display']
-    icon_name = 'layers'
+    icon_name = 'assignment'
 
 @register(TopAttractions)
 class TopAttractionsAdmin(ModelAdmin):
@@ -88,5 +88,5 @@ class TopActivitiesAdmin(ModelAdmin):
 
 admin.site.register(Destination, DestinationAdmin)
 admin.site.register(Package, PackageAdmin)
-admin.site.register(Review, ReviewAdmin)
+
 admin.site.site_header = 'Travel CRM'

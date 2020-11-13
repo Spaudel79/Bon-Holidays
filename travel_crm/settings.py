@@ -41,8 +41,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
 
-    # storage for S3
-    'storages',
+    # # storage for S3
+    # 'storages',
 
     # custom apps
     'apps.accounts',
@@ -60,6 +60,8 @@ INSTALLED_APPS = [
     'corsheaders',
     'django_filters',
 ]
+
+CKEDITOR_BASEPATH = "/static/ckeditor/ckeditor/"
 
 CKEDITOR_UPLOAD_PATH = "uploads/"
 #ckeditor configs #todo
