@@ -27,6 +27,7 @@ urlpatterns = [
         path('api/allpackages', views.AllPackageAPIView.as_view(), name='api-allpackages'),
         path('api/allpackagescount', views.PackageCountAPIView.as_view(), name='api-allpackagescount'),
         path('api/allpackages/<int:pk>', views.AllPackageDetailAPIView.as_view(), name='api-package-detail'),
+        path('api/allpackages/<int:pk>/postreview', views.ReviewAPIView.as_view(), name='api-review-post'),
         path('api/activities/', views.TopActivitiesListAPIView.as_view(), name='api-activities'),
         path('api/activities/<int:pk>', views.TopActivitiesDetailsListAPIView.as_view(), name='api-activites_details'),
 

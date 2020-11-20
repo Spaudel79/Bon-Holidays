@@ -21,5 +21,5 @@ class BlogPostAdmin(ModelAdmin):
 @register(Comment)
 class CommentAdmin(ModelAdmin):
 
-    list_display = ('name', 'email', 'subject', 'comment', 'created_at')
+    list_display = ('blog', 'user', 'name', 'email', 'subject', 'comment', 'created_at')
     icon_name = 'comment'

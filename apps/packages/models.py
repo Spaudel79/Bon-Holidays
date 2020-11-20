@@ -3,6 +3,7 @@ from imagekit.models import ImageSpecField
 from imagekit.processors import ResizeToFill
 # from django_random_queryset import RandomManager
 from ckeditor.fields import RichTextField
+from apps.accounts.models import UserProfile, User
 
 class Destination(models.Model):
     name = models.CharField(max_length=255, unique=True)
@@ -26,6 +27,7 @@ class Destination(models.Model):
 
 
 class Package(models.Model):
+
     destination = models.ForeignKey(Destination, on_delete=models.CASCADE)
     package_name = models.CharField(max_length=255)
     featured = models.BooleanField(default=False)
@@ -41,6 +43,7 @@ class Package(models.Model):
                                           (4, 4),
                                           (5, 5))
                                  )
+
     image = models.ImageField(blank=True)
     thumbnail = ImageSpecField(source='image',
                                       processors=[ResizeToFill(100, 50)],
@@ -62,11 +65,15 @@ class Package(models.Model):
     #     return self.featured
 
 class Review(models.Model):
-    package = models.ForeignKey(Package, on_delete=models.CASCADE, related_name='review')
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    package = models.ForeignKey(Package, on_delete=models.CASCADE, related_name='reviews')
     full_name = models.CharField(max_length=255)
     review = RichTextField()
     created_at = models.DateTimeField(auto_now_add=True)
 
+
+    def __str__(self):
+        return self.full_name
 
     class Meta:
         ordering = ('created_at',)
@@ -84,8 +91,9 @@ class TopAttractions(models.Model):
         return self.title
 
 class TopActivities(models.Model):
+    package = models.ForeignKey(Package, on_delete=models.CASCADE, related_name='activities')
 
-    destination = models.ForeignKey(Destination, on_delete=models.CASCADE)
+    # destination = models.ForeignKey(Destination, on_delete=models.CASCADE)
     image = models.ImageField(blank=True)
     thumbnail = ImageSpecField(source='image',
                                       processors=[ResizeToFill(100, 50)],

@@ -7,5 +7,6 @@ from .import views
 
 urlpatterns = [
 
-        path('api/booking', views.BookingCreateAPIView.as_view(), name='api-booking'),
+        path('api/allpackages/<int:pk>/booking', views.BookingCreateAPIView.as_view(), name='api-booking'),
+        path('api/mybooking', views.BookingListAPIView.as_view(), name='api-mybooking'),
 ]

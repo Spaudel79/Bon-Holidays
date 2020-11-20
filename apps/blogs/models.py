@@ -5,7 +5,7 @@ from ckeditor_uploader.fields import RichTextUploadingField
 from django.contrib.contenttypes.models import ContentType
 from ckeditor.fields import RichTextField
 
-class BlogPost(models.Model):
+class BlogPost(models.Model): 
     CATEGORY_CHOICES = (
         ('travel_news', 'Travel News',),
         ('travel_tips', 'Travel Tips',),
@@ -27,19 +27,22 @@ class BlogPost(models.Model):
        from django.utils.html import strip_tags
        return strip_tags(self.content)
 
+    def __str__(self):
+        return self.title
+
     # @property
     # def get_content_type(self):
     #     instance = self
     #     content_type = ContentType.objects.get_for_model(instance.__class__)
     #     return content_type
 
-    @property
-    def comments(self):
-        return self.comments_set.all()
+    # @property
+    # def comments(self):
+    #     return self.comments_set.all()
 
 class Comment(models.Model):
     # blog = models.ForeignKey(BlogPost, on_delete=models.CASCADE, default=1)
-    # user = models.ForeignKey(User, on_delete=models.CASCADE)
+    user = models.ForeignKey(User, on_delete=models.CASCADE)
     blog = models.ForeignKey(BlogPost, on_delete=models.CASCADE, related_name='comments')
     name = models.CharField(max_length=255)
     email = models.EmailField()
@@ -50,6 +53,8 @@ class Comment(models.Model):
 
     class Meta:
         ordering = ('created_at',)
+
+
 
     # def __str__(self):
     #     return f'Comment by {self.author.username} on {self.post}'

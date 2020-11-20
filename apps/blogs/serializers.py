@@ -2,6 +2,13 @@ from rest_framework import serializers
 from .models import *
 from .serializers import *
 
+class CommentSerializer(serializers.ModelSerializer):
+    # blog = serializers.StringRelatedField()
+    class Meta:
+        model = Comment
+        fields = ['name', 'email', 'subject', 'comment']
+        # depth = 1
+
 class CommentListSerializer(serializers.ModelSerializer):
     # blog = serializers.StringRelatedField()
     class Meta:
@@ -34,15 +41,15 @@ class BlogPostAllSerializer(serializers.ModelSerializer):
         # def create(self, validated_data):
         #     comments = validated_data.pop('commnets')
 
-class BlogPostDetailSerializer(serializers.HyperlinkedModelSerializer):
+class BlogPostDetailSerializer(serializers.ModelSerializer):
     # comments = serializers.SerializerMethodField()
     # comments = CommentSerializer(source='comments.content')
     # comments = CommentListSerializer(many=True)
-    url = serializers.HyperlinkedIdentityField(view_name='api-blog-post_details', read_only=True)
-    comments= CommentListSerializer (many=True)
+    # url = serializers.HyperlinkedIdentityField(view_name='api-blog-post_details', read_only=True)
+    comments= CommentSerializer (many=True)
     class Meta:
         model = BlogPost
-        fields = ['id', 'url', 'image', 'title', 'categories', 'description', 'content', 'tags', 'date_created', 'comments']
+        fields = ['id',  'image', 'title', 'categories', 'description', 'content', 'tags', 'date_created', 'comments']
         # fields = '__all__'
 
 

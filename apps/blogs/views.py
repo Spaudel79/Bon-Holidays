@@ -60,7 +60,7 @@ class CommentCreateAPIView(CreateAPIView):
     def perform_create(self, serializer):
         # user = self.request.user
         blog = get_object_or_404(BlogPost, pk= self.kwargs['pk'])
-        serializer.save(blog=blog)
+        serializer.save(user=self.request.user, blog=blog)
     # def get_queryset(self):
     #     return BlogPost.objects.filter(pk=self.kwargs['pk'])
 

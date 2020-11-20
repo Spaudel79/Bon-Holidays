@@ -1,6 +1,7 @@
 from rest_framework import viewsets, generics, filters
 from .models import  *
 from .serializers import *
+from django.shortcuts import get_object_or_404
 from django.db.models import Q
 from django_filters.rest_framework import DjangoFilterBackend
 from rest_framework.generics import (
@@ -8,7 +9,11 @@ CreateAPIView, DestroyAPIView, ListCreateAPIView,
 ListAPIView, UpdateAPIView,
 RetrieveUpdateAPIView, RetrieveAPIView
 )
+from rest_framework.views import APIView
 from django_filters.rest_framework import DjangoFilterBackend
+from rest_framework.permissions import (
+AllowAny, IsAuthenticated, IsAdminUser, IsAuthenticatedOrReadOnly
+)
 
 
 # class DestinationViewSet(generics.ListAPIView, generics.RetrieveAPIView, viewsets.GenericViewSet):
@@ -47,7 +52,7 @@ class AllPackageAPIView(ListAPIView):
     queryset = Package.objects.all()
     serializer_class = PackageSerializer
     filter_backends = [DjangoFilterBackend]
-    filterset_fields = ['featured', 'special_discount']
+    filterset_fields = ['featured', 'special_discount', 'activities']
 
 class PackageCountAPIView(ListCreateAPIView):
     queryset = Package.objects.all()
@@ -71,6 +76,18 @@ class PackageCountAPIView(ListCreateAPIView):
 class AllPackageDetailAPIView(RetrieveAPIView):
     queryset = Package.objects.all()
     serializer_class = PackageDetailSerializer
+
+class ReviewAPIView(ListCreateAPIView):
+    permission_classes = [IsAuthenticated]
+    queryset = Review.objects.all()
+    serializer_class = ReviewSerializer
+
+    def perform_create(self, serializer):
+        # user = self.request.user
+        package = get_object_or_404(Package, pk= self.kwargs['pk'])
+        serializer.save(user=self.request.user,package=package)
+
+
 
 
 class TopActivitiesListAPIView(ListAPIView):
