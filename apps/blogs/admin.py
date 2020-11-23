@@ -18,6 +18,9 @@ class BlogPostAdmin(ModelAdmin):
     list_display = ('categories', 'html_stripped', 'title', 'date_created','edit', 'delete')
     icon_name = 'assignment'
 
+    # class Media:
+    #     js = ('ckeditor.js')
+
 @register(Comment)
 class CommentAdmin(ModelAdmin):
 

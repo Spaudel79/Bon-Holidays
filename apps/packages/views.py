@@ -15,6 +15,8 @@ from rest_framework.permissions import (
 AllowAny, IsAuthenticated, IsAdminUser, IsAuthenticatedOrReadOnly
 )
 
+from django_filters import rest_framework as filters
+
 
 # class DestinationViewSet(generics.ListAPIView, generics.RetrieveAPIView, viewsets.GenericViewSet):
 #     queryset = Destination.objects.all()
@@ -35,6 +37,8 @@ AllowAny, IsAuthenticated, IsAdminUser, IsAuthenticatedOrReadOnly
 #     queryset = TopActivities.objects.all()
 #     serializer_class = TopActivitiesSerializer
 
+
+
 class DestinationFrontListAPIView(ListAPIView):
     # queryset = Destination.objects.all().order_by('?')[:4]
     queryset = Destination.objects.all().order_by('-date_created')[:4]
@@ -48,11 +52,32 @@ class DestinationPackageListAPIView(RetrieveAPIView):
     serializer_class = DestinationwithPackageSerializer
 
 
+# class PackageFilter(filters.FilterSet):
+#     activities = filters.CharFilter(
+#         field_name='activities',
+#         lookup_expr='contains'
+#     )
+#     class Meta:
+#         model = Package
+#         fields = ['featured', 'special_discount', 'activities']
+
+
 class AllPackageAPIView(ListAPIView):
     queryset = Package.objects.all()
     serializer_class = PackageSerializer
     filter_backends = [DjangoFilterBackend]
-    filterset_fields = ['featured', 'special_discount', 'activities']
+    filterset_fields = ['featured', 'special_discount',]
+    # filterset_class = PackageFilter
+
+    def get_queryset(self):
+        # This might work with DjangoFilterBackend as well, don't know...
+        activity = self.request.query_params.get('title', None)
+        if not activity:
+            return Package.objects.all()
+        else:
+            return Package.objects.filter(activities__title=activity)
+
+
 
 class PackageCountAPIView(ListCreateAPIView):
     queryset = Package.objects.all()
