@@ -71,11 +71,11 @@ class AllPackageAPIView(ListAPIView):
 
     def get_queryset(self):
         # This might work with DjangoFilterBackend as well, don't know...
-        activity = self.request.query_params.get('title', None)
+        activity = self.request.query_params.get('activity', None)
         if not activity:
             return Package.objects.all()
         else:
-            return Package.objects.filter(activities__title=activity)
+            return Package.objects.filter(activities__activity=activity)
 
 
 

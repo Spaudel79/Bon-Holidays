@@ -78,7 +78,7 @@ class TopActivitiesAdmin(ModelAdmin):
     def delete(self, obj):
         return format_html('<a class="btn-btn" href="/admin/packages/topactivities/{}/delete/">Delete</a>', obj.id)
 
-    list_display = ( 'image_display', 'title', 'description', 'edit', 'delete')
+    list_display = ( 'image_display', 'activity', 'description', 'edit', 'delete')
     # list_display = ('what','image_display', 'title', 'description', 'edit', 'delete')
     # list_filter = ('image_display', 'title', )
     image_display = AdminThumbnail(image_field='thumbnail')

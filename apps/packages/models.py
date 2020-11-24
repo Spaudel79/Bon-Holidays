@@ -99,8 +99,8 @@ class TopActivities(models.Model):
                                       processors=[ResizeToFill(100, 50)],
                                       format='JPEG',
                                       options={'quality': 60})
-    title = models.CharField(max_length=64)
-    description = models.TextField(blank=True)
+    activity = models.CharField(max_length=64)
+    description =RichTextField(blank=True)
 
 
     def __str__(self):

@@ -4,7 +4,7 @@ from .models import *
 class ActivitiesSerializer(serializers.ModelSerializer):
     class Meta:
         model = TopActivities
-        fields = ['image', 'title', 'description']
+        fields = ['image', 'activity', 'description']
 
 
 
