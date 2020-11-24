@@ -61,7 +61,7 @@ INSTALLED_APPS = [
     'django_filters',
 ]
 
-# CKEDITOR_BASEPATH = "/static/ckeditor/ckeditor/"
+CKEDITOR_BASEPATH = "/static/ckeditor/ckeditor/"
 
 CKEDITOR_UPLOAD_PATH = "uploads/"
 #ckeditor configs #todo
