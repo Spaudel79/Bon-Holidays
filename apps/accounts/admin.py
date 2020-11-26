@@ -33,23 +33,23 @@ class UsersAdmin(UserAdmin):
 
 
 
-class UserProfileAdmin(ModelAdmin):
-
-    def edit(self, obj):
-        return format_html('<a class="btn-btn" href="/admin/accounts/userprofile/{}/change/">Change</a>', obj.id)
-
-    def delete(self, obj):
-        return format_html('<a class="btn-btn" href="/admin/accounts/userprofile/{}/delete/">Delete</a>', obj.id)
-
-    icon_name = 'person_pin'
-    search_fields = ['user__name']
-    autocomplete_fields = ['user']
-
-    list_display = ('image_display', 'user', 'group', 'first_name','last_name','phone_number',
-                    'user_type', 'last_updated', 'edit', 'delete')
-    image_display = AdminThumbnail(image_field='thumbnail')
-    image_display.short_description = 'Image'
-    readonly_fields = ['image_display']
+# class UserProfileAdmin(ModelAdmin):
+#
+#     def edit(self, obj):
+#         return format_html('<a class="btn-btn" href="/admin/accounts/userprofile/{}/change/">Change</a>', obj.id)
+#
+#     def delete(self, obj):
+#         return format_html('<a class="btn-btn" href="/admin/accounts/userprofile/{}/delete/">Delete</a>', obj.id)
+#
+#     icon_name = 'person_pin'
+#     search_fields = ['user__name']
+#     autocomplete_fields = ['user']
+#
+#     list_display = ('image_display', 'user', 'group', 'first_name','last_name','phone_number',
+#                     'user_type', 'last_updated', 'edit', 'delete')
+#     image_display = AdminThumbnail(image_field='thumbnail')
+#     image_display.short_description = 'Image'
+#     readonly_fields = ['image_display']
 
 
 #already commented out
@@ -57,21 +57,21 @@ class UserProfileAdmin(ModelAdmin):
 #     icon_name = 'people'
 
 
-class PartnerApplicationAdmin(ModelAdmin):
-    list_display = ('first_name', 'last_name', 'company_name', 'email_address', 'phone', 'state')
-    icon_name = 'people'
-
-class BookmundiAccountAdmin(ModelAdmin):
-    list_display = ('title', 'first_name', 'middle_name', 'last_name',
-                    'date_of_birth', 'nationality', 'occupation', 'email',
-                    'phone_number', 'passport_number', 'expiry_date')
-    icon_name = 'person'
+# class PartnerApplicationAdmin(ModelAdmin):
+#     list_display = ('first_name', 'last_name', 'company_name', 'email_address', 'phone', 'state')
+#     icon_name = 'people'
+#
+# class BookmundiAccountAdmin(ModelAdmin):
+#     list_display = ('title', 'first_name', 'middle_name', 'last_name',
+#                     'date_of_birth', 'nationality', 'occupation', 'email',
+#                     'phone_number', 'passport_number', 'expiry_date')
+#     icon_name = 'person'
 
 admin.site.register(User, UsersAdmin)
-admin.site.register(UserProfile, UserProfileAdmin)
+# admin.site.register(UserProfile, UserProfileAdmin)
 # #already commented out
 # # admin.site.register(UserGroup, UserGroupAdmin)
 # # admin.site.unregister(Group)
 #
-admin.site.register(PartnerApplication, PartnerApplicationAdmin)
-admin.site.register(BookmundiAccount, BookmundiAccountAdmin)
+# admin.site.register(PartnerApplication, PartnerApplicationAdmin)
+# admin.site.register(BookmundiAccount, BookmundiAccountAdmin)
