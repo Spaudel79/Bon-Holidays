@@ -31,3 +31,20 @@ class TestAdmin(ModelAdmin):
 
     list_display = ('email', 'name', 'edit', 'delete')
     icon_name = 'assignment'
+
+
+
+@register(CustomBooking)
+class CustomeBookingAdmin(ModelAdmin):
+
+    # autocomplete_fields = ['author']
+    def edit(self, obj):
+        return format_html('<a class="btn-btn" href="/admin/booking/custombooking/{}/change/">Change</a>', obj.id)
+
+    def delete(self, obj):
+        return format_html('<a class="btn-btn" href="/admin/booking/custombooking/{}/delete/">Delete</a>', obj.id)
+
+    list_display = ('user', 'people', 'number_of_children', 'number_of_adults', 'geographical_area',
+                    'age_group', 'tour_type', 'accomodation', 'budget', 'budget_flexibility', 'Trip_stage',
+                     'trip_title', 'description','bookedfor', 'created_at', 'edit', 'delete')
+    icon_name = 'assignment'

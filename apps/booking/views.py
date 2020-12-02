@@ -30,6 +30,17 @@ class BookingCreateAPIView(ListCreateAPIView):
         package = get_object_or_404(Package, pk= self.kwargs['pk'])
         serializer.save(user=self.request.user,package=package)
 
+
+class CustomBookingCreateAPIView(ListCreateAPIView):
+    permission_classes= [IsAuthenticated]
+    queryset = CustomBooking.objects.all()
+    serializer_class = CustomBookingSerializer
+
+    def perform_create(self, serializer):
+        # user = self.request.user
+        # package = get_object_or_404(Package, pk= self.kwargs['pk'])
+        serializer.save(user=self.request.user)
+
 class BookingListAPIView(ListAPIView):
     permission_classes = [IsAuthenticated]
     # queryset = Booking.objects.all()
