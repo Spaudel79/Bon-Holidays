@@ -31,15 +31,7 @@ class BookingCreateAPIView(ListCreateAPIView):
         serializer.save(user=self.request.user,package=package)
 
 
-class CustomBookingCreateAPIView(ListCreateAPIView):
-    permission_classes= [IsAuthenticated]
-    queryset = CustomBooking.objects.all()
-    serializer_class = CustomBookingSerializer
 
-    def perform_create(self, serializer):
-        # user = self.request.user
-        # package = get_object_or_404(Package, pk= self.kwargs['pk'])
-        serializer.save(user=self.request.user)
 
 class BookingListAPIView(ListAPIView):
     permission_classes = [IsAuthenticated]
@@ -56,6 +48,28 @@ class BookingListAPIView(ListAPIView):
         # return HttpResponse(bookings)
         serializer = self.get_serializer(bookings, many=True)
         return Response({"booking_history": serializer.data})
+
+class CustomBookingCreateAPIView(ListCreateAPIView):
+    permission_classes = [IsAuthenticated]
+    queryset = CustomBooking.objects.all()
+    serializer_class = CustomBookingSerializer
+
+    def perform_create(self, serializer):
+        # user = self.request.user
+        # package = get_object_or_404(Package, pk= self.kwargs['pk'])
+        serializer.save(user=self.request.user)
+
+class CustomBookingListAPIView(ListAPIView):
+    permission_classes = [IsAuthenticated]
+    serializer_class = CustomBookingSerializer
+
+    def get(self, request, *args, **kwargs):
+        bookings = CustomBooking.objects.filter(user=request.user).order_by('created_at')
+        # return HttpResponse(bookings)
+        serializer = self.get_serializer(bookings, many=True)
+        return Response({"booking_history": serializer.data})
+
+
 
 
 
@@ -82,7 +96,8 @@ class BookingListAPIView(ListAPIView):
     #                                          )
     #     new_booking.save()
     #     serializer = BookingSerializer(new_booking)
+    #     serializer = self.get_serializer(bookings, many=True)
     #     return Response(serializer.data, status=status.HTTP_200_OK)
-
+    #
     # user = booking_data["user"],
 

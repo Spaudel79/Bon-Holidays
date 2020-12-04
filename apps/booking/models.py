@@ -40,8 +40,8 @@ class CustomBooking(models.Model):
             ('65+ yrs', '65+ yrs',),
         )
     TOUR_TYPE = (
-            ('With Guide/Driver', 'With Guide/Driver',),
-            ('Without Guide/Driver', 'Without Guide/Driver',),
+            ('Custom-made trip with guide and/or driver', 'Custom-made trip with guide and/or driver',),
+            ('Custom-made trip without guide and driver', 'Custom-made trip without guide and driver',),
             ('Group Tour', 'Group Tour',),
             ('Cruise Tour', 'Cruise Tour',),
         )
@@ -69,16 +69,16 @@ class CustomBooking(models.Model):
     people = models.CharField(max_length=64, choices=PEOPLE_CHOICES, default='Couple')
     number_of_children = models.IntegerField(default=0)
     number_of_adults = models.IntegerField(default=0)
-    geographical_area = models.CharField(max_length=255)
+    # geographical_area = models.CharField(max_length=255)
     bookedfor = models.DateField(blank=True)
     age_group = models.CharField(max_length=64, choices=AGE_GROUP, default='18-35 yrs')
     tour_type = models.CharField(max_length=100, choices=TOUR_TYPE, default='Group Tour')
-    accomodation = models.CharField(max_length=100, choices=ACCOMODATIONS, default='Comfortable')
-    budget = models.FloatField()
+    accomodation = models.CharField(max_length=100, choices=ACCOMODATIONS, default='Quirky')
+    budget = models.FloatField(blank=True)
     budget_flexibility = models.CharField(max_length=255, choices=FLEXIBILITY, default='I can increase upto 20%')
     Trip_stage = models.CharField(max_length=255, choices=STAGE, default='Iam ready to start trip planning')
-    trip_title = models.CharField(max_length=255)
-    description = RichTextField()
+    trip_title = models.CharField(max_length=255,blank=True)
+    description = RichTextField(blank=True)
     created_at = models.DateTimeField(auto_now_add=True)
 
 

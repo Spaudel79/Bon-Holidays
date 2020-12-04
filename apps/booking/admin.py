@@ -35,7 +35,7 @@ class TestAdmin(ModelAdmin):
 
 
 @register(CustomBooking)
-class CustomeBookingAdmin(ModelAdmin):
+class CustomBookingAdmin(ModelAdmin):
 
     # autocomplete_fields = ['author']
     def edit(self, obj):
@@ -44,7 +44,7 @@ class CustomeBookingAdmin(ModelAdmin):
     def delete(self, obj):
         return format_html('<a class="btn-btn" href="/admin/booking/custombooking/{}/delete/">Delete</a>', obj.id)
 
-    list_display = ('user', 'people', 'number_of_children', 'number_of_adults', 'geographical_area',
+    list_display = ('user', 'people', 'number_of_children', 'number_of_adults',
                     'age_group', 'tour_type', 'accomodation', 'budget', 'budget_flexibility', 'Trip_stage',
                      'trip_title', 'description','bookedfor', 'created_at', 'edit', 'delete')
     icon_name = 'assignment'

@@ -92,6 +92,8 @@ CORS_ORIGIN_WHITELIST = [
     "http://27.34.13.130",
     "http://192.168.1.178:3000",
     "http://127.0.0.1:9000",
+    "https://bonholidays.aakash.cloud",
+    "http://bonholidays.aakash.cloud",
 ]
 
 CORS_ALLOW_METHODS = [
