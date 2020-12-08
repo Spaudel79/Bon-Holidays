@@ -52,17 +52,17 @@ class CustomBooking(models.Model):
         ('Quirky', 'Quirky',),
     )
     FLEXIBILITY = (
-        ('No,this is my max budget', 'No,this is my max budget',),
-        ('I can increase upto 20%', 'I can increase upto 20%',),
-        ('Very flexible, plan me the best', 'Very flexible, plan me the best',),
+        ('No,this is my maximum budget', 'No,this is my maximum budget',),
+        ('Flexible,I can increase up to 20%,if needed', 'Flexible,I can increase up to 20%,if needed',),
+        ('Very flexible, plan me the best trip possible', 'Very flexible, plan me the best trip possible',),
 
     )
     STAGE = (
-        ('I need more information before I can start trip planning',
-         'I need more information before I can start trip planning',),
-        ('Iam ready to start trip planning', 'Iam ready to start trip planning',),
-        ('I have done my homework and almost ready to book',
-         'I have done my homework and almost ready to book',),
+        ("I need more information before I can start trip planning",
+         "I need more information before I can start trip planning",),
+        ("I'm ready to start trip planning", "I'm ready to start trip planning",),
+        ("I've done my homework and almost ready to book",
+         "I've done my homework and almost ready to book",),
 
     )
     user = models.ForeignKey(User, on_delete=models.CASCADE)
@@ -75,8 +75,8 @@ class CustomBooking(models.Model):
     tour_type = models.CharField(max_length=100, choices=TOUR_TYPE, default='Group Tour')
     accomodation = models.CharField(max_length=100, choices=ACCOMODATIONS, default='Quirky')
     budget = models.FloatField(blank=True)
-    budget_flexibility = models.CharField(max_length=255, choices=FLEXIBILITY, default='I can increase upto 20%')
-    Trip_stage = models.CharField(max_length=255, choices=STAGE, default='Iam ready to start trip planning')
+    budget_flexibility = models.CharField(max_length=255, choices=FLEXIBILITY, default='Flexible,I can increase up to 20%,if needed')
+    Trip_stage = models.CharField(max_length=255, choices=STAGE, default="I'm ready to start trip planning")
     trip_title = models.CharField(max_length=255,blank=True)
     description = RichTextField(blank=True)
     created_at = models.DateTimeField(auto_now_add=True)
