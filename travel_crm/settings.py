@@ -40,10 +40,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
-
-    # # storage for S3
-    # 'storages',
-
+    'storages',
     # custom apps
     'apps.accounts',
     'apps.blogs',
@@ -198,9 +195,6 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/3.0/howto/static-files/
 
 
-
-
-
 STATIC_URL = '/static/'
 STATIC_ROOT = os.path.join(BASE_DIR, 'static/')
 
@@ -259,27 +253,24 @@ REST_FRAMEWORK = {
     'DEFAULT_FILTER_BACKENDS': ['django_filters.rest_framework.DjangoFilterBackend']
 }
 
-# AWS_ACCESS_KEY_ID = "AKIAYYG2ZHHZQ3PZ5VOT"
-# AWS_SECRET_ACCESS_KEY = "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"
-# AWS_FILE_EXPIRE = 200
-# AWS_PRELOAD_METADATA = True
-# AWS_QUERYSTRING_AUTH = True
-#
-# DEFAULT_FILE_STORAGE = 'travel_crm.utils.MediaRootS3BotoStorage'
-# STATICFILES_STORAGE = 'travel_crm.utils.StaticRootS3BotoStorage'
-# AWS_STORAGE_BUCKET_NAME = 'bonbonstage'
-# S3DIRECT_REGION = 'ap-southeast-1'
-# S3_URL = '//%s.s3.amazonaws.com/' % AWS_STORAGE_BUCKET_NAME
-# MEDIA_URL = '//%s.s3.amazonaws.com/media/' % AWS_STORAGE_BUCKET_NAME
-# MEDIA_ROOT = MEDIA_URL
-# STATIC_URL = S3_URL + 'static/'
-# ADMIN_MEDIA_PREFIX = STATIC_URL + 'admin/'
-#
-# two_months = datetime.timedelta(days=61)
-# date_two_months_later = datetime.date.today() + two_months
-# expires = date_two_months_later.strftime("%A, %d %B %Y 20:00:00 GMT")
-#
-# AWS_HEADERS = {
-#     'Expires': expires,
-#     'Cache-Control': 'max-age=%d' % (int(two_months.total_seconds()), ),
-# }
+AWS_ACCESS_KEY_ID = "AKIAYOTYKWMTSYHWDP74"
+AWS_SECRET_ACCESS_KEY = "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"
+AWS_FILE_EXPIRE = 200
+AWS_PRELOAD_METADATA = True
+AWS_QUERYSTRING_AUTH = True
+DEFAULT_FILE_STORAGE = 'travel_crm.utils.MediaRootS3BotoStorage'
+STATICFILES_STORAGE = 'travel_crm.utils.StaticRootS3BotoStorage'
+AWS_STORAGE_BUCKET_NAME = 'bonbucket'
+S3DIRECT_REGION = 'ap-southeast-1'
+S3_URL = '//%s.s3.amazonaws.com/' % AWS_STORAGE_BUCKET_NAME
+MEDIA_URL = '//%s.s3.amazonaws.com/media/' % AWS_STORAGE_BUCKET_NAME
+MEDIA_ROOT = MEDIA_URL
+STATIC_URL = S3_URL + 'static/'
+ADMIN_MEDIA_PREFIX = STATIC_URL + 'admin/'
+two_months = datetime.timedelta(days=61)
+date_two_months_later = datetime.date.today() + two_months
+expires = date_two_months_later.strftime("%A, %d %B %Y 20:00:00 GMT")
+AWS_HEADERS = {
+    'Expires': expires,
+    'Cache-Control': 'max-age=%d' % (int(two_months.total_seconds()), ),
+}
