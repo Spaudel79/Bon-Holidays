@@ -19,7 +19,7 @@ class BlogPost(models.Model):
     content = RichTextUploadingField()
     # author = models.ForeignKey(UserProfile, on_delete=models.CASCADE)
     # todo support for tags
-    tags = models.CharField(max_length=255, default='#travel') #todo
+    tags = models.CharField(max_length=255, default='travel') #todo
     date_created = models.DateField()
 
     @property

@@ -6,6 +6,7 @@ from rest_framework.response import Response
 from rest_framework.status import HTTP_200_OK, HTTP_400_BAD_REQUEST
 from django.shortcuts import get_object_or_404
 from .pagination import *
+from django_filters.rest_framework import DjangoFilterBackend
 
 
 from rest_framework.generics import (
@@ -32,12 +33,16 @@ class BlogPostListFrontAPIView(ListAPIView):
     queryset = BlogPost.objects.all().order_by('-date_created')[:3]
     # queryset = BlogPost.objects.all.order_by('-date_created')[:3]
     serializer_class = BlogPostFrontPageSerializer
+    # filter_backends = [DjangoFilterBackend]
+    # filterset_fields = ['tags', ]
 
 class BlogPostAllListAPIView(ListAPIView):
     permission_classes = [AllowAny]
     queryset = BlogPost.objects.all()
     serializer_class = BlogPostAllSerializer
     pagination_class = BlogPostPageNumberPagination
+    filter_backends = [DjangoFilterBackend]
+    filterset_fields = ['tags' ]
 
 class BlogPostDetailsListAPIView(ListAPIView):
     permission_classes = [AllowAny]
