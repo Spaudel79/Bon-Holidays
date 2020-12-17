@@ -56,19 +56,19 @@ class ReviewAdmin(ModelAdmin):
     list_display = ('user', 'package', 'full_name', 'created_at', 'edit', 'delete')
     icon_name = 'assignment'
 
-@register(TopAttractions)
-class TopAttractionsAdmin(ModelAdmin):
-    def edit(self, obj):
-        return format_html('<a class="btn-btn" href="/admin/packages/topattractions/{}/change/">Change</a>', obj.id)
-
-    def delete(self, obj):
-        return format_html('<a class="btn-btn" href="/admin/packages/topattractions/{}/delete/">Delete</a>', obj.id)
-
-    list_display = ('image_display','title','edit', 'delete')
-    image_display = AdminThumbnail(image_field='thumbnail')
-    image_display.short_description = 'Image'
-    readonly_fields = ['image_display']
-    icon_name = 'layers'
+# @register(TopAttractions)
+# class TopAttractionsAdmin(ModelAdmin):
+#     def edit(self, obj):
+#         return format_html('<a class="btn-btn" href="/admin/packages/topattractions/{}/change/">Change</a>', obj.id)
+#
+#     def delete(self, obj):
+#         return format_html('<a class="btn-btn" href="/admin/packages/topattractions/{}/delete/">Delete</a>', obj.id)
+#
+#     list_display = ('image_display','title','edit', 'delete')
+#     image_display = AdminThumbnail(image_field='thumbnail')
+#     image_display.short_description = 'Image'
+#     readonly_fields = ['image_display']
+#     icon_name = 'layers'
 
 @register(TopActivities)
 class TopActivitiesAdmin(ModelAdmin):
@@ -89,4 +89,4 @@ class TopActivitiesAdmin(ModelAdmin):
 admin.site.register(Destination, DestinationAdmin)
 admin.site.register(Package, PackageAdmin)
 
-admin.site.site_header = 'Travel CRM'
+admin.site.site_header = ' Bon Holidays'

@@ -12,8 +12,15 @@ from django.contrib.auth.models import Group
 from apps.accounts import models
 # Register your models here.
 class UsersAdmin(UserAdmin):
+
+    def edit(self, obj):
+        return format_html('<a class="btn-btn" href="/admin/accounts/user/{}/change/">Change</a>', obj.id)
+
+    def delete(self, obj):
+        return format_html('<a class="btn-btn" href="/admin/accounts/user/{}/delete/">Delete</a>', obj.id)
+
     ordering = ['id']
-    list_display = ['email', 'first_name', 'last_name', 'is_active', 'is_staff', 'is_superuser']
+    list_display = ['email', 'first_name', 'last_name', 'is_active', 'is_staff', 'is_superuser', 'edit', 'delete']
     search_fields = ('email', 'first_name', 'last_name')
     fieldsets = (
         (None, {'fields': ('email', 'password')}),

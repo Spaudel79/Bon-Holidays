@@ -19,18 +19,18 @@ class BookingAdmin(ModelAdmin):
     icon_name = 'assignment'
 
 
-@register(Test)
-class TestAdmin(ModelAdmin):
-
-    # autocomplete_fields = ['author']
-    def edit(self, obj):
-        return format_html('<a class="btn-btn" href="/admin/booking/test/{}/change/">Change</a>', obj.id)
-
-    def delete(self, obj):
-        return format_html('<a class="btn-btn" href="/admin/booking/test/{}/delete/">Delete</a>', obj.id)
-
-    list_display = ('email', 'name', 'edit', 'delete')
-    icon_name = 'assignment'
+# @register(Test)
+# class TestAdmin(ModelAdmin):
+#
+#     # autocomplete_fields = ['author']
+#     def edit(self, obj):
+#         return format_html('<a class="btn-btn" href="/admin/booking/test/{}/change/">Change</a>', obj.id)
+#
+#     def delete(self, obj):
+#         return format_html('<a class="btn-btn" href="/admin/booking/test/{}/delete/">Delete</a>', obj.id)
+#
+#     list_display = ('email', 'name', 'edit', 'delete')
+#     icon_name = 'assignment'
 
 
 
@@ -44,7 +44,7 @@ class CustomBookingAdmin(ModelAdmin):
     def delete(self, obj):
         return format_html('<a class="btn-btn" href="/admin/booking/custombooking/{}/delete/">Delete</a>', obj.id)
 
-    list_display = ('user', 'people', 'number_of_children', 'number_of_adults',
-                    'age_group', 'tour_type', 'accomodation', 'budget',  'Trip_stage',
-                     'trip_title', 'bookedfor', 'created_at', 'edit', 'delete')
+    list_display = ('user','accomodation', 'tour_type', 'budget','age_group','people','number_of_adults',
+                     'number_of_children',    'Trip_stage',
+                     'trip_title',  'bookedfor', 'created_at', 'edit', 'delete')
     icon_name = 'assignment'

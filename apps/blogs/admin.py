@@ -15,7 +15,7 @@ class BlogPostAdmin(ModelAdmin):
     def delete(self, obj):
         return format_html('<a class="btn-btn" href="/admin/blogs/blogpost/{}/delete/">Delete</a>', obj.id)
 
-    list_display = ('categories', 'html_stripped', 'title', 'date_created','edit', 'delete')
+    list_display = ('categories', 'title', 'date_created','edit', 'delete')
     icon_name = 'assignment'
 
     # class Media:
@@ -24,5 +24,11 @@ class BlogPostAdmin(ModelAdmin):
 @register(Comment)
 class CommentAdmin(ModelAdmin):
 
-    list_display = ('blog', 'user', 'name', 'email', 'subject', 'created_at')
+    def edit(self, obj):
+        return format_html('<a class="btn-btn" href="/admin/blogs/comment/{}/change/">Change</a>', obj.id)
+
+    def delete(self, obj):
+        return format_html('<a class="btn-btn" href="/admin/blogs/comment/{}/delete/">Delete</a>', obj.id)
+
+    list_display = ('blog','name', 'email', 'subject', 'created_at','edit', 'delete')
     icon_name = 'comment'

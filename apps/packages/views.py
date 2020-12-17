@@ -65,17 +65,26 @@ class DestinationPackageListAPIView(RetrieveAPIView):
 class AllPackageAPIView(ListAPIView):
     queryset = Package.objects.all()
     serializer_class = PackageSerializer
-    filter_backends = [DjangoFilterBackend]
-    filterset_fields = ['featured', 'special_discount',]
+    # filter_backends = [DjangoFilterBackend]
+    # filterset_fields = ['featured', 'special_discount',]
     # filterset_class = PackageFilter
+
+    # def get_queryset(self):
+    #     # This might work with DjangoFilterBackend as well, don't know...
+    #     activity = self.request.query_params.get('activity', None)
+    #     if not activity:
+    #         return Package.objects.all()
+    #     else:
+    #         return Package.objects.filter(activities__activity=activity)
 
     def get_queryset(self):
         # This might work with DjangoFilterBackend as well, don't know...
-        activity = self.request.query_params.get('activity', None)
-        if not activity:
-            return Package.objects.all()
-        else:
-            return Package.objects.filter(activities__activity=activity)
+        if self.request.query_params.get() is not 'featured' and 'special_discount':
+            return Package.objects.all().order_by('-date_created')[:4]
+            if self.request.query_params.get() is not 'featured':
+                return Package.objects.filter(special_discount)
+            else:
+                return
 
 
 
@@ -121,7 +130,7 @@ class TopActivitiesListAPIView(ListAPIView):
     serializer_class = TopActivitiesSerializer
     filter_backends = [DjangoFilterBackend]
     filterset_fields = [
-       'destination', 'title',
+       'destination', 'activity'
     ]
 
     # def get_queryset(self):

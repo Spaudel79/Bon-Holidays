@@ -47,7 +47,7 @@ class Comment(models.Model):
     name = models.CharField(max_length=255)
     email = models.EmailField()
     subject = models.CharField(max_length=255)
-    comment = models.TextField()
+    comment = RichTextField(blank=True)
     created_at = models.DateTimeField(auto_now_add=True)
     is_active = models.BooleanField(default=True)
 

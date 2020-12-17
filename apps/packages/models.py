@@ -104,4 +104,4 @@ class TopActivities(models.Model):
 
 
     def __str__(self):
-        return self.title
+        return self.activity
