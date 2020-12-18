@@ -61,6 +61,9 @@ class DestinationPackageListAPIView(RetrieveAPIView):
 #         model = Package
 #         fields = ['featured', 'special_discount', 'activities']
 
+class PackageAPIView(ListAPIView):
+    queryset = Package.objects.all()
+    serializer_class = PackageSerializer
 
 class AllPackageAPIView(ListAPIView):
     queryset = Package.objects.all()
@@ -77,14 +80,29 @@ class AllPackageAPIView(ListAPIView):
     #     else:
     #         return Package.objects.filter(activities__activity=activity)
 
+    # def get_queryset(self):
+    #     # This might work with DjangoFilterBackend as well, don't know...
+    #     if self.request.query_params.get() is'featured':
+    #         return Package.objects.filter(featured)
+    #
+    #     elif self.request.query_params.get() is 'special_discount':
+    #             return Package.objects.filter(special_discount)
     def get_queryset(self):
-        # This might work with DjangoFilterBackend as well, don't know...
-        if self.request.query_params.get() is not 'featured' and 'special_discount':
+        featured = self.request.query_params.get('featured', None)
+        special_discount = self.request.query_params.get('special_discount', None)
+        activity = self.request.query_params.get('activity', None)
+        if featured is not None:
+            return Package.objects.filter(featured=True)
+        elif special_discount is not None:
+            return Package.objects.filter(special_discount=True)
+        elif activity is not None:
+            return Package.objects.filter(activities__activity=activity)
+        else:
             return Package.objects.all().order_by('-date_created')[:4]
-            if self.request.query_params.get() is not 'featured':
-                return Package.objects.filter(special_discount)
-            else:
-                return
+
+
+
+
 
 
 

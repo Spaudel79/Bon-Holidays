@@ -51,6 +51,8 @@ class Package(models.Model):
                                       options={'quality': 60})
     content =RichTextField()
     highlights = RichTextField()
+    inclusions = RichTextField()
+    exclusions = RichTextField()
     itinerary = RichTextField()
     image_1= models.ImageField(blank=True,null = True)
     image_2= models.ImageField(blank=True,null = True)

@@ -198,7 +198,7 @@ AUTH_PASSWORD_VALIDATORS = [
 
 LANGUAGE_CODE = 'en-us'
 
-TIME_ZONE = 'UTC'
+TIME_ZONE = 'Asia/Kathmandu'
 
 USE_I18N = True
 
@@ -242,9 +242,9 @@ MATERIAL_ADMIN_SITE = {
 #     # 'FAVICON':  'path/to/favicon',  # Admin site favicon (path to static should be specified)
 #     # 'MAIN_BG_COLOR':  'color',  # Admin site main color, css color should be specified
 #     'MAIN_HOVER_COLOR':  'color',  # Admin site main hover color, css color should be specified
-    'PROFILE_PICTURE':  'TravelCRM/media/gerrard.jpg',  # Admin site profile picture (path to static should be specified)
-#     # 'PROFILE_BG':  'path/to/image',  # Admin site profile background (path to static should be specified)
-#     # 'LOGIN_LOGO':  'path/to/image',  # Admin site logo on login page (path to static should be specified)
+#     'PROFILE_PICTURE':  'static/admin/img/icon-alert.svg',  # Admin site profile picture (path to static should be specified)
+#     'PROFILE_BG':  'static/admin/img/gerrard.jpg',  # Admin site profile background (path to static should be specified)
+#     # 'LOGIN_LOGO':  '',  # Admin site logo on login page (path to static should be specified)
 #     # 'LOGOUT_BG':  'path/to/image',  # Admin site background on login/logout pages (path to static should be specified)
 #     # 'SHOW_THEMES':  True,  #  Show default admin themes button
 #     # 'TRAY_REVERSE': True,  # Hide object-tools and additional-submit-line by default
