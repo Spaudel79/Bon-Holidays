@@ -49,7 +49,7 @@ class BlogPostDetailSerializer(serializers.ModelSerializer):
     comments= CommentSerializer (many=True)
     class Meta:
         model = BlogPost
-        fields = ['id',  'image', 'title', 'categories', 'description', 'content', 'tags', 'date_created', 'comments']
+        fields = ['id',  'image', 'title', 'categories', 'content', 'tags', 'date_created', 'comments']
         # fields = '__all__'
 
 
