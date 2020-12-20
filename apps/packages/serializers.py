@@ -28,7 +28,7 @@ class PackageDetailSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = Package
-        fields = ['id', 'destination', 'package_name', 'image', 'duration', 'featured', 'content', 'highlights',
+        fields = ['id', 'destination', 'package_name', 'image', 'duration', 'featured', 'content', 'highlights', 'inclusions', 'exclusions',
                   'image_1', 'image_2', 'image_3', 'itinerary',  'date_created', 'reviews', 'activities']
 
 

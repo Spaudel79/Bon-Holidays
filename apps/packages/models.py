@@ -66,6 +66,8 @@ class Package(models.Model):
     # def is_featured(self):
     #     return self.featured
 
+
+
 class Review(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     package = models.ForeignKey(Package, on_delete=models.CASCADE, related_name='reviews')

@@ -46,7 +46,7 @@ class BlogPostDetailSerializer(serializers.ModelSerializer):
     # comments = CommentSerializer(source='comments.content')
     # comments = CommentListSerializer(many=True)
     # url = serializers.HyperlinkedIdentityField(view_name='api-blog-post_details', read_only=True)
-    comments= CommentSerializer (many=True)
+    comments = CommentSerializer(many=True)
     class Meta:
         model = BlogPost
         fields = ['id',  'image', 'title', 'categories', 'content', 'tags', 'date_created', 'comments']
