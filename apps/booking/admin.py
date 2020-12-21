@@ -45,6 +45,6 @@ class CustomBookingAdmin(ModelAdmin):
         return format_html('<a class="btn-btn" href="/admin/booking/custombooking/{}/delete/">Delete</a>', obj.id)
 
     list_display = ('user','accomodation', 'tour_type', 'budget','age_group','people','number_of_adults',
-                     'number_of_children',    'Trip_stage',
-                     'trip_title',  'bookedfor', 'created_at', 'edit', 'delete')
+                     'number_of_children',    'trip_stage',
+                       'bookedfor', 'created_at', 'edit', 'delete')
     icon_name = 'assignment'
