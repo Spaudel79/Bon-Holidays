@@ -70,7 +70,7 @@ class CustomBooking(models.Model):
     number_of_children = models.IntegerField(default=0)
     number_of_adults = models.IntegerField(default=0)
     country = models.CharField(max_length=255)
-    bookedfor = models.DateField(blank=True)
+    bookedfor = models.DateField(blank=True,null=True)
     age_group = models.CharField(max_length=64, choices=AGE_GROUP, default='18-35 yrs')
     tour_type = models.CharField(max_length=100, choices=TOUR_TYPE, default='Group Tour')
     accomodation = models.CharField(max_length=100, choices=ACCOMODATIONS, default='Quirky')
