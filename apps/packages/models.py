@@ -10,6 +10,7 @@ class Destination(models.Model):
     # description = models.CharField(max_length=255)
     # discount = models.CharField(max_length=255, default="5% OFF")
     # featured = models.BooleanField(default=False)
+    top = models.BooleanField(default=False)
     dest_image = models.ImageField(blank=True)
     thumbnail = ImageSpecField(source='dest_image',
                                       processors=[ResizeToFill(100, 50)],

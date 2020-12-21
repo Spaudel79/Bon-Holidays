@@ -16,7 +16,7 @@ class DestinationAdmin(ModelAdmin):
     def delete(self, obj):
         return format_html('<a class="btn-btn" href="/admin/packages/destination/{}/delete/">Delete</a>', obj.id)
 
-    list_display = ('image_display', 'name', 'date_created',  'edit', 'delete')
+    list_display = ('image_display', 'name', 'top', 'date_created',  'edit', 'delete')
     image_display = AdminThumbnail(image_field='thumbnail')
     image_display.short_description = 'Image'
     readonly_fields = ['image_display']
@@ -96,4 +96,4 @@ class PackageInline(admin.TabularInline):
 admin.site.register(Destination, DestinationAdmin)
 admin.site.register(Package, PackageAdmin)
 
-admin.site.site_header = ' Bon Holidays'
+admin.site.site_header = 'Bon Holidays'

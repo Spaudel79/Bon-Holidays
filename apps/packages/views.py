@@ -41,15 +41,18 @@ from django_filters import rest_framework as filters
 
 class DestinationFrontListAPIView(ListAPIView):
     # queryset = Destination.objects.all().order_by('?')[:4]
-    queryset = Destination.objects.all().order_by('-date_created')[:4]
-    # queryset = Destination.objects.all()
+    # queryset = Destination.objects.all().order_by('-date_created')[:4]
+    queryset = Destination.objects.all()
     serializer_class = DestinationFrontSerializer
+    filter_backends = [DjangoFilterBackend]
+    filterset_fields = ['top', ]
 
 
 
 class DestinationPackageListAPIView(RetrieveAPIView):
     queryset = Destination.objects.all()
     serializer_class = DestinationwithPackageSerializer
+
 
 
 # class PackageFilter(filters.FilterSet):
@@ -68,8 +71,7 @@ class PackageAPIView(ListAPIView):
 class AllPackageAPIView(ListAPIView):
     queryset = Package.objects.all()
     serializer_class = PackageSerializer
-    # filter_backends = [DjangoFilterBackend]
-    # filterset_fields = ['featured', 'special_discount',]
+
     # filterset_class = PackageFilter
 
     # def get_queryset(self):
