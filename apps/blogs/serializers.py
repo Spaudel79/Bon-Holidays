@@ -20,7 +20,7 @@ class BlogPostFrontPageSerializer(serializers.ModelSerializer):
     # tag = serializers.StringRelatedField()
     class Meta:
         model = BlogPost
-        fields = ['id', 'image', 'title', 'categories', 'tag', 'date_created']
+        fields = ['id', 'image', 'title', 'caption', 'categories', 'tag', 'date_created']
         # fields = '__all__'
         depth = 1
 
@@ -30,7 +30,7 @@ class BlogPostAllSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = BlogPost
-        fields = ['id', 'image', 'title', 'categories', 'tag', 'date_created', ]
+        fields = ['id', 'image', 'title', 'caption', 'categories', 'tag', 'date_created', ]
         # fields = '__all__'
         depth = 1
 
@@ -53,7 +53,7 @@ class BlogPostDetailSerializer(serializers.ModelSerializer):
     # tag = serializers.StringRelatedField()
     class Meta:
         model = BlogPost
-        fields = ['id',  'image', 'title', 'categories', 'content', 'tag', 'date_created', 'comments']
+        fields = ['id',  'image', 'title', 'categories', 'caption', 'content', 'tag', 'date_created', 'comments']
         # fields = '__all__'
         depth = 1
 
