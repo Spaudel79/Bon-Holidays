@@ -17,19 +17,22 @@ class CommentListSerializer(serializers.ModelSerializer):
 
 class BlogPostFrontPageSerializer(serializers.ModelSerializer):
     # url = serializers.HyperlinkedIdentityField(view_name='api-blog-post', read_only=True)
-
+    # tag = serializers.StringRelatedField()
     class Meta:
         model = BlogPost
-        fields = ['id', 'image', 'title', 'categories', 'tags', 'date_created']
+        fields = ['id', 'image', 'title', 'categories', 'tag', 'date_created']
         # fields = '__all__'
+        depth = 1
 
 
 class BlogPostAllSerializer(serializers.ModelSerializer):
+    # tag = serializers.StringRelatedField()
 
     class Meta:
         model = BlogPost
-        fields = ['id', 'image', 'title', 'categories', 'tags', 'date_created', ]
+        fields = ['id', 'image', 'title', 'categories', 'tag', 'date_created', ]
         # fields = '__all__'
+        depth = 1
 
         # def get_comments(self, obj):
         #     content_type = obj.get_content_type
@@ -47,10 +50,20 @@ class BlogPostDetailSerializer(serializers.ModelSerializer):
     # comments = CommentListSerializer(many=True)
     # url = serializers.HyperlinkedIdentityField(view_name='api-blog-post_details', read_only=True)
     comments = CommentSerializer(many=True)
+    # tag = serializers.StringRelatedField()
     class Meta:
         model = BlogPost
-        fields = ['id',  'image', 'title', 'categories', 'content', 'tags', 'date_created', 'comments']
+        fields = ['id',  'image', 'title', 'categories', 'content', 'tag', 'date_created', 'comments']
         # fields = '__all__'
+        depth = 1
+
+
+class TagSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Tag
+        fields = '__all__'
+
+
 
 
 

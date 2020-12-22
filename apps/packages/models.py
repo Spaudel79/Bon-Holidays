@@ -26,6 +26,15 @@ class Destination(models.Model):
 
     date_created = models.DateField()
 
+class Itinerary(models.Model):
+    day = models.IntegerField()
+    title = models.CharField(max_length=255)
+    content = RichTextField()
+
+    def __str__(self):
+        return f'Day{self.day}:{self.title}'
+
+
 
 class Package(models.Model):
 
@@ -54,7 +63,7 @@ class Package(models.Model):
     highlights = RichTextField()
     inclusions = RichTextField()
     exclusions = RichTextField()
-    itinerary = RichTextField()
+    itinerary = models.ManyToManyField(Itinerary)
     image_1= models.ImageField(blank=True,null = True)
     image_2= models.ImageField(blank=True,null = True)
     image_3= models.ImageField(blank=True,null = True)

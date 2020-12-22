@@ -19,6 +19,11 @@ class ReviewSerializer(serializers.ModelSerializer):
         model = Review
         fields = ['id', 'package', 'full_name', 'review']
 
+class ItinerarySerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Itinerary
+        fields = ['id', 'day', 'title', 'content']
+
 
 
 class PackageDetailSerializer(serializers.ModelSerializer):
@@ -26,10 +31,13 @@ class PackageDetailSerializer(serializers.ModelSerializer):
     reviews = ReviewSerializer(many=True)
     activities = ActivitiesSerializer (many=True)
 
+
     class Meta:
         model = Package
         fields = ['id', 'destination', 'package_name', 'image', 'duration', 'featured', 'content', 'highlights', 'inclusions', 'exclusions',
                   'image_1', 'image_2', 'image_3', 'itinerary',  'date_created', 'reviews', 'activities']
+
+        depth = 1
 
 
 

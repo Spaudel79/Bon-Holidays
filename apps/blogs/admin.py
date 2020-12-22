@@ -5,8 +5,23 @@ from django.contrib.admin import ModelAdmin, register
 
 # Register your models here.
 
+@register(Tag)
+class TagAdmin(admin.ModelAdmin):
+    model = Tag
+
+    def edit(self, obj):
+        return format_html('<a class="btn-btn" href="/admin/blogs/tag/{}/change/">Change</a>', obj.id)
+
+    def delete(self, obj):
+        return format_html('<a class="btn-btn" href="/admin/blogs/tag/{}/delete/">Delete</a>', obj.id)
+
+    list_display = ('tagname','edit', 'delete')
+    icon_name = 'assignment'
+
+
 @register(BlogPost)
 class BlogPostAdmin(ModelAdmin):
+
 
     # autocomplete_fields = ['author']
     def edit(self, obj):
@@ -15,8 +30,11 @@ class BlogPostAdmin(ModelAdmin):
     def delete(self, obj):
         return format_html('<a class="btn-btn" href="/admin/blogs/blogpost/{}/delete/">Delete</a>', obj.id)
 
-    list_display = ('categories', 'title', 'tags', 'date_created','edit', 'delete')
+    list_display = ('categories', 'title', 'date_created','edit', 'delete')
     icon_name = 'assignment'
+    # inlines = [TagInline]
+
+
 
     # class Media:
     #     js = ('ckeditor.js')
@@ -32,3 +50,6 @@ class CommentAdmin(ModelAdmin):
 
     list_display = ('blog','name', 'email', 'subject', 'created_at','edit', 'delete')
     icon_name = 'comment'
+
+
+

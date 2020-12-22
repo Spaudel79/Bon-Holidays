@@ -130,3 +130,9 @@ class CommentListAPIView(ListAPIView):
         return Comment.objects.filter(blog=self.kwargs['blog'])
 
 
+class TagsAPIView(ListAPIView):
+    permission_classes = [AllowAny]
+    queryset = Tag.objects.all()
+    serializer_class = TagSerializer
+
+

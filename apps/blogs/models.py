@@ -5,7 +5,14 @@ from ckeditor_uploader.fields import RichTextUploadingField
 from django.contrib.contenttypes.models import ContentType
 from ckeditor.fields import RichTextField
 
+class Tag(models.Model):
+    tagname= models.CharField(max_length=255)
+
+    def __str__(self):
+        return self.tagname
+
 class BlogPost(models.Model):
+
     author = models.CharField(max_length=64, default='Admin')
     CATEGORY_CHOICES = (
         ('travel_news', 'Travel News',),
@@ -20,7 +27,8 @@ class BlogPost(models.Model):
     content = RichTextUploadingField()
 
     # todo support for tags
-    tags = models.CharField(max_length=255, default='travel') #todo
+    # tags = models.CharField(max_length=255, default='travel') #todo
+    tag = models.ManyToManyField(Tag)
     date_created = models.DateField()
 
     @property
@@ -61,3 +69,4 @@ class Comment(models.Model):
     #     return f'Comment by {self.author.username} on {self.post}'
 
     # jpt = models.CharField(max_length=255)
+
