@@ -41,8 +41,14 @@ class BlogPostAllListAPIView(ListAPIView):
     queryset = BlogPost.objects.all()
     serializer_class = BlogPostAllSerializer
     pagination_class = BlogPostPageNumberPagination
-    filter_backends = [filters.SearchFilter]
-    search_fields = ['tags', ]
+
+    def get_queryset(self):
+        tag = self.request.query_params.get('tag', None)
+        if tag is not None:
+            return BlogPost.objects.filter(tag__tagname=tag)
+        else:
+            return BlogPost.objects.all()
+
 
 
 
