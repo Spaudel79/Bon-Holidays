@@ -4,6 +4,7 @@ from .serializers import *
 from apps.packages.models import Package
 from django.http import HttpResponse
 from django.core.mail import send_mail
+from travel_crm.settings import EMAIL_HOST_USER
 
 from .models import *
 from rest_framework.generics import ( ListCreateAPIView,
@@ -30,7 +31,15 @@ class BookingCreateAPIView(ListCreateAPIView):
         # user = self.request.user
         package = get_object_or_404(Package, pk= self.kwargs['pk'])
         serializer.save(user=self.request.user,package=package)
-        send_mail('Subject here', 'Here is the message.', 'admin@gmail.com', ['saroj.aakashlabs@gmail.com'],
+        # data = self.request.data
+        name = serializer.data['name']
+        email = serializer.data['email']
+        phone = serializer.data['phone']
+
+        send_mail('New booking ',[name
+                                 ]
+
+        , EMAIL_HOST_USER , ['saroj.aakashlabs@gmail.com'],
                   fail_silently=False)
 
     # def send_email(request):

@@ -277,10 +277,11 @@ REST_FRAMEWORK = {
 # SMTP Mail service with decouple
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'smtp.gmail.com'
-EMAIL_HOST_USER = ''
-EMAIL_HOST_PASSWORD = ''
+EMAIL_HOST_USER = 'sarojpaudel79@gmail.com'
+SERVER_EMAIL = 'sarojpaudel79@gmail.com'
+EMAIL_HOST_PASSWORD = 'ovlpoqdkuiktqfki'
 EMAIL_USE_TLS = True
-# EMAIL_USE_SLS = False
+EMAIL_USE_SLS = False
 EMAIL_PORT = 587
 DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
 
