@@ -36,10 +36,10 @@ class BookingCreateAPIView(ListCreateAPIView):
         email = serializer.data['email']
         phone = serializer.data['phone']
 
-        send_mail('New booking ',[name
-                                 ]
-
-        , EMAIL_HOST_USER , ['saroj.aakashlabs@gmail.com'],
+        send_mail('New Booking ',f"Booking has been made by {name} "
+                                 f"having email {email} "
+                                 f"and phone number {phone}",
+                  email , ['sales6@bonholidays.com.np'],
                   fail_silently=False)
 
     # def send_email(request):

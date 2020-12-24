@@ -8,6 +8,8 @@ from django.shortcuts import get_object_or_404
 from .pagination import *
 from django_filters.rest_framework import DjangoFilterBackend
 from rest_framework import filters
+from django.core.mail import send_mail
+from travel_crm.settings import EMAIL_HOST_USER
 
 
 from rest_framework.generics import (
@@ -75,6 +77,18 @@ class CommentCreateAPIView(CreateAPIView):
         # user = self.request.user
         blog = get_object_or_404(BlogPost, pk= self.kwargs['pk'])
         serializer.save(user=self.request.user, blog=blog)
+
+        name = serializer.data['name']
+        email = serializer.data['email']
+        subject = serializer.data['subject']
+
+        send_mail('New Comment ', f"Comment has been made by {name} "
+                                  f"having email {email} "
+                                  f"and subject as '{subject}'",
+                  email, ['saroj.aakashlabs@gmail.com'],
+                  fail_silently=False)
+
+
     # def get_queryset(self):
     #     return BlogPost.objects.filter(pk=self.kwargs['pk'])
 

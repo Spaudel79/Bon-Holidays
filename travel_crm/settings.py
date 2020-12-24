@@ -9,7 +9,8 @@ https://docs.djangoproject.com/en/3.0/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/3.0/ref/settings/
 """
-
+# from apps.booking.serializers import BookingSerializer
+# from rest_framework import serializers
 import os
 import datetime
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
@@ -283,7 +284,7 @@ EMAIL_HOST_PASSWORD = 'ovlpoqdkuiktqfki'
 EMAIL_USE_TLS = True
 EMAIL_USE_SLS = False
 EMAIL_PORT = 587
-DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
+# DEFAULT_FROM_EMAIL = EMAIL_HOST_USER
 
 
 

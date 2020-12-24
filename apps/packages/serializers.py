@@ -17,7 +17,7 @@ class PackageCountSerializer(serializers.ModelSerializer):
 class ReviewSerializer(serializers.ModelSerializer):
     class Meta:
         model = Review
-        fields = ['id', 'package', 'full_name', 'review']
+        fields = ['id','full_name', 'review']
 
 class ItinerarySerializer(serializers.ModelSerializer):
     class Meta:

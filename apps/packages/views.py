@@ -14,6 +14,8 @@ from django_filters.rest_framework import DjangoFilterBackend
 from rest_framework.permissions import (
 AllowAny, IsAuthenticated, IsAdminUser, IsAuthenticatedOrReadOnly
 )
+from django.core.mail import send_mail
+from travel_crm.settings import EMAIL_HOST_USER
 
 from django_filters import rest_framework as filters
 
@@ -140,6 +142,14 @@ class ReviewAPIView(ListCreateAPIView):
         # user = self.request.user
         package = get_object_or_404(Package, pk= self.kwargs['pk'])
         serializer.save(user=self.request.user,package=package)
+
+        name = serializer.data['full_name']
+
+
+        send_mail('New Review ', f"Review has been made by {name}"
+
+                  ,EMAIL_HOST_USER, ['sales6@bonholidays.com.np'],
+                  fail_silently=False)
 
 
 
