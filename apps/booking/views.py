@@ -7,7 +7,7 @@ from django.core.mail import send_mail
 from travel_crm.settings import EMAIL_HOST_USER
 
 from .models import *
-from rest_framework.generics import ( ListCreateAPIView,
+from rest_framework.generics import (ListCreateAPIView,
 CreateAPIView, DestroyAPIView,
 ListAPIView, UpdateAPIView,
 RetrieveUpdateAPIView, RetrieveAPIView
@@ -72,9 +72,15 @@ class CustomBookingCreateAPIView(ListCreateAPIView):
     serializer_class = CustomBookingSerializer
 
     def perform_create(self, serializer):
-        # user = self.request.user
+        user = self.request.user
         # package = get_object_or_404(Package, pk= self.kwargs['pk'])
-        serializer.save(user=self.request.user)
+        serializer.save(user=user)
+
+        send_mail('New Custom Booking ', f" Custom Booking has been made by {user.first_name} {user.last_name} "
+                                  f"having email {user.email} "
+                                  ,
+                  EMAIL_HOST_USER, ['sales6@bonholidays.com.np'],
+                  fail_silently=False)
 
 class CustomBookingListAPIView(ListAPIView):
     permission_classes = [IsAuthenticated]

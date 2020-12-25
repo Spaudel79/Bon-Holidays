@@ -4,6 +4,7 @@ from ckeditor.fields import RichTextField
 # Create your models here.
 
 class Contact(models.Model):
+
     address = models.CharField(max_length=255, default="795 Australia")
     phone = models.CharField(max_length=255, default="808 - 808")
     email = models.EmailField(default="hello@hello.com")
@@ -15,6 +16,7 @@ class Contact(models.Model):
 
 
 class ContactForm(models.Model):
+    contacted = models.BooleanField(default=False)
     subject = models.CharField(max_length=255, blank=True)
     full_name = models.CharField(max_length=255)
     email = models.EmailField(default="hello@hello.com")
@@ -26,6 +28,7 @@ class ContactForm(models.Model):
 
 
 class Feedback(models.Model):
+    contacted = models.BooleanField(default=False)
     name = models.CharField(max_length=255)
     email = models.EmailField()
     subject = models.CharField(max_length=255)

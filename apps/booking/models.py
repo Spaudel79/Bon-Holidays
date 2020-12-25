@@ -7,6 +7,7 @@ from ckeditor.fields import RichTextField
 class Booking(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     package = models.ForeignKey(Package, on_delete=models.CASCADE, related_name='package')
+    contacted = models.BooleanField(default=False)
     name = models.CharField(max_length=255)
     email = models.EmailField()
     phone = models.CharField(max_length=255)
@@ -66,6 +67,7 @@ class CustomBooking(models.Model):
 
     )
     user = models.ForeignKey(User, on_delete=models.CASCADE)
+    contacted = models.BooleanField(default=False)
     people = models.CharField(max_length=64, choices=PEOPLE_CHOICES, default='Couple')
     number_of_children = models.IntegerField(default=0)
     number_of_adults = models.IntegerField(default=0)

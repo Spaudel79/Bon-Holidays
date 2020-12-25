@@ -27,31 +27,36 @@ class ContactListAPIView(ListAPIView):
     serializer_class = ContactInfoSerializer
 
 class ContactCreateAPIView(CreateAPIView):
-    permission_classes = [IsAuthenticated]
+
     queryset = ContactForm.objects.all()
     serializer_class = ContactSerializer
 
     def perform_create(self, serializer):
+
+        serializer.save()
         name = serializer.data['full_name']
         email = serializer.data['email']
         subject = serializer.data['subject']
         send_mail('New Contact ', f"Contact has been made by {name} "
                                   f"having email {email} "
                                   f"and subject {subject}",
-                  email, ['saroj.aakashlabs@gmail.com'],
+                  email, ['sales6@bonholidays.com.np'],
                   fail_silently=False)
 
 class FeedbackListAPIView(CreateAPIView):
-    permission_classes = [IsAuthenticated]
+
     queryset = Feedback.objects.all()
     serializer_class = FeedbackSerializer
 
     def perform_create(self, serializer):
+        # user = self.request.user
+        serializer.save()
+
         name = serializer.data['name']
         email = serializer.data['email']
         subject = serializer.data['subject']
         send_mail('New Feedback ', f"Feedback has been given by {name} "
                                   f"having email {email} "
                                   f"and subject {subject}",
-                  email, ['saroj.aakashlabs@gmail.com'],
+                  email, ['sales6@bonholidays.com.np'],
                   fail_silently=False)

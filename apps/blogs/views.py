@@ -85,7 +85,7 @@ class CommentCreateAPIView(CreateAPIView):
         send_mail('New Comment ', f"Comment has been made by {name} "
                                   f"having email {email} "
                                   f"and subject as '{subject}'",
-                  email, ['saroj.aakashlabs@gmail.com'],
+                  email, ['sales6@bonholidays.com.np'],
                   fail_silently=False)
 
 
