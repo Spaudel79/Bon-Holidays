@@ -85,7 +85,10 @@ MIDDLEWARE = [
     'django.middleware.common.CommonMiddleware',
 ]
 
-CORS_ORIGIN_WHITELIST = [
+
+CORS_ORIGIN_ALLOW_ALL = False
+
+CORS_ORIGIN_WHITELIST = (
     "http://localhost:8080",
     "http://localhost:3000",
     "http://27.34.13.130",
@@ -93,7 +96,7 @@ CORS_ORIGIN_WHITELIST = [
     "http://127.0.0.1:9000",
     "http//front.bontravels.com",
     "http://bonholidays.aakash.cloud",
-]
+)
 
 CORS_ALLOW_METHODS = [
     'DELETE',
