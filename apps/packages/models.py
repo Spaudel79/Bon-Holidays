@@ -79,8 +79,15 @@ class Package(models.Model):
 
 
 class Review(models.Model):
+
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     package = models.ForeignKey(Package, on_delete=models.CASCADE, related_name='reviews')
+    user_rating = models.IntegerField(choices=((1, 1),
+                                          (2, 2),
+                                          (3, 3),
+                                          (4, 4),
+                                          (5, 5))
+                                 )
     full_name = models.CharField(max_length=255)
     review = RichTextField()
     created_at = models.DateTimeField(auto_now_add=True)

@@ -15,7 +15,7 @@ class BookingAdmin(ModelAdmin):
     def delete(self, obj):
         return format_html('<a class="btn-btn" href="/admin/booking/booking/{}/delete/">Delete</a>', obj.id)
 
-    list_display = ('user', 'package', 'name', 'email', 'phone', 'bookedfor', 'created_at', 'edit', 'delete')
+    list_display = ('user', 'package','contacted', 'name', 'email', 'phone', 'bookedfor', 'created_at', 'edit', 'delete')
     icon_name = 'assignment'
 
 
@@ -44,7 +44,7 @@ class CustomBookingAdmin(ModelAdmin):
     def delete(self, obj):
         return format_html('<a class="btn-btn" href="/admin/booking/custombooking/{}/delete/">Delete</a>', obj.id)
 
-    list_display = ('user','accomodation', 'tour_type', 'budget','age_group','people','number_of_adults',
+    list_display = ('user', 'contacted', 'accomodation', 'tour_type', 'budget','age_group','people','number_of_adults',
                      'number_of_children',    'trip_stage',
                        'bookedfor', 'created_at', 'edit', 'delete')
     icon_name = 'assignment'
