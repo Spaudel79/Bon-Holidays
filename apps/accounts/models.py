@@ -39,6 +39,7 @@ class User(AbstractBaseUser, PermissionsMixin):
     last_name = models.CharField(max_length=255)
     is_active = models.BooleanField(default=True)
     is_staff = models.BooleanField(default=True)
+    # is_agent = models.BooleanField(default=False)
 
     objects = UserManager()
     USERNAME_FIELD = 'email'
@@ -55,14 +56,16 @@ class UserProfile(models.Model):
         ('g', 'Agent'),
         ('c', 'Customer'),
     )
-
+    user = models.OneToOneField(settings.AUTH_USER_MODEL,
+                                related_name='profile', on_delete=models.CASCADE)
+    group = models.ForeignKey(Group, on_delete=models.CASCADE)
+    user_type = models.CharField(max_length=1, choices=USER_TYPES, default='g')
     first_name = models.CharField(max_length=255, default="")
     last_name = models.CharField(max_length=255, default="")
     company_name = models.CharField(max_length=255, default="")
     email_address = models.EmailField(default="abc@abc.com")
     phone_number = models.CharField(max_length=255, default="")
-    user = models.OneToOneField(settings.AUTH_USER_MODEL,
-                                related_name='profile', on_delete=models.CASCADE)
+
     avatar = models.ImageField(blank=True)
     thumbnail = ImageSpecField(source='avatar',
                                       processors=[ResizeToFill(100, 50)],
@@ -70,9 +73,9 @@ class UserProfile(models.Model):
                                       options={'quality': 60})
     cover_photo = models.ImageField(blank=True, null=True)
     about = models.TextField(blank=True)
-    user_type = models.CharField(max_length=1, choices=USER_TYPES, default='g')
+    # user_type = models.CharField(max_length=1, choices=USER_TYPES, default='g')
 
-    group = models.ForeignKey(Group, on_delete=models.CASCADE)
+
 
 
     last_updated = models.DateTimeField(auto_now=True)
