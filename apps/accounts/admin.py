@@ -25,7 +25,7 @@ class UsersAdmin(UserAdmin):
     fieldsets = (
         (None, {'fields': ('email', 'password')}),
         ('Personal Info', {'fields': ('first_name', 'last_name')}),
-        ('Permissions', {'fields': ('is_active', 'groups', 'user_permissions', 'is_staff')}),
+        ('Permissions', {'fields': ('is_active', 'groups', 'is_staff')}),
         ('Important dates', {'fields': ('last_login',)})
     )
     add_fieldsets = (
@@ -49,7 +49,7 @@ class UserProfileAdmin(ModelAdmin):
         return format_html('<a class="btn-btn" href="/admin/accounts/userprofile/{}/delete/">Delete</a>', obj.id)
 
     icon_name = 'person_pin'
-    search_fields = ['user__name']
+    search_fields = ['first_name','last_name','phone_number', 'company_name']
     autocomplete_fields = ['user']
 
     list_display = ('image_display', 'user', 'group', 'first_name','last_name','phone_number',

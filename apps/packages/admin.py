@@ -95,6 +95,6 @@ class TopActivitiesAdmin(ModelAdmin):
 
 admin.site.register(Destination, DestinationAdmin)
 admin.site.register(Package, PackageAdmin)
-admin.site.register(Itinerary)
+# admin.site.register(Itinerary)
 
 admin.site.site_header = 'Bon Holidays'

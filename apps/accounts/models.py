@@ -5,6 +5,7 @@ from django.utils.translation import gettext_lazy as _
 from django.contrib.auth.models import BaseUserManager, AbstractBaseUser, PermissionsMixin,Permission
 from imagekit.models import ImageSpecField
 from imagekit.processors import ResizeToFill
+from ckeditor.fields import RichTextField
 
 from django.contrib.auth.models import Group
 # # Create your models here.
@@ -65,14 +66,14 @@ class UserProfile(models.Model):
     company_name = models.CharField(max_length=255, default="")
     email_address = models.EmailField(default="abc@abc.com")
     phone_number = models.CharField(max_length=255, default="")
-
+    commission = models.CharField(max_length=50, default="15%")
     avatar = models.ImageField(blank=True)
     thumbnail = ImageSpecField(source='avatar',
                                       processors=[ResizeToFill(100, 50)],
                                       format='JPEG',
                                       options={'quality': 60})
-    cover_photo = models.ImageField(blank=True, null=True)
-    about = models.TextField(blank=True)
+    # cover_photo = models.ImageField(blank=True, null=True)
+    about = RichTextField()
     # user_type = models.CharField(max_length=1, choices=USER_TYPES, default='g')
 
 
