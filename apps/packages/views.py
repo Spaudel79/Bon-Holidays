@@ -44,7 +44,7 @@ from django_filters import rest_framework as filters
 class DestinationFrontListAPIView(ListAPIView):
     # queryset = Destination.objects.all().order_by('?')[:4]
     # queryset = Destination.objects.all().order_by('-date_created')[:4]
-    queryset = Destination.objects.all()
+    queryset = Destination.objects.all().order_by('-date_created')
     serializer_class = DestinationFrontSerializer
     filter_backends = [DjangoFilterBackend]
     filterset_fields = ['top', ]
