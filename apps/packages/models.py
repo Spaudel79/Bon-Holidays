@@ -46,7 +46,7 @@ class Package(models.Model):
     discount = models.CharField(max_length=255, default="15% OFF")
     discounted_price = models.IntegerField(default=230)
     savings = models.IntegerField(default=230)
-    special_discount = models.BooleanField(default=False)
+    fix_departure = models.BooleanField(default=False)
     rating = models.IntegerField(choices=((1, 1),
                                           (2, 2),
                                           (3, 3),

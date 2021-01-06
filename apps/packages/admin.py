@@ -33,7 +33,7 @@ class PackageAdmin(ModelAdmin):
         return format_html('<a class="btn-btn" href="/admin/packages/package/{}/delete/">Delete</a>', obj.id)
 
     list_display = ('image_display','package_name',  'featured', 'price', 'discounted_price',
-                    'savings', 'special_discount', 'rating',
+                    'savings', 'fix_departure', 'rating',
                      'date_created', 'edit', 'delete')
     image_display = AdminThumbnail(image_field='thumbnail')
     image_display.short_description = 'Image'
@@ -86,11 +86,11 @@ class TopActivitiesAdmin(ModelAdmin):
     readonly_fields = ['image_display']
     icon_name = 'layers'
 
-class PackageInline(admin.TabularInline):
-    model = Package
-    exclude = [ 'featured', 'price', 'discounted_price',
-                    'savings', 'special_discount',
-                     ]
+# class PackageInline(admin.TabularInline):
+#     model = Package
+#     exclude = [ 'featured', 'price', 'discounted_price',
+#                     'savings', 'special_discount',
+#                      ]
 
 
 admin.site.register(Destination, DestinationAdmin)

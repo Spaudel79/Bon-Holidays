@@ -93,12 +93,12 @@ class AllPackageAPIView(ListAPIView):
     #             return Package.objects.filter(special_discount)
     def get_queryset(self):
         featured = self.request.query_params.get('featured', None)
-        special_discount = self.request.query_params.get('special_discount', None)
+        fix_departure = self.request.query_params.get('fix_departure', None)
         activity = self.request.query_params.get('activity', None)
         if featured is not None:
             return Package.objects.filter(featured=True)
-        elif special_discount is not None:
-            return Package.objects.filter(special_discount=True)
+        elif fix_departure is not None:
+            return Package.objects.filter(fix_departure=True)
         elif activity is not None:
             return Package.objects.filter(activities__activity=activity)
         else:
