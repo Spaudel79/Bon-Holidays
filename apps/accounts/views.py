@@ -152,6 +152,12 @@ class UsersListView(ListAPIView):
 #         return self.queryset.filter(user=self.request.user)
 
 
+class ProfileListView(ListAPIView):
+    # permission_classes = [AllowAny]
+    serializer_class = ProfileListSerializer
+    queryset = UserProfile.objects.all()
+
+
 
 
 

@@ -59,6 +59,7 @@ INSTALLED_APPS = [
     'corsheaders',
     'django_filters',
     'storages',
+    "taggit",
 ]
 
 CKEDITOR_BASEPATH = "/static/ckeditor/ckeditor/"

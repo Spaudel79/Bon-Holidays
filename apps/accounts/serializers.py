@@ -104,6 +104,14 @@ class UserListSerializer(serializers.ModelSerializer):
         model = User
         fields = '__all__'
 
+class ProfileListSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = UserProfile
+        fields = '__all__'
+        depth = 1
+
+
+
 
 
 
