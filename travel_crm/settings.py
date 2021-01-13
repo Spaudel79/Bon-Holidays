@@ -49,6 +49,7 @@ INSTALLED_APPS = [
     'apps.packages',
     'apps.payment',
     'apps.booking',
+    'apps.logo',
     #third party apps
     'rest_framework',
     'rest_framework.authtoken',
