@@ -6,7 +6,7 @@ from django.contrib.auth.models import BaseUserManager, AbstractBaseUser, Permis
 from imagekit.models import ImageSpecField
 from imagekit.processors import ResizeToFill
 from ckeditor.fields import RichTextField
-from taggit.managers import TaggableManager
+# from taggit.managers import TaggableManager
 
 from django.contrib.auth.models import Group
 # # Create your models here.
