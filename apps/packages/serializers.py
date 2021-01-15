@@ -50,7 +50,8 @@ class PackageSerializer(serializers.ModelSerializer):
     class Meta:
         model = Package
         fields = ['id', 'destination', 'package_name', 'duration', 'featured', 'price', 'discount', 'discounted_price',
-                            'savings', 'fix_departure', 'rating', 'image', 'date_created', 'activities']
+                       'tour_type','new_activity', 'accommodation', 'transport', 'age_range',
+                  'savings', 'fix_departure', 'rating', 'image', 'date_created', 'activities']
         # fields = '__all__'
         # depth = 1
 
