@@ -35,6 +35,15 @@ class Itinerary(models.Model):
         return f'Day{self.day}:{self.title}'
 
 
+class NewActivity(models.Model):
+    title = models.CharField(max_length=64)
+
+    class Meta:
+        # verbose_name = "New Activity"
+        verbose_name_plural = "Activities"
+
+    def __str__(self):
+        return self.title
 
 class Package(models.Model):
     TOUR_TYPE = (
@@ -54,7 +63,7 @@ class Package(models.Model):
     discounted_price = models.IntegerField(default=230)
     savings = models.IntegerField(default=230)
     tour_type = models.CharField(max_length=100, choices=TOUR_TYPE, default='Group Tour')
-    new_activity = models.CharField(max_length=255, default='Trekking')
+    new_activity = models.ManyToManyField(NewActivity)
     accommodation = models.CharField(max_length=255,default='Guest House & Hotel')
     transport = models.CharField(max_length=150, default='Flight')
     age_range = models.CharField(max_length=100, default='6 to 79 years old')
