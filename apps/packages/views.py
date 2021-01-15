@@ -99,8 +99,8 @@ class AllPackageAPIView(ListAPIView):
             return Package.objects.filter(featured=True)
         elif fix_departure is not None:
             return Package.objects.filter(fix_departure=True)
-        elif activity is not None:
-            return Package.objects.filter(activities__activity=activity)
+        # elif activity is not None:
+        #     return Package.objects.filter(activities__activity=activity)
         else:
             return Package.objects.all().order_by('-date_created')[:4]
 

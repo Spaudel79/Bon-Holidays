@@ -37,7 +37,14 @@ class Itinerary(models.Model):
 
 
 class Package(models.Model):
+    TOUR_TYPE = (
+        ('Custom-made trip with guide and/or driver', 'Custom-made trip with guide and/or driver',),
+        ('Custom-made trip without guide and driver', 'Custom-made trip without guide and driver',),
+        ('Group Tour', 'Group Tour',),
+        ('Cruise Tour', 'Cruise Tour',),
+    )
 
+    operator = models.ForeignKey(UserProfile, on_delete=models.CASCADE)
     destination = models.ForeignKey(Destination, on_delete=models.CASCADE)
     package_name = models.CharField(max_length=255)
     featured = models.BooleanField(default=False)
@@ -46,6 +53,11 @@ class Package(models.Model):
     discount = models.CharField(max_length=255, default="15% OFF")
     discounted_price = models.IntegerField(default=230)
     savings = models.IntegerField(default=230)
+    tour_type = models.CharField(max_length=100, choices=TOUR_TYPE, default='Group Tour')
+    new_activity = models.CharField(max_length=255, default='Trekking')
+    accommodation = models.CharField(max_length=255,default='Guest House & Hotel')
+    transport = models.CharField(max_length=150, default='Flight')
+    age_range = models.CharField(max_length=100, default='6 to 79 years old')
     fix_departure = models.BooleanField(default=False)
     rating = models.IntegerField(choices=((1, 1),
                                           (2, 2),
@@ -115,7 +127,7 @@ class TopAttractions(models.Model):
 class TopActivities(models.Model):
     package = models.ForeignKey(Package, on_delete=models.CASCADE, related_name='activities')
 
-    # destination = models.ForeignKey(Destination, on_delete=models.CASCADE)
+
     image = models.ImageField(blank=True)
     thumbnail = ImageSpecField(source='image',
                                       processors=[ResizeToFill(100, 50)],

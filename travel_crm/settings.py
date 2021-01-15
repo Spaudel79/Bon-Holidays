@@ -140,6 +140,10 @@ if 'RDS_HOSTNAME' in os.environ:
             'PASSWORD': os.environ['RDS_PASSWORD'],
             'HOST': os.environ['RDS_HOSTNAME'],
             'PORT': os.environ['RDS_PORT'],
+            # 'OPTIONS': {
+            #     "init_command": "SET foreign_key_checks = 0;",
+            # },
+            'STORAGE_ENGINE': 'MyISAM / INNODB / ETC'
         }
     }
     AWS_ACCESS_KEY_ID = "AKIAYOTYKWMTSYHWDP74"
