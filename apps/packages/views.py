@@ -104,12 +104,6 @@ class AllPackageAPIView(ListAPIView):
         else:
             return Package.objects.all().order_by('-date_created')[:4]
 
-
-
-
-
-
-
 class PackageCountAPIView(ListCreateAPIView):
     queryset = Package.objects.all()
     serializer_class = PackageCountSerializer

@@ -65,10 +65,6 @@ class DestinationwithPackageSerializer(serializers.ModelSerializer):
         # fields = '__all__'
         # depth = 1
 
-
-
-
-
 class DestinationFrontSerializer(serializers.ModelSerializer):
     #destination name instead of foreigen key id
     # destination = serializers.StringRelatedField()
