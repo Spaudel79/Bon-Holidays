@@ -33,6 +33,7 @@ ALLOWED_HOSTS = '*'
 
 INSTALLED_APPS = [
     #django admin dashboard
+    'material',
     'material.admin',
     'material.admin.default',
     # 'django.contrib.admin',
@@ -41,6 +42,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django.utils',
     # 'storages',
     # custom apps
     'apps.accounts',
