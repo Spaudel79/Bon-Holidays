@@ -105,9 +105,18 @@ class AllPackageAPIView(ListAPIView):
     #     else:
     #         return Package.objects.all().order_by('-date_created')[:4]
     def get_queryset(self):
-        new_activity = self.request.query_params.get('new_activity',None)
+        new_activity = self.request.query_params.get('new_activity', None)
+        destination = self.request.query_params.get('destination', None)
         if new_activity is not None:
-            return Package.objects.filter(new_activity__title=new_activity)
+            if destination is not None:
+                return Package.objects.filter(destination__name=destination, new_activity__title=new_activity)
+            else:
+                return Package.objects.filter(new_activity__title=new_activity)
+        elif destination is not None:
+            if new_activity is not None:
+                return Package.objects.filter(destination__name=destination, new_activity__title=new_activity)
+            else:
+                return Package.objects.filter(destination__name=destination)
         else:
             return Package.objects.all()
 

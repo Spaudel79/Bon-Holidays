@@ -7,5 +7,5 @@ class PackageFilter(filters.FilterSet):
 
    class Meta:
       model = Package
-      fields = ['price','featured', 'fix_departure', 'destination',
+      fields = ['price','featured', 'fix_departure',
                 'tour_type',]
