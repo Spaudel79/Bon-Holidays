@@ -58,6 +58,7 @@ INSTALLED_APPS = [
     'ckeditor_uploader',
     'corsheaders',
     'django_filters',
+
     'storages',
     # "taggit",
 ]
