@@ -5,6 +5,8 @@ from django.utils.translation import gettext_lazy as _
 from django.contrib.auth.models import BaseUserManager, AbstractBaseUser, PermissionsMixin,Permission
 from imagekit.models import ImageSpecField
 from imagekit.processors import ResizeToFill
+from ckeditor.fields import RichTextField
+# from taggit.managers import TaggableManager
 
 from django.contrib.auth.models import Group
 # # Create your models here.
@@ -48,11 +50,11 @@ class User(AbstractBaseUser, PermissionsMixin):
 # # class Admin(models.Model):
 # #     user = models.OneToOneField(settings.AUTH_USER_MODEL,
 # #                                 related_name='profile', on_delete=models.CASCADE)
-#
+
 class UserProfile(models.Model):
 
     USER_TYPES = (
-        ('a', 'Admin'),
+        ('b', 'Bon-Admin'),
         ('g', 'Agent'),
         ('c', 'Customer'),
     )
@@ -65,15 +67,20 @@ class UserProfile(models.Model):
     company_name = models.CharField(max_length=255, default="")
     email_address = models.EmailField(default="abc@abc.com")
     phone_number = models.CharField(max_length=255, default="")
-
+    experience = models.IntegerField(default=10)
+    commission = models.CharField(max_length=50, default="15%")
     avatar = models.ImageField(blank=True)
+
     thumbnail = ImageSpecField(source='avatar',
                                       processors=[ResizeToFill(100, 50)],
                                       format='JPEG',
                                       options={'quality': 60})
-    cover_photo = models.ImageField(blank=True, null=True)
-    about = models.TextField(blank=True)
-    # user_type = models.CharField(max_length=1, choices=USER_TYPES, default='g')
+    # cover_photo = models.ImageField(blank=True, null=True)
+    languages = models.CharField(max_length=255)
+    expert_countries = models.TextField()
+    about = RichTextField()
+    travel_advice= RichTextField()
+
 
 
 

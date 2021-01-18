@@ -51,6 +51,7 @@ INSTALLED_APPS = [
     'apps.packages',
     'apps.payment',
     'apps.booking',
+    'apps.logo',
     #third party apps
     'rest_framework',
     'rest_framework.authtoken',
@@ -60,6 +61,7 @@ INSTALLED_APPS = [
     'corsheaders',
     'django_filters',
     'storages',
+    # "taggit",
 ]
 
 CKEDITOR_BASEPATH = "/static/ckeditor/ckeditor/"
@@ -140,6 +142,10 @@ if 'RDS_HOSTNAME' in os.environ:
             'PASSWORD': os.environ['RDS_PASSWORD'],
             'HOST': os.environ['RDS_HOSTNAME'],
             'PORT': os.environ['RDS_PORT'],
+            # 'OPTIONS': {
+            #     "init_command": "SET foreign_key_checks = 0;",
+            # },
+            'STORAGE_ENGINE': 'MyISAM / INNODB / ETC'
         }
     }
     AWS_ACCESS_KEY_ID = "AKIAYOTYKWMTSYHWDP74"

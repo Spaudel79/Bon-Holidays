@@ -2,6 +2,7 @@ from rest_framework import viewsets, generics, filters
 from .models import  *
 from .serializers import *
 from django.shortcuts import get_object_or_404
+from .filter import PackageFilter
 from django.db.models import Q
 from django_filters.rest_framework import DjangoFilterBackend
 from rest_framework.generics import (
@@ -44,7 +45,7 @@ from django_filters import rest_framework as filters
 class DestinationFrontListAPIView(ListAPIView):
     # queryset = Destination.objects.all().order_by('?')[:4]
     # queryset = Destination.objects.all().order_by('-date_created')[:4]
-    queryset = Destination.objects.all()
+    queryset = Destination.objects.all().order_by('-date_created')
     serializer_class = DestinationFrontSerializer
     filter_backends = [DjangoFilterBackend]
     filterset_fields = ['top', ]
@@ -73,7 +74,7 @@ class PackageAPIView(ListAPIView):
 class AllPackageAPIView(ListAPIView):
     queryset = Package.objects.all()
     serializer_class = PackageSerializer
-
+    filterset_class = PackageFilter
     # filterset_class = PackageFilter
 
     # def get_queryset(self):
@@ -91,23 +92,33 @@ class AllPackageAPIView(ListAPIView):
     #
     #     elif self.request.query_params.get() is 'special_discount':
     #             return Package.objects.filter(special_discount)
+    # def get_queryset(self):
+    #     featured = self.request.query_params.get('featured', None)
+    #     fix_departure = self.request.query_params.get('fix_departure', None)
+    #     activity = self.request.query_params.get('activity', None)
+    #     if featured is not None:
+    #         return Package.objects.filter(featured=True)
+    #     elif fix_departure is not None:
+    #         return Package.objects.filter(fix_departure=True)
+    #     # elif activity is not None:
+    #     #     return Package.objects.filter(activities__activity=activity)
+    #     else:
+    #         return Package.objects.all().order_by('-date_created')[:4]
     def get_queryset(self):
-        featured = self.request.query_params.get('featured', None)
-        special_discount = self.request.query_params.get('special_discount', None)
-        activity = self.request.query_params.get('activity', None)
-        if featured is not None:
-            return Package.objects.filter(featured=True)
-        elif special_discount is not None:
-            return Package.objects.filter(special_discount=True)
-        elif activity is not None:
-            return Package.objects.filter(activities__activity=activity)
+        new_activity = self.request.query_params.get('new_activity', None)
+        destination = self.request.query_params.get('destination', None)
+        if new_activity is not None:
+            if destination is not None:
+                return Package.objects.filter(destination__name=destination, new_activity__title=new_activity)
+            else:
+                return Package.objects.filter(new_activity__title=new_activity)
+        elif destination is not None:
+            if new_activity is not None:
+                return Package.objects.filter(destination__name=destination, new_activity__title=new_activity)
+            else:
+                return Package.objects.filter(destination__name=destination)
         else:
-            return Package.objects.all().order_by('-date_created')[:4]
-
-
-
-
-
+            return Package.objects.all()
 
 
 class PackageCountAPIView(ListCreateAPIView):
