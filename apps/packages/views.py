@@ -2,6 +2,7 @@ from rest_framework import viewsets, generics, filters
 from .models import  *
 from .serializers import *
 from django.shortcuts import get_object_or_404
+from rest_framework.response import Response
 from .filter import PackageFilter
 from django.http import QueryDict
 from django.db.models import Q
@@ -105,24 +106,96 @@ class AllPackageAPIView(ListAPIView):
     #     #     return Package.objects.filter(activities__activity=activity)
     #     else:
     #         return Package.objects.all().order_by('-date_created')[:4]
-    # def get_queryset(self):
-    def get(self, request, format=None, *args, **kwargs):
+    def get_queryset(self):
+    # def get(self, request, format=None, *args, **kwargs):
 
-        new_activity = self.request.GET.get('new_activity', None)
-        destination = self.request.GET.get('destination', [])
-        destination_values = destination.split(",")
+        new_activity = self.request.GET.get('new_activity',None)
+        destination = self.request.GET.get("destination",None)
+        tour_type = self.request.GET.get("tour_type",None)
         if new_activity is not None:
+            new_activity = self.request.GET.get('new_activity', "")
+            new_activity_values = new_activity.split(",")
             if destination is not None:
-                return Package.objects.filter(destination__name=destination_values, new_activity__title=new_activity)
+                destination = self.request.GET.get("destination", "")
+                destination_values = destination.split(",")
+                if tour_type is not None:
+                    tour_type = self.request.GET.get("tour_type", "")
+                    tour_type_values = tour_type.split(",")
+                    return Package.objects.filter(destination__name__in=destination_values,new_activity__title__in=new_activity_values,
+                                              tour_type__in=tour_type_values)
+                else:
+                    return Package.objects.filter(destination__name__in=destination_values,
+                                                  new_activity__title__in=new_activity_values)
             else:
-                return Package.objects.filter(new_activity__title=new_activity)
+                return Package.objects.filter(new_activity__title__in=new_activity_values)
         elif destination is not None:
+            destination = self.request.GET.get("destination", "")
+            destination_values = destination.split(",")
             if new_activity is not None:
-                return Package.objects.filter(destination__name=destination_values, new_activity__title=new_activity)
+                new_activity = self.request.GET.get('new_activity', "")
+                new_activity_values = new_activity.split(",")
+                if tour_type is not None:
+                    tour_type = self.request.GET.get("tour_type", "")
+                    tour_type_values = tour_type.split(",")
+                    return Package.objects.filter(destination__name__in=destination_values,
+                                                  new_activity__title__in=new_activity_values,
+                                                  tour_type__in=tour_type_values)
+                else:
+                    return Package.objects.filter(destination__name__in=destination_values,
+                                                  new_activity__title__in=new_activity_values
+                                                  )
             else:
-                return Package.objects.filter(destination__name=destination_values)
+                return Package.objects.filter(destination__name__in=destination_values)
+        elif tour_type is not None:
+            tour_type = self.request.GET.get("tour_type", "")
+            tour_type_values = tour_type.split(",")
+            if destination is not None:
+                destination = self.request.GET.get("destination", "")
+                destination_values = destination.split(",")
+                if new_activity is not None:
+                    new_activity = self.request.GET.get('new_activity', "")
+                    new_activity_values = new_activity.split(",")
+                    return Package.objects.filter(destination__name__in=destination_values,
+                                                  new_activity__title__in=new_activity_values,
+                                                  tour_type__in=tour_type_values)
+                else:
+                    return Package.objects.filter(destination__name__in=destination_values,
+                                                           tour_type__in=tour_type_values)
+            else:
+                return Package.objects.filter(tour_type__in=tour_type_values)
         else:
             return Package.objects.all()
+
+    # def list(self, request, format=None, *args, **kwargs):
+    #
+    #     new_activity = self.request.query_params.get('new_activity', "")
+    #     destination = self.request.query_params.get("destination", "")
+    #     destination_values = destination.split(",")
+    #     new_activity_values = new_activity.split(",")
+    #     if new_activity is not None:
+    #         if destination is not None:
+    #             queryset = Package.objects.filter(destination__name__in=destination_values,
+    #                                           new_activity__title__in=new_activity_values)
+    #             serializer = self.get_serializer(queryset, many=True)
+    #             return Response(serializer.data)
+    #         else:
+    #             queryset = Package.objects.filter(new_activity__title__in=new_activity_values)
+    #             serializer = self.get_serializer(queryset, many=True)
+    #             return Response(serializer.data)
+    #     elif destination is not None:
+    #         if new_activity is not None:
+    #             queryset = Package.objects.filter(destination__name__in=destination_values,
+    #                                           new_activity__title__in=new_activity_values)
+    #             serializer = self.get_serializer(queryset, many=True)
+    #             return Response(serializer.data)
+    #         else:
+    #             queryset = Package.objects.filter(destination__name__in=destination_values)
+    #             serializer = self.get_serializer(queryset, many=True)
+    #             return Response(serializer.data)
+    #     else:
+    #         queryset = Package.objects.all()
+    #         serializer = self.get_serializer(queryset, many=True)
+    #         return Response(serializer.data)
     # def get(self, request, format=None, *args, **kwargs):
     #     dict_params = dict(request.query_params.iterlists())
     #     filter = PackageFilter(dict_params, queryset=Package.objects.all())

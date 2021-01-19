@@ -8,8 +8,7 @@ class PackageFilter(filters.FilterSet):
 
    class Meta:
       model = Package
-      fields = ['price','featured', 'fix_departure',
-                'tour_type',]
+      fields = ['price','featured', 'fix_departure', 'city']
 
    # def filter_first_filter(self, queryset, value):
    #     # I expect value to setup with an array of values
