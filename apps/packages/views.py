@@ -6,6 +6,9 @@ from .filter import PackageFilter
 from django.http import QueryDict
 from django.db.models import Q
 from django_filters.rest_framework import DjangoFilterBackend
+# from rest_framework_json_api import filters
+# from rest_framework_json_api import django_filters
+# from rest_framework import SearchFilter
 from rest_framework.generics import (
 CreateAPIView, DestroyAPIView, ListCreateAPIView,
 ListAPIView, UpdateAPIView,
@@ -105,24 +108,25 @@ class AllPackageAPIView(ListAPIView):
     #     #     return Package.objects.filter(activities__activity=activity)
     #     else:
     #         return Package.objects.all().order_by('-date_created')[:4]
-    # def get_queryset(self):
-    def get(self, request, format=None, *args, **kwargs):
 
+    # def get(self, request, format=None, *args, **kwargs):
+    def get_queryset(self):
         new_activity = self.request.GET.get('new_activity', None)
-        destination = self.request.GET.get('destination', [])
+        destination = self.request.GET.get("destination", "")
         destination_values = destination.split(",")
         if new_activity is not None:
             if destination is not None:
-                return Package.objects.filter(destination__name=destination_values, new_activity__title=new_activity)
+                return Package.objects.filter(destination__name__in=destination_values, new_activity__title=new_activity)
             else:
                 return Package.objects.filter(new_activity__title=new_activity)
         elif destination is not None:
             if new_activity is not None:
-                return Package.objects.filter(destination__name=destination_values, new_activity__title=new_activity)
+                return Package.objects.filter(destination__name__in=destination_values, new_activity__title=new_activity)
             else:
-                return Package.objects.filter(destination__name=destination_values)
+                return Package.objects.filter(destination__name__in=destination_values)
         else:
             return Package.objects.all()
+
     # def get(self, request, format=None, *args, **kwargs):
     #     dict_params = dict(request.query_params.iterlists())
     #     filter = PackageFilter(dict_params, queryset=Package.objects.all())
