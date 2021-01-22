@@ -110,61 +110,99 @@ class AllPackageAPIView(ListAPIView):
     # def get(self, request, format=None, *args, **kwargs):
 
         new_activity = self.request.GET.get('new_activity',None)
-        destination = self.request.GET.get("destination",None)
         tour_type = self.request.GET.get("tour_type",None)
+        city = self.request.GET.get("city", None)
         if new_activity is not None:
             new_activity = self.request.GET.get('new_activity', "")
             new_activity_values = new_activity.split(",")
-            if destination is not None:
-                destination = self.request.GET.get("destination", "")
-                destination_values = destination.split(",")
-                if tour_type is not None:
+            if tour_type is not None:
                     tour_type = self.request.GET.get("tour_type", "")
                     tour_type_values = tour_type.split(",")
-                    return Package.objects.filter(destination__name__in=destination_values,new_activity__title__in=new_activity_values,
-                                              tour_type__in=tour_type_values)
-                else:
-                    return Package.objects.filter(destination__name__in=destination_values,
-                                                  new_activity__title__in=new_activity_values)
+                    if city is not None:
+                        city = self.request.GET.get("city", "")
+                        city_values = city.split(",")
+                        return Package.objects.filter(new_activity__title__in=new_activity_values,
+                                              tour_type__in=tour_type_values,
+                                                  city__in=city_values)
+                    else:
+                        return Package.objects.filter(new_activity__title__in=new_activity_values,
+                                                  tour_type__in=tour_type_values,)
+            elif city is not None:
+                    city = self.request.GET.get("city", "")
+                    city_values = city.split(",")
+                    if tour_type is not None:
+                        tour_type = self.request.GET.get("tour_type", "")
+                        tour_type_values = tour_type.split(",")
+                        return Package.objects.filter(new_activity__title__in=new_activity_values,
+                                                      tour_type__in=tour_type_values,
+                                                      city__in=city_values)
+                    else:
+                        return Package.objects.filter(new_activity__title__in=new_activity_values,
+                                                      city__in=city_values)
             else:
-                return Package.objects.filter(new_activity__title__in=new_activity_values)
-        elif destination is not None:
-            destination = self.request.GET.get("destination", "")
-            destination_values = destination.split(",")
+                    return Package.objects.filter(new_activity__title__in=new_activity_values,)
+
+        elif tour_type is not None:
+            tour_type = self.request.GET.get("tour_type", "")
+            tour_type_values = tour_type.split(",")
+            if city is not None:
+                city = self.request.GET.get("city", "")
+                city_values = city.split(",")
+                if new_activity is not None:
+                    new_activity = self.request.GET.get('new_activity', "")
+                    new_activity_values = new_activity.split(",")
+                    return Package.objects.filter(new_activity__title__in=new_activity_values,
+                                                  tour_type__in=tour_type_values,
+                                                  city__in=city_values)
+                else:
+                    return Package.objects.filter(tour_type__in=tour_type_values,
+                                                  city__in=city_values)
+            elif new_activity is not None:
+                new_activity = self.request.GET.get('new_activity', "")
+                new_activity_values = new_activity.split(",")
+                if city is not None:
+                    city = self.request.GET.get("city", "")
+                    city_values = city.split(",")
+                    return Package.objects.filter(new_activity__title__in=new_activity_values,
+                                                  tour_type__in=tour_type_values,
+                                                  city__in=city_values)
+                else:
+                    return Package.objects.filter(tour_type__in=tour_type_values,
+                                                  new_activity__title__in=new_activity_values,)
+            else:
+                return Package.objects.filter(tour_type__in=tour_type_values,)
+        elif city is not None:
+            city = self.request.GET.get("city", "")
+            city_values = city.split(",")
             if new_activity is not None:
                 new_activity = self.request.GET.get('new_activity', "")
                 new_activity_values = new_activity.split(",")
                 if tour_type is not None:
                     tour_type = self.request.GET.get("tour_type", "")
                     tour_type_values = tour_type.split(",")
-                    return Package.objects.filter(destination__name__in=destination_values,
-                                                  new_activity__title__in=new_activity_values,
-                                                  tour_type__in=tour_type_values)
+                    return Package.objects.filter(new_activity__title__in=new_activity_values,
+                                                  tour_type__in=tour_type_values,
+                                                  city__in=city_values)
                 else:
-                    return Package.objects.filter(destination__name__in=destination_values,
-                                                  new_activity__title__in=new_activity_values
-                                                  )
-            else:
-                return Package.objects.filter(destination__name__in=destination_values)
-        elif tour_type is not None:
-            tour_type = self.request.GET.get("tour_type", "")
-            tour_type_values = tour_type.split(",")
-            if destination is not None:
-                destination = self.request.GET.get("destination", "")
-                destination_values = destination.split(",")
+                    return Package.objects.filter(new_activity__title__in=new_activity_values,
+                                                  city__in=city_values)
+            elif tour_type is not None:
+                tour_type = self.request.GET.get("tour_type", "")
+                tour_type_values = tour_type.split(",")
                 if new_activity is not None:
                     new_activity = self.request.GET.get('new_activity', "")
                     new_activity_values = new_activity.split(",")
-                    return Package.objects.filter(destination__name__in=destination_values,
-                                                  new_activity__title__in=new_activity_values,
-                                                  tour_type__in=tour_type_values)
+                    return Package.objects.filter(new_activity__title__in=new_activity_values,
+                                                  tour_type__in=tour_type_values,
+                                                  city__in=city_values)
                 else:
-                    return Package.objects.filter(destination__name__in=destination_values,
-                                                           tour_type__in=tour_type_values)
+                    return Package.objects.filter(tour_type__in=tour_type_values,
+                                                  city__in=city_values)
             else:
-                return Package.objects.filter(tour_type__in=tour_type_values)
-        else:
-            return Package.objects.all()
+                return Package.objects.filter(city__in=city_values)
+        return Package.objects.all()
+
+
 
     # def list(self, request, format=None, *args, **kwargs):
     #
