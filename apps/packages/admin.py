@@ -3,6 +3,8 @@ from .models import *
 from django.contrib.admin import ModelAdmin, register
 from imagekit.admin import AdminThumbnail
 from django.utils.html import format_html
+from apps.accounts.models import User
+
 # Register your models here.
 
 
@@ -23,7 +25,7 @@ class DestinationAdmin(ModelAdmin):
     icon_name = 'explore'
 
 class PackageAdmin(ModelAdmin):
-
+    icon_name = 'explore'
     autocomplete_fields = ['destination']
 
     def edit(self, obj):
@@ -35,10 +37,23 @@ class PackageAdmin(ModelAdmin):
     list_display = ('image_display','package_name',  'featured', 'price', 'discounted_price',
                     'savings', 'fix_departure', 'rating',
                      'date_created', 'edit', 'delete')
+
     image_display = AdminThumbnail(image_field='thumbnail')
     image_display.short_description = 'Image'
     readonly_fields = ['image_display']
-    icon_name = 'explore'
+
+    def changelist_view(self, request, extra_context=None):
+        if not request.user.is_superuser:
+            self.list_display = ('')
+        else:
+            self.list_display = ('image_display','package_name',  'featured', 'price', 'discounted_price',
+                    'savings', 'fix_departure', 'rating',
+                     'date_created', 'edit', 'delete')
+        return super(PackageAdmin, self).changelist_view(request, extra_context)
+
+
+
+
 
     # class Media:
     #     js = ('ckeditor.js','configuration-ckeditor.js')
