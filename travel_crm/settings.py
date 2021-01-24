@@ -33,6 +33,7 @@ ALLOWED_HOSTS = '*'
 
 INSTALLED_APPS = [
     #django admin dashboard
+    'material',
     'material.admin',
     'material.admin.default',
     # 'django.contrib.admin',
@@ -41,6 +42,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django.utils',
     # 'storages',
     # custom apps
     'apps.accounts',
@@ -86,6 +88,8 @@ MIDDLEWARE = [
     # django cors headers
     'corsheaders.middleware.CorsMiddleware',
     'django.middleware.common.CommonMiddleware',
+    #addedforoperatorpackage
+    # 'django.contrib.operator.middleware.CurrentSiteMiddleware',
 ]
 
 
@@ -268,7 +272,7 @@ MATERIAL_ADMIN_SITE = {
 #     #     'site': 'contact_mail',
 #     # }
 #
-#
+
 
 # REST Framework settings
 REST_FRAMEWORK = {
@@ -281,7 +285,12 @@ REST_FRAMEWORK = {
     'DEFAULT_PAGINATION_CLASS': 'rest_framework.pagination.PageNumberPagination',
     'PAGE_SIZE': 100,
     # for filter
-    'DEFAULT_FILTER_BACKENDS': ['django_filters.rest_framework.DjangoFilterBackend']
+    'DEFAULT_FILTER_BACKENDS': ['django_filters.rest_framework.DjangoFilterBackend',
+                                # 'rest_framework_json_api.filters.QueryParameterValidationFilter',
+                                # 'rest_framework_json_api.filters.OrderingFilter',
+                                # 'rest_framework_json_api.django_filters.DjangoFilterBackend',
+                                # 'rest_framework.filters.SearchFilter',
+                                ]
 }
 
 

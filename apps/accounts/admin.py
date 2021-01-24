@@ -58,6 +58,14 @@ class UserProfileAdmin(ModelAdmin):
     image_display.short_description = 'Image'
     readonly_fields = ['image_display']
 
+    def get_queryset(self, request):
+        abc = super(UserProfileAdmin, self).get_queryset(request)
+        if request.user.is_superuser:
+            return abc
+        else:
+            user = request.user.id
+            return abc.filter(user=user)
+
 
 #already commented out
 # class UserGroupAdmin(ModelAdmin):

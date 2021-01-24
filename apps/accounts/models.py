@@ -31,8 +31,8 @@ class UserManager(BaseUserManager):
         user.save(using=self._db)
 
         return user
-#
-#
+
+
 class User(AbstractBaseUser, PermissionsMixin):
     """ Custom user model that supports using email instead of username """
 
@@ -80,11 +80,6 @@ class UserProfile(models.Model):
     expert_countries = models.TextField()
     about = RichTextField()
     travel_advice= RichTextField()
-
-
-
-
-
     last_updated = models.DateTimeField(auto_now=True)
 
     def __str__(self):
