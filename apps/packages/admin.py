@@ -3,7 +3,7 @@ from .models import *
 from django.contrib.admin import ModelAdmin, register
 from imagekit.admin import AdminThumbnail
 from django.utils.html import format_html
-from apps.accounts.models import User
+from apps.accounts.models import User, UserProfile
 
 # Register your models here.
 
@@ -42,14 +42,21 @@ class PackageAdmin(ModelAdmin):
     image_display.short_description = 'Image'
     readonly_fields = ['image_display']
 
-    def changelist_view(self, request, extra_context=None):
-        if not request.user.is_superuser:
-            self.list_display = ('')
+    # def changelist_view(self, request, extra_context=None):
+    #     if not request.user.is_superuser:
+    #         self.list_display = ('')
+    #     else:
+    #         self.list_display = ('image_display','package_name',  'featured', 'price', 'discounted_price',
+    #                 'savings', 'fix_departure', 'rating',
+    #                  'date_created', 'edit', 'delete')
+    #     return super(PackageAdmin, self).changelist_view(request, extra_context)
+
+    def get_queryset(self, request):
+        abc = super(PackageAdmin, self).queryset(request)
+        if request.user.is_superuser:
+            return abc
         else:
-            self.list_display = ('image_display','package_name',  'featured', 'price', 'discounted_price',
-                    'savings', 'fix_departure', 'rating',
-                     'date_created', 'edit', 'delete')
-        return super(PackageAdmin, self).changelist_view(request, extra_context)
+            return abc.fiter()
 
 
 
