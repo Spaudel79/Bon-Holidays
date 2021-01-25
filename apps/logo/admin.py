@@ -17,8 +17,8 @@ class LogoAdmin(ModelAdmin):
     def delete(self, obj):
         return format_html('<a class="btn-btn" href="/admin/logo/logo/{}/delete/">Delete</a>', obj.id)
 
-    list_display = ('image_display', 'date_created',  'edit', 'delete')
-    image_display = AdminThumbnail(image_field='thumbnail')
-    image_display.short_description = 'Image'
-    readonly_fields = ['image_display']
+    list_display = ('date_created',  'edit', 'delete')
+    # image_display = AdminThumbnail(image_field='thumbnail')
+    # image_display.short_description = 'Image'
+    # readonly_fields = ['image_display']
     icon_name = 'explore'

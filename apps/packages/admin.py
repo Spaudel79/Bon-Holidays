@@ -18,17 +18,17 @@ class DestinationAdmin(ModelAdmin):
     def delete(self, obj):
         return format_html('<a class="btn-btn" href="/admin/packages/destination/{}/delete/">Delete</a>', obj.id)
 
-    list_display = ('image_display', 'name', 'top', 'date_created',  'edit', 'delete')
-    image_display = AdminThumbnail(image_field='thumbnail')
-    image_display.short_description = 'Image'
-    readonly_fields = ['image_display']
+    list_display = ('name', 'top', 'date_created',  'edit', 'delete')
+    # image_display = AdminThumbnail(image_field='thumbnail')
+    # image_display.short_description = 'Image'
+    # readonly_fields = ['image_display']
     icon_name = 'explore'
 
     def changelist_view(self, request, extra_context=None):
         if not request.user.is_superuser:
             self.list_display = ('')
         else:
-            self.list_display = ('image_display', 'name', 'top', 'date_created',  'edit', 'delete')
+            self.list_display = ('name', 'top', 'date_created',  'edit', 'delete')
         return super(DestinationAdmin, self).changelist_view(request, extra_context)
 
 
@@ -43,13 +43,13 @@ class PackageAdmin(ModelAdmin):
     def delete(self, obj):
         return format_html('<a class="btn-btn" href="/admin/packages/package/{}/delete/">Delete</a>', obj.id)
 
-    list_display = ('image_display','package_name',  'featured', 'price', 'discounted_price',
+    list_display = ('package_name',  'featured', 'price', 'discounted_price',
                     'savings', 'fix_departure', 'rating',
                      'date_created', 'edit', 'delete')
 
-    image_display = AdminThumbnail(image_field='thumbnail')
-    image_display.short_description = 'Image'
-    readonly_fields = ['image_display']
+    # image_display = AdminThumbnail(image_field='thumbnail')
+    # image_display.short_description = 'Image'
+    # readonly_fields = ['image_display']
 
 
 

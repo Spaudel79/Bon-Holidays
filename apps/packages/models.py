@@ -12,10 +12,10 @@ class Destination(models.Model):
     # featured = models.BooleanField(default=False)
     top = models.BooleanField(default=False)
     dest_image = models.ImageField(blank=True)
-    thumbnail = ImageSpecField(source='dest_image',
-                                      processors=[ResizeToFill(100, 50)],
-                                      format='JPEG',
-                                      options={'quality': 60})
+    # thumbnail = ImageSpecField(source='dest_image',
+    #                                   processors=[ResizeToFill(100, 50)],
+    #                                   format='JPEG',
+    #                                   options={'quality': 60})
 
     def __str__(self):
         return self.name
@@ -77,10 +77,10 @@ class Package(models.Model):
                                  )
 
     image = models.ImageField(blank=True)
-    thumbnail = ImageSpecField(source='image',
-                                      processors=[ResizeToFill(100, 50)],
-                                      format='JPEG',
-                                      options={'quality': 60})
+    # thumbnail = ImageSpecField(source='image',
+    #                                   processors=[ResizeToFill(100, 50)],
+    #                                   format='JPEG',
+    #                                   options={'quality': 60})
     content =RichTextField()
     highlights = RichTextField()
     inclusions = RichTextField()
