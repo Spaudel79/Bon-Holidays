@@ -7,6 +7,10 @@ class ActivitiesSerializer(serializers.ModelSerializer):
         fields = ['image', 'activity', 'description']
 
 
+class NewActivitySerializer(serializers.ModelSerializer):
+    class Meta:
+        model = NewActivity
+        fields = '__all__'
 
 class PackageCountSerializer(serializers.ModelSerializer):
     class Meta:

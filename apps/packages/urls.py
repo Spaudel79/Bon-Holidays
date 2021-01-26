@@ -31,6 +31,6 @@ urlpatterns = [
         path('api/allpackages/<int:pk>/postreview', views.ReviewAPIView.as_view(), name='api-review-post'),
         path('api/activities/', views.TopActivitiesListAPIView.as_view(), name='api-activities'),
         path('api/activities/<int:pk>', views.TopActivitiesDetailsListAPIView.as_view(), name='api-activites_details'),
-
+        path('api/newactivities', views.NewActivityListAPIView.as_view(), name='api-newactivities'),
 ]
 

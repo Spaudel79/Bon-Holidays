@@ -316,5 +316,9 @@ class TopActivitiesDetailsListAPIView(RetrieveAPIView):
     queryset = TopActivities.objects.all()
     serializer_class = TopActivitiesSerializer
 
+class NewActivityListAPIView(ListAPIView):
+    queryset = NewActivity.objects.all()
+    serializer_class = NewActivitySerializer
+
 
 
