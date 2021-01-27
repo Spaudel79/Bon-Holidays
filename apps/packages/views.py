@@ -1,6 +1,7 @@
 from rest_framework import viewsets, generics, filters
 from .models import  *
 from .serializers import *
+from django.db.models import Count
 from django.shortcuts import get_object_or_404
 from rest_framework.response import Response
 from .filter import PackageFilter, ContinentFilter
@@ -42,22 +43,21 @@ from django_filters import rest_framework as filters
 #     queryset = TopActivities.objects.all()
 #     serializer_class = TopActivitiesSerializer
 
-
-
 class DestinationFrontListAPIView(ListAPIView):
     # queryset = Destination.objects.all().order_by('?')[:4]
     # queryset = Destination.objects.all().order_by('-date_created')[:4]
     queryset = Destination.objects.all().order_by('-date_created')
+
     serializer_class = DestinationFrontSerializer
     filter_backends = [DjangoFilterBackend]
     filterset_fields = ['top', 'continent' ]
-    # filterset_class = ContinentFilter
+    # filterset_class = ContinentFilter #filterset_class and filterset_fields dont work together
 
 
 class DestinationPackageListAPIView(RetrieveAPIView):
     queryset = Destination.objects.all()
+    # queryset = Destination.objects.annotate(package_count=Count('package'))
     serializer_class = DestinationwithPackageSerializer
-
 
 
 class PackageAPIView(ListAPIView):
@@ -68,7 +68,6 @@ class AllPackageAPIView(ListAPIView):
     queryset = Package.objects.all()
     serializer_class = PackageSerializer
     filterset_class = PackageFilter
-    # filterset_class = PackageFilter
 
     # def get_queryset(self):
     #     # This might work with DjangoFilterBackend as well, don't know...
@@ -97,74 +96,82 @@ class AllPackageAPIView(ListAPIView):
     #     #     return Package.objects.filter(activities__activity=activity)
     #     else:
     #         return Package.objects.all().order_by('-date_created')[:4]
-    def get_queryset(self):
-    # def get(self, request, format=None, *args, **kwargs):
+    # def get_queryset(self):
+    #     operator = self.request.GET.get("operator", None)
+    #     if operator is not None:
+    #         operator = self.request.GET.get("operator", "")
+    #         operator_values = operator.split(",")
+    #         return Package.objects.filter(operator__company_name__in=operator_values)
+    #     else:
+    #         return Package.objects.all()
 
+#Actual Filtering starts
+    def get_queryset(self):
         new_activity = self.request.GET.get('new_activity',None)
         tour_type = self.request.GET.get("tour_type",None)
-        city = self.request.GET.get("city", None)
+        operator = self.request.GET.get("operator", None)
         if new_activity is not None:
             new_activity = self.request.GET.get('new_activity', "")
             new_activity_values = new_activity.split(",")
             if tour_type is not None:
                     tour_type = self.request.GET.get("tour_type", "")
                     tour_type_values = tour_type.split(",")
-                    if city is not None:
-                        city = self.request.GET.get("city", "")
-                        city_values = city.split(",")
+                    if operator is not None:
+                        operator = self.request.GET.get("operator", "")
+                        operator_values = operator.split(",")
                         return Package.objects.filter(new_activity__title__in=new_activity_values,
                                               tour_type__in=tour_type_values,
-                                                  city__in=city_values)
+                                                  operator__in=operator_values)
                     else:
                         return Package.objects.filter(new_activity__title__in=new_activity_values,
                                                   tour_type__in=tour_type_values,)
-            elif city is not None:
-                    city = self.request.GET.get("city", "")
-                    city_values = city.split(",")
+            elif operator is not None:
+                    operator = self.request.GET.get("operator", "")
+                    operator_values = operator.split(",")
                     if tour_type is not None:
                         tour_type = self.request.GET.get("tour_type", "")
                         tour_type_values = tour_type.split(",")
                         return Package.objects.filter(new_activity__title__in=new_activity_values,
                                                       tour_type__in=tour_type_values,
-                                                      city__in=city_values)
+                                                      operator__company_name__in=operator_values)
                     else:
                         return Package.objects.filter(new_activity__title__in=new_activity_values,
-                                                      city__in=city_values)
+                                                      operator__company_name__in=operator_values)
             else:
                     return Package.objects.filter(new_activity__title__in=new_activity_values,)
 
         elif tour_type is not None:
             tour_type = self.request.GET.get("tour_type", "")
             tour_type_values = tour_type.split(",")
-            if city is not None:
-                city = self.request.GET.get("city", "")
-                city_values = city.split(",")
+            if operator is not None:
+                operator = self.request.GET.get("operator", "")
+                operator_values = operator.split(",")
                 if new_activity is not None:
                     new_activity = self.request.GET.get('new_activity', "")
                     new_activity_values = new_activity.split(",")
                     return Package.objects.filter(new_activity__title__in=new_activity_values,
                                                   tour_type__in=tour_type_values,
-                                                  city__in=city_values)
+                                                  operator__company_name__in=operator_values)
                 else:
                     return Package.objects.filter(tour_type__in=tour_type_values,
-                                                  city__in=city_values)
+                                                  operator__company_name__in=operator_values)
             elif new_activity is not None:
                 new_activity = self.request.GET.get('new_activity', "")
                 new_activity_values = new_activity.split(",")
-                if city is not None:
-                    city = self.request.GET.get("city", "")
-                    city_values = city.split(",")
+                if operator is not None:
+                    operator = self.request.GET.get("operator", "")
+                    operator_values = operator.split(",")
                     return Package.objects.filter(new_activity__title__in=new_activity_values,
                                                   tour_type__in=tour_type_values,
-                                                  city__in=city_values)
+                                                  operator__company_name__in=operator_values)
                 else:
                     return Package.objects.filter(tour_type__in=tour_type_values,
                                                   new_activity__title__in=new_activity_values,)
             else:
                 return Package.objects.filter(tour_type__in=tour_type_values,)
-        elif city is not None:
-            city = self.request.GET.get("city", "")
-            city_values = city.split(",")
+        elif operator is not None:
+            operator = self.request.GET.get("operator", "")
+            operator_values = operator.split(",")
             if new_activity is not None:
                 new_activity = self.request.GET.get('new_activity', "")
                 new_activity_values = new_activity.split(",")
@@ -173,10 +180,10 @@ class AllPackageAPIView(ListAPIView):
                     tour_type_values = tour_type.split(",")
                     return Package.objects.filter(new_activity__title__in=new_activity_values,
                                                   tour_type__in=tour_type_values,
-                                                  city__in=city_values)
+                                                  operator__company_name__in=operator_values)
                 else:
                     return Package.objects.filter(new_activity__title__in=new_activity_values,
-                                                  city__in=city_values)
+                                                  operator__company_name__in=operator_values)
             elif tour_type is not None:
                 tour_type = self.request.GET.get("tour_type", "")
                 tour_type_values = tour_type.split(",")
@@ -185,14 +192,15 @@ class AllPackageAPIView(ListAPIView):
                     new_activity_values = new_activity.split(",")
                     return Package.objects.filter(new_activity__title__in=new_activity_values,
                                                   tour_type__in=tour_type_values,
-                                                  city__in=city_values)
+                                                  operator__company_name__in=operator_values)
                 else:
                     return Package.objects.filter(tour_type__in=tour_type_values,
-                                                  city__in=city_values)
+                                                  operator__company_name__in=operator_values)
             else:
-                return Package.objects.filter(city__in=city_values)
+                return Package.objects.filter(operator__company_name__in=operator_values)
         return Package.objects.all()
 
+# Actual Filtering Ends
 
 
     # def list(self, request, format=None, *args, **kwargs):
@@ -236,15 +244,15 @@ class PackageCountAPIView(ListCreateAPIView):
     serializer_class = PackageCountSerializer
     # p_count = Package.objects.all().count()
 
-    # def get_queryset(self):
-    #         p_count=Package.objects.all().count()
-    #         return[p_count]
+    def get_queryset(self):
+        p_count=Package.objects.all().count()
+        return[p_count]
 
     # def get_(self, request, *args, **kwargs):
     #     p_count = Package.objects.all().count()
     #     return self.list(request, {'p_count': p_count})
 
-    # def get_queryset(self, *args, **kwargs):
+    # def get_queryset(self):
     #
     #     p_count = Package.objects.all().count()
     #     return {'p_count': p_count}

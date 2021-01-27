@@ -63,11 +63,14 @@ class PackageSerializer(serializers.ModelSerializer):
 
 class DestinationwithPackageSerializer(serializers.ModelSerializer):
     packages = PackageSerializer(many= True)
+    # packages_count = serializers.IntegerField()
     class Meta:
         model = Destination
-        fields = ['id', 'name', 'dest_image', 'packages']
+        fields = ['id', 'name', 'dest_image', 'packages',]
         # fields = '__all__'
         # depth = 1
+
+# class Destinationwith
 
 class DestinationFrontSerializer(serializers.ModelSerializer):
     #destination name instead of foreigen key id
