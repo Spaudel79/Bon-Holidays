@@ -14,3 +14,10 @@ class PackageFilter(filters.FilterSet):
    #     # I expect value to setup with an array of values
    #     myquery = Q()
    #     return queryset.filter(myquery)
+
+
+class ContinentFilter(filters.FilterSet):
+
+   class Meta:
+      model = Destination
+      fields = ['continent']

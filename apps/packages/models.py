@@ -6,16 +6,18 @@ from ckeditor.fields import RichTextField
 from apps.accounts.models import UserProfile, User
 
 class Destination(models.Model):
-    # Continent_Name = (
-    #     ('Europe, 'Custom-made trip with guide and/or driver',),
-    #     ('Asia', 'Custom-made trip without guide and driver',),
-    #     ('North America, 'Group Tour',),
-    #     ('South America', 'Cruise Tour',),
-    #     ('Africa', 'Cruise Tour',),
-    #     ('South America', 'Cruise Tour',),
-    # )
+    Continent_Name = (
+        ('Europe', 'Europe',),
+        ('Asia', 'Asia',),
+        ('North America', 'North America',),
+        ('South America', 'South America',),
+        ('Africa', 'Africa',),
+        ('Ocenia', 'Ocenia',),
+        ('Polar', 'Polar',),
+        ('Regions', 'Regions',),
+    )
     name = models.CharField(max_length=255, unique=True)
-    # continent = models.CharField(max_length=255, unique=True)
+    continent = models.CharField(max_length=255, choices=Continent_Name, default='Europe')
     top = models.BooleanField(default=False)
     dest_image = models.ImageField(blank=True)
     # thumbnail = ImageSpecField(source='dest_image',

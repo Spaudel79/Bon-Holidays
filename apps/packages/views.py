@@ -3,7 +3,7 @@ from .models import  *
 from .serializers import *
 from django.shortcuts import get_object_or_404
 from rest_framework.response import Response
-from .filter import PackageFilter
+from .filter import PackageFilter, ContinentFilter
 from django.http import QueryDict
 from django.db.models import Q
 from django_filters.rest_framework import DjangoFilterBackend
@@ -50,21 +50,13 @@ class DestinationFrontListAPIView(ListAPIView):
     queryset = Destination.objects.all().order_by('-date_created')
     serializer_class = DestinationFrontSerializer
     filter_backends = [DjangoFilterBackend]
-    filterset_fields = ['top', ]
-
+    filterset_fields = ['top', 'continent' ]
+    # filterset_class = ContinentFilter
 
 
 class DestinationPackageListAPIView(RetrieveAPIView):
     queryset = Destination.objects.all()
     serializer_class = DestinationwithPackageSerializer
-
-    # def get_queryset(self):
-    #     city = self.request.GET.get("city", None)
-    #     if city is not None:
-    #         return Package.objects.filter(packages__city=city)
-    #     # else:
-    #     #     # return Package.objects.all()
-
 
 
 
