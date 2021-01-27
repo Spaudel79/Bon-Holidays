@@ -55,15 +55,15 @@ class DestinationFrontListAPIView(ListAPIView):
 
 
 class DestinationPackageListAPIView(RetrieveAPIView):
-    # queryset = Destination.objects.all()
+    queryset = Destination.objects.all()
     serializer_class = DestinationwithPackageSerializer
 
-    def get_queryset(self):
-        city = self.request.GET.get("city", None)
-        if city is not None:
-            return Package.objects.filter(packages__city=city)
-        # else:
-        #     # return Package.objects.all()
+    # def get_queryset(self):
+    #     city = self.request.GET.get("city", None)
+    #     if city is not None:
+    #         return Package.objects.filter(packages__city=city)
+    #     # else:
+    #     #     # return Package.objects.all()
 
 
 
