@@ -55,19 +55,18 @@ class DestinationFrontListAPIView(ListAPIView):
 
 
 class DestinationPackageListAPIView(RetrieveAPIView):
-    queryset = Destination.objects.all()
+    # queryset = Destination.objects.all()
     serializer_class = DestinationwithPackageSerializer
 
+    def get_queryset(self):
+        city = self.request.GET.get("city", None)
+        if city is not None:
+            return Package.objects.filter(packages__city=city)
+        # else:
+        #     # return Package.objects.all()
 
 
-# class PackageFilter(filters.FilterSet):
-#     activities = filters.CharFilter(
-#         field_name='activities',
-#         lookup_expr='contains'
-#     )
-#     class Meta:
-#         model = Package
-#         fields = ['featured', 'special_discount', 'activities']
+
 
 class PackageAPIView(ListAPIView):
     queryset = Package.objects.all()
