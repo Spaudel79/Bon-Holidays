@@ -63,10 +63,10 @@ class PackageSerializer(serializers.ModelSerializer):
 
 class DestinationwithPackageSerializer(serializers.ModelSerializer):
     packages = PackageSerializer(many= True)
-    # packages_count = serializers.IntegerField()
+
     class Meta:
         model = Destination
-        fields = ['id', 'name', 'dest_image', 'packages',]
+        fields = ['id', 'name', 'dest_image', 'packages',  ]
         # fields = '__all__'
         # depth = 1
 
@@ -78,11 +78,13 @@ class DestinationFrontSerializer(serializers.ModelSerializer):
     # destination = serializers.ReadOnlyField(source='destination.name')
     # url = serializers.HyperlinkedIdentityField(view_name='api-packages', read_only=True)
     # package = DestinationPackageSerializer(many= True)
+    # packages = PackageSerializer(many=True)
+    packages_count = serializers.IntegerField()
     class Meta:
         model = Destination
         # fields = ['id', 'package']
-        fields = '__all__'
-        depth = 1
+        fields = ['packages_count','id', 'name', 'dest_image', 'continent' ]
+        # depth = 1
 
 
 class AllpackageSerializer(serializers.ModelSerializer):

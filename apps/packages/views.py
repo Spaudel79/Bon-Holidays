@@ -46,11 +46,12 @@ from django_filters import rest_framework as filters
 class DestinationFrontListAPIView(ListAPIView):
     # queryset = Destination.objects.all().order_by('?')[:4]
     # queryset = Destination.objects.all().order_by('-date_created')[:4]
-    queryset = Destination.objects.all().order_by('-date_created')
+    queryset = Destination.objects.annotate(packages_count=Count('package'))
+    # queryset = Destination.objects.all().order_by('-date_created')
 
     serializer_class = DestinationFrontSerializer
     filter_backends = [DjangoFilterBackend]
-    filterset_fields = ['top', 'continent' ]
+    filterset_fields = ['top', 'continent']
     # filterset_class = ContinentFilter #filterset_class and filterset_fields dont work together
 
 
@@ -59,6 +60,9 @@ class DestinationPackageListAPIView(RetrieveAPIView):
     # queryset = Destination.objects.annotate(package_count=Count('package'))
     serializer_class = DestinationwithPackageSerializer
 
+class PackageCountView(ListAPIView):
+    queryset = Destination.objects.annotate(packages_count=Count('package'))
+    serializer_class = DestinationwithPackageSerializer
 
 class PackageAPIView(ListAPIView):
     queryset = Package.objects.all()
@@ -237,8 +241,6 @@ class AllPackageAPIView(ListAPIView):
     #     dict_params = dict(request.query_params.iterlists())
     #     filter = PackageFilter(dict_params, queryset=Package.objects.all())
 
-
-
 class PackageCountAPIView(ListCreateAPIView):
     queryset = Package.objects.all()
     serializer_class = PackageCountSerializer
@@ -273,8 +275,6 @@ class ReviewAPIView(ListCreateAPIView):
         serializer.save(user=self.request.user,package=package)
 
         name = serializer.data['full_name']
-
-
         send_mail('New Review ', f"Review has been made by {name}"
 
                   ,EMAIL_HOST_USER, ['sales6@bonholidays.com.np'],
