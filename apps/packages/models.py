@@ -12,7 +12,7 @@ class Destination(models.Model):
         ('North America', 'North America',),
         ('South America', 'South America',),
         ('Africa', 'Africa',),
-        ('Ocenia', 'Ocenia',),
+        ('Oceania', 'Oceania',),
         ('Polar', 'Polar',),
         ('Regions', 'Regions',),
     )
