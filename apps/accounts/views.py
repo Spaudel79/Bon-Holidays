@@ -40,7 +40,7 @@ class RegisterUserView(GenericAPIView):
     permission_classes = [AllowAny]
     serializer_class = RegisterUserSerializer
 
-    def post(self, request):
+    def post(self, request,**kwargs):
         user = request.data
         serializer = self.serializer_class(data=user)
         serializer.is_valid(raise_exception=True)
