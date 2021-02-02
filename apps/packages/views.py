@@ -163,8 +163,8 @@ class AllPackageAPIView(ListAPIView):
                                                            tour_type__in=tour_type_values)
             else:
                 return Package.objects.filter(tour_type__in=tour_type_values)
-        else:
-            return Package.objects.all()
+
+        return Package.objects.all()
 
     # def list(self, request, format=None, *args, **kwargs):
     #

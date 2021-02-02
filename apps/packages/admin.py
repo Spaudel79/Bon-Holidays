@@ -51,12 +51,12 @@ class PackageAdmin(ModelAdmin):
     #                  'date_created', 'edit', 'delete')
     #     return super(PackageAdmin, self).changelist_view(request, extra_context)
 
-    def get_queryset(self, request):
-        abc = super(PackageAdmin, self).queryset(request)
-        if request.user.is_superuser:
-            return abc
-        else:
-            return abc.fiter()
+    # def get_queryset(self, request):
+    #     abc = super(PackageAdmin, self).queryset(request)
+    #     if request.user.is_superuser:
+    #         return abc
+    #     else:
+    #         return abc.fiter()
 
 
 
