@@ -88,6 +88,8 @@ MIDDLEWARE = [
     # django cors headers
     'corsheaders.middleware.CorsMiddleware',
     'django.middleware.common.CommonMiddleware',
+    #addedforoperatorpackage
+    # 'django.contrib.operator.middleware.CurrentSiteMiddleware',
 ]
 
 

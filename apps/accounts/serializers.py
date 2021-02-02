@@ -17,12 +17,12 @@ class BookmundiAccountSerializer(serializers.ModelSerializer):
         fields = '__all__'
 
 class RegisterUserSerializer(serializers.ModelSerializer):
-    password = serializers.CharField(min_length=8, write_only=True)
-
+    password= serializers.CharField(min_length=8, write_only=True)
+    #password2 = serializers.CharField(min_length=8, write_only=True)
 
     class Meta:
         model = User
-        fields = ['email', 'first_name', 'last_name', 'password']
+        fields = ['email', 'first_name', 'last_name', 'password1']
         extra_kwargs = {
                         "password":{"write_only": True},
                         'first_name':{'required': False},

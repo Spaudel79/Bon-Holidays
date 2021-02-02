@@ -18,15 +18,24 @@ class DestinationAdmin(ModelAdmin):
     def delete(self, obj):
         return format_html('<a class="btn-btn" href="/admin/packages/destination/{}/delete/">Delete</a>', obj.id)
 
-    list_display = ('image_display', 'name', 'top', 'date_created',  'edit', 'delete')
-    image_display = AdminThumbnail(image_field='thumbnail')
-    image_display.short_description = 'Image'
-    readonly_fields = ['image_display']
+    list_display = ('name', 'continent', 'top', 'date_created',  'edit', 'delete')
+    # image_display = AdminThumbnail(image_field='thumbnail')
+    # image_display.short_description = 'Image'
+    # readonly_fields = ['image_display']
     icon_name = 'explore'
+
+    def changelist_view(self, request, extra_context=None):
+        if not request.user.is_superuser:
+            self.list_display = ('')
+        else:
+            self.list_display = ('name', 'top', 'continent', 'date_created',  'edit', 'delete')
+        return super(DestinationAdmin, self).changelist_view(request, extra_context)
+
+
 
 class PackageAdmin(ModelAdmin):
     icon_name = 'explore'
-    autocomplete_fields = ['destination']
+    # autocomplete_fields = ['destination']
 
     def edit(self, obj):
         return format_html('<a class="btn-btn" href="/admin/packages/package/{}/change/">Change</a>', obj.id)
@@ -34,33 +43,23 @@ class PackageAdmin(ModelAdmin):
     def delete(self, obj):
         return format_html('<a class="btn-btn" href="/admin/packages/package/{}/delete/">Delete</a>', obj.id)
 
-    list_display = ('image_display','package_name',  'featured', 'price', 'discounted_price',
+    list_display = ('package_name',  'featured', 'price', 'discounted_price',
                     'savings', 'fix_departure', 'rating',
                      'date_created', 'edit', 'delete')
 
-    image_display = AdminThumbnail(image_field='thumbnail')
-    image_display.short_description = 'Image'
-    readonly_fields = ['image_display']
-
-    # def changelist_view(self, request, extra_context=None):
-    #     if not request.user.is_superuser:
-    #         self.list_display = ('')
-    #     else:
-    #         self.list_display = ('image_display','package_name',  'featured', 'price', 'discounted_price',
-    #                 'savings', 'fix_departure', 'rating',
-    #                  'date_created', 'edit', 'delete')
-    #     return super(PackageAdmin, self).changelist_view(request, extra_context)
-
-    # def get_queryset(self, request):
-    #     abc = super(PackageAdmin, self).queryset(request)
-    #     if request.user.is_superuser:
-    #         return abc
-    #     else:
-    #         return abc.fiter()
+    # image_display = AdminThumbnail(image_field='thumbnail')
+    # image_display.short_description = 'Image'
+    # readonly_fields = ['image_display']
 
 
 
-
+    def get_queryset(self, request):
+        abc = super(PackageAdmin, self).get_queryset(request)
+        if request.user.is_superuser:
+            return abc
+        else:
+            operator = request.user.profile
+            return abc.filter(operator=operator)
 
     # class Media:
     #     js = ('ckeditor.js','configuration-ckeditor.js')

@@ -6,16 +6,24 @@ from ckeditor.fields import RichTextField
 from apps.accounts.models import UserProfile, User
 
 class Destination(models.Model):
+    Continent_Name = (
+        ('Europe', 'Europe',),
+        ('Asia', 'Asia',),
+        ('North America', 'North America',),
+        ('South America', 'South America',),
+        ('Africa', 'Africa',),
+        ('Oceania', 'Oceania',),
+        ('Polar', 'Polar',),
+        ('Regions', 'Regions',),
+    )
     name = models.CharField(max_length=255, unique=True)
-    # description = models.CharField(max_length=255)
-    # discount = models.CharField(max_length=255, default="5% OFF")
-    # featured = models.BooleanField(default=False)
+    continent = models.CharField(max_length=255, choices=Continent_Name, default='Europe')
     top = models.BooleanField(default=False)
     dest_image = models.ImageField(blank=True)
-    thumbnail = ImageSpecField(source='dest_image',
-                                      processors=[ResizeToFill(100, 50)],
-                                      format='JPEG',
-                                      options={'quality': 60})
+    # thumbnail = ImageSpecField(source='dest_image',
+    #                                   processors=[ResizeToFill(100, 50)],
+    #                                   format='JPEG',
+    #                                   options={'quality': 60})
 
     def __str__(self):
         return self.name
@@ -77,10 +85,10 @@ class Package(models.Model):
                                  )
 
     image = models.ImageField(blank=True)
-    thumbnail = ImageSpecField(source='image',
-                                      processors=[ResizeToFill(100, 50)],
-                                      format='JPEG',
-                                      options={'quality': 60})
+    # thumbnail = ImageSpecField(source='image',
+    #                                   processors=[ResizeToFill(100, 50)],
+    #                                   format='JPEG',
+    #                                   options={'quality': 60})
     content =RichTextField()
     highlights = RichTextField()
     inclusions = RichTextField()
