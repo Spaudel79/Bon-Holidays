@@ -10,7 +10,7 @@ from apps.accounts.models import User, UserProfile
 
 class DestinationAdmin(ModelAdmin):
 
-    search_fields = ['name']
+    # search_fields = ['name']
 
     def edit(self, obj):
         return format_html('<a class="btn-btn" href="/admin/packages/destination/{}/change/">Change</a>', obj.id)
