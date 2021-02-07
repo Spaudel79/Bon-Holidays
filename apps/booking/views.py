@@ -46,15 +46,10 @@ class BookingCreateAPIView(ListCreateAPIView):
     #     email = ('New booking is created')
     #     email.send()
 
-
-
-
-
 class BookingListAPIView(ListAPIView):
     permission_classes = [IsAuthenticated]
     # queryset = Booking.objects.all()
     serializer_class = BookingListSerializer
-
 
     def get(self, request,*args, **kwargs):
     #     bookings = Booking.objects.get(user=request.user)
