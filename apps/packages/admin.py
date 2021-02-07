@@ -26,7 +26,7 @@ class DestinationAdmin(ModelAdmin):
 
     def changelist_view(self, request, extra_context=None):
         if not request.user.is_superuser:
-            self.list_display = ('')
+            self.list_display = ('name', 'top', 'continent', 'date_created',)
         else:
             self.list_display = ('name', 'top', 'continent', 'date_created',  'edit', 'delete')
         return super(DestinationAdmin, self).changelist_view(request, extra_context)
@@ -43,8 +43,8 @@ class PackageAdmin(ModelAdmin):
     def delete(self, obj):
         return format_html('<a class="btn-btn" href="/admin/packages/package/{}/delete/">Delete</a>', obj.id)
 
-    list_display = ('package_name',  'featured', 'price', 'discounted_price',
-                    'savings', 'fix_departure', 'rating',
+    list_display = ('package_name',  'featured', 'price',
+                     'fix_departure', 'rating',
                      'date_created', 'edit', 'delete')
 
     # image_display = AdminThumbnail(image_field='thumbnail')
