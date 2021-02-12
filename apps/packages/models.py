@@ -84,7 +84,7 @@ class Package(models.Model):
                                           (5, 5))
                                  )
 
-    image = models.ImageField(blank=True)
+    image = models.ImageField(blank=True, verbose_name="Thumbnail Image-Vertical")
     # thumbnail = ImageSpecField(source='image',
     #                                   processors=[ResizeToFill(100, 50)],
     #                                   format='JPEG',
@@ -95,9 +95,9 @@ class Package(models.Model):
     exclusions = RichTextField()
     # itinerary = models.ManyToManyField(Itinerary)
     itinerary_text = RichTextField()
-    image_1= models.ImageField(blank=True,null = True)
-    image_2= models.ImageField(blank=True,null = True)
-    image_3= models.ImageField(blank=True,null = True)
+    image_1= models.ImageField(blank=True,null = True,verbose_name="Image-Horizontal")
+    image_2= models.ImageField(blank=True,null = True,verbose_name="Image-Square")
+    image_3= models.ImageField(blank=True,null = True,verbose_name="Image-Sqaure")
     date_created = models.DateField()
 
 
