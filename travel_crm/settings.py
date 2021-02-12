@@ -118,7 +118,7 @@ ROOT_URLCONF = 'travel_crm.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [os.path.join(BASE_DIR, 'templates')],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -177,7 +177,7 @@ else:
             'ENGINE': 'django.db.backends.mysql',
             'NAME': 'traveldb',
             'USER': 'root',
-            'PASSWORD': '1234',
+            'PASSWORD': 'root',
             'HOST': 'localhost',
             'PORT': '3306',
         }
