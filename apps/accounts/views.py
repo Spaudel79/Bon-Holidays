@@ -22,6 +22,7 @@ from rest_framework.authtoken.models import Token
 from rest_framework.authentication import TokenAuthentication
 from rest_framework.response import Response
 
+
 class Homepage(GenericAPIView):
     def get(self,request):
         return Response(status=status.HTTP_200_OK)
@@ -30,6 +31,7 @@ class Homepage(GenericAPIView):
 class PartnerApplicationViewSet(mixins.CreateModelMixin, viewsets.GenericViewSet):
     queryset = PartnerApplication.objects.all()
     serializer_class = PartnerApplicationSerializer
+
 
 class BookmundiAccountViewSet(mixins.CreateModelMixin, viewsets.GenericViewSet):
     queryset = BookmundiAccount.objects.all()
@@ -40,7 +42,7 @@ class RegisterUserView(GenericAPIView):
     permission_classes = [AllowAny]
     serializer_class = RegisterUserSerializer
 
-    def post(self, request,**kwargs):
+    def post(self, request, **kwargs):
         user = request.data
         serializer = self.serializer_class(data=user)
         serializer.is_valid(raise_exception=True)
@@ -66,13 +68,6 @@ class LoginUserView(GenericAPIView):
         return response.Response({"token": token.key,
                                   "serializer.data": serializer.data},
                                    status=status.HTTP_200_OK)
-        # return response.Response(serializer.errors, status=status.HTTP_400_BAD_REQUEST)
-
-
-# class Logout(GenericAPIView):
-#     def get(self, request, format=None):
-#         auth.logout(request)
-#         return Response(status=status.HTTP_200_OK)
 
 
 class Logout(GenericAPIView):
@@ -84,72 +79,11 @@ class Logout(GenericAPIView):
         request.user.auth_token.delete()
         return Response(status=status.HTTP_200_OK)
 
-# class Logout(GenericAPIView):
-#     def logout(self, request):
-#         try:
-#             request.user.auth_token.delete()
-#         except (AttributeError, ObjectDoesNotExist):
-#             pass
-#
-#         # django_logout(request)
-#         return Response(status=status.HTTP_200_OK)
-
-# class UsersListView(ListAPIView):
-#     queryset = User.objects.all()
-#     serializer_class = UserListSerializer
-
 
 class UsersListView(ListAPIView):
-    # serializer_class = UserListSerializer
-
-    # def get(self, request, *args, **kwargs):
-    #     user = Token.objects.get(key="token").user
-    #     # if user.exists():
-    #     #     user =user.last().user
-    #     return self.list(request, user)
-
     def get(self, request, *args, **kwargs):
         serializer = UserListSerializer(request.user)
         return Response({"user": serializer.data})
-
-    # def get_queryset(self):
-    #
-    #
-    #     user_id = Token.objects.get(key=self.request.auth.key).user_id
-    #     return User.objects.filter(user=User.objects.get(id=user_id))
-    #     # return self.list(self.request, user)
-
-
-
-
-
-
-    # def get_queryset(self):
-    #     # user = Token.objects.get(key="token")
-    #     # return User.objects.filter(user= user)
-    #     return User.objects.filter(user =Token.objects.get(key="token").user)
-
-    # def post(self, request, *args, **kwargs):
-    #     serializer = self.get_serializer(data=request.data)
-    #
-    #     if serializer.is_valid():
-    #         user = serializer.object.get('user') or request.user
-    #         token = serializer.object.get('token')
-    #         response_data = {
-    #             'token': token,
-    #             'user': UserListSerializer(user).data
-    #         }
-    #         response = Response(response_data, status=status.HTTP_200_OK)
-
-# class UsersListView(ListCreateAPIView):
-#     permission_classes = (IsAuthenticated,)
-#     authentication_classes = (TokenAuthentication,)
-#
-#     queryset = User.objects.all()
-#     serializer_class = UserListSerializer
-#
-#     def get_queryset(self):
-#         return self.queryset.filter(user=self.request.user)
 
 
 class ProfileListView(ListAPIView):

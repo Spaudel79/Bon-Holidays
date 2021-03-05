@@ -1,16 +1,12 @@
 from django.db import models
 from django.conf import settings
-from django.urls import reverse
-from django.utils.translation import gettext_lazy as _
-from django.contrib.auth.models import BaseUserManager, AbstractBaseUser, PermissionsMixin,Permission
+from django.contrib.auth.models import BaseUserManager, AbstractBaseUser, PermissionsMixin
 from imagekit.models import ImageSpecField
 from imagekit.processors import ResizeToFill
 from ckeditor.fields import RichTextField
-# from taggit.managers import TaggableManager
-
 from django.contrib.auth.models import Group
-# # Create your models here.
-#
+
+
 class UserManager(BaseUserManager):
 
     def create_user(self, email, password=None, **kwargs):
@@ -45,14 +41,9 @@ class User(AbstractBaseUser, PermissionsMixin):
 
     objects = UserManager()
     USERNAME_FIELD = 'email'
-#
-# #already commented out
-# # class Admin(models.Model):
-# #     user = models.OneToOneField(settings.AUTH_USER_MODEL,
-# #                                 related_name='profile', on_delete=models.CASCADE)
+
 
 class UserProfile(models.Model):
-
     USER_TYPES = (
         ('b', 'Bon-Admin'),
         ('g', 'Agent'),
@@ -69,17 +60,17 @@ class UserProfile(models.Model):
     phone_number = models.CharField(max_length=255, default="")
     experience = models.IntegerField(default=10)
     commission = models.CharField(max_length=50, default="15%")
-    avatar = models.ImageField(blank=True)
+    avatar = models.ImageField(blank=False)
 
     thumbnail = ImageSpecField(source='avatar',
-                                      processors=[ResizeToFill(100, 50)],
-                                      format='JPEG',
-                                      options={'quality': 60})
+                               processors=[ResizeToFill(100, 50)],
+                               format='JPEG',
+                               options={'quality': 60})
     # cover_photo = models.ImageField(blank=True, null=True)
     languages = models.CharField(max_length=255)
     expert_countries = models.TextField()
     about = RichTextField()
-    travel_advice= RichTextField()
+    travel_advice = RichTextField()
     last_updated = models.DateTimeField(auto_now=True)
 
     def __str__(self):
@@ -103,12 +94,8 @@ class UserProfile(models.Model):
         return self.user_type == 'g'
 
     def is_customer(self):
-        return self.user_type=='c'
-#
-# #already commented out
-# # class UserGroup(models.Model):
-# #     group = models.OneToOneField(Group, on_delete=models.CASCADE)
-#
+        return self.user_type == 'c'
+
 
 class PartnerApplication(models.Model):
     first_name = models.CharField(max_length=255)
@@ -118,9 +105,9 @@ class PartnerApplication(models.Model):
     phone = models.CharField(max_length=255)
     state = models.CharField(max_length=255)
 
-class BookmundiAccount(models.Model):
 
-    #personal details
+class BookmundiAccount(models.Model):
+    # personal details
     title = models.CharField(max_length=255)
     first_name = models.CharField(max_length=255)
     middle_name = models.CharField(max_length=255, null=True)
@@ -132,26 +119,11 @@ class BookmundiAccount(models.Model):
     short_bio = models.TextField(max_length=255)
     website_if_any = models.CharField(max_length=255, null=True)
 
-    #contact details
+    # contact details
     email = models.EmailField()
     phone_number = models.CharField(max_length=255)
 
-    #passport details
+    # passport details
     passport_number = models.CharField(max_length=255)
     issue_date = models.DateField()
     expiry_date = models.DateField()
-#
-#
-#
-#
-#
-#
-#
-#
-#
-#
-#
-#
-#
-#
-#
