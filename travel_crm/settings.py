@@ -24,14 +24,14 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = 'f)_sy=de0f7z*qs19&uodz1+vx@4i5**$xl=0hz&6qrrajqqqj'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = [ 'admin.bonholidays.com.np', 'crm.mountaintigernepal.com', '127.0.0.1']
 
 # Application definition
 
 INSTALLED_APPS = [
-    #django admin dashboard
+    # django admin dashboard
     'material',
     'material.admin',
     'material.admin.default',
@@ -66,7 +66,8 @@ INSTALLED_APPS = [
 CKEDITOR_BASEPATH = "/static/ckeditor/ckeditor/"
 
 CKEDITOR_UPLOAD_PATH = "uploads/"
-#ckeditor configs #todo
+
+#ckeditor configs # todo
 CKEDITOR_CONFIGS = {
     'default': {
         'toolbar': 'full',
@@ -99,7 +100,6 @@ CORS_ORIGIN_WHITELIST = (
     "http://27.34.13.130",
     "http://192.168.1.178:3000",
     "http://127.0.0.1:9000",
-    "http://front.bontravels.com",
     "http://bonholidays.com.np",
     "https://bonholidays.com.np",
 )
@@ -133,8 +133,10 @@ TEMPLATES = [
 
 WSGI_APPLICATION = 'travel_crm.wsgi.application'
 
+# Local/Development
+DEBUG = True
+
 # Database
-# https://docs.djangoproject.com/en/3.0/ref/settings/#databases
 if 'RDS_HOSTNAME' in os.environ:
     DATABASES = {
         'default': {
@@ -171,6 +173,8 @@ if 'RDS_HOSTNAME' in os.environ:
         'Expires': expires,
         'Cache-Control': 'max-age=%d' % (int(two_months.total_seconds()),),
     }
+    # Production
+    DEBUG = False
 else:
     DATABASES = {
         'default': {
@@ -186,7 +190,7 @@ else:
     STATIC_ROOT = os.path.join(BASE_DIR, 'static/')
     MEDIA_URL = '/media/'
     MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
-    # MEDIA_ROOT = os.path.join(os.path.dirname(BASE_DIR), "media_cdn")
+
 
 # Password validation
 # https://docs.djangoproject.com/en/3.0/ref/settings/#auth-password-validators
