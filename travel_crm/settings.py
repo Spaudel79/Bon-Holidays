@@ -101,6 +101,7 @@ CORS_ORIGIN_WHITELIST = (
     "http://192.168.1.178:3000",
     "http://127.0.0.1:9000",
     "http://front.bontravels.com",
+"http://bonholidays.com.np",
     "http://bonholidays.aakash.cloud",
 )
 
