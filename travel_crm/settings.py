@@ -24,10 +24,9 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 SECRET_KEY = 'f)_sy=de0f7z*qs19&uodz1+vx@4i5**$xl=0hz&6qrrajqqqj'
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
-# ALLOWED_HOSTS = [ 'travel-dev2.ap-southeast-1.elasticbeanstalk.com', 'crm.mountaintigernepal.com', '127.0.0.1']
-ALLOWED_HOSTS = '*'
+ALLOWED_HOSTS = [ 'admin.bonholidays.com.np', 'crm.mountaintigernepal.com', '127.0.0.1']
 
 # Application definition
 
@@ -101,7 +100,7 @@ CORS_ORIGIN_WHITELIST = (
     "http://192.168.1.178:3000",
     "http://127.0.0.1:9000",
     "http://front.bontravels.com",
-"http://bonholidays.com.np",
+    "http://bonholidays.com.np",
     "https://bonholidays.com.np",
 )
 
