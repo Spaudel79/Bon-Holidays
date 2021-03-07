@@ -25,7 +25,7 @@ class Contact(models.Model):
     date_created = models.DateField(auto_now_add=True,null=True)
 
     def __str__(self):
-        return self.date_created
+        return f"{self.date_created}"
 
 
 class ContactForm(models.Model):

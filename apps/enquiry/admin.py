@@ -1,8 +1,13 @@
 from django.contrib import admin
-from .models import Contact, Feedback, ContactForm
+from .models import Contact, Feedback, ContactForm,AddressInfo
 from django.contrib.admin import ModelAdmin, register
 
 # Register your models here.
+
+@register(AddressInfo)
+class AddressInfoAdmin(ModelAdmin):
+    icon_name = 'add_location'
+
 
 @register(Contact)
 class ContactAdmin(ModelAdmin):
