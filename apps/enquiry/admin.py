@@ -6,7 +6,7 @@ from django.contrib.admin import ModelAdmin, register
 
 @register(Contact)
 class ContactAdmin(ModelAdmin):
-    list_display = ('address',  'phone', 'email',)
+    list_display = ( 'date_created', 'phone', 'email',)
     icon_name = 'call'
 
 @register(ContactForm)
