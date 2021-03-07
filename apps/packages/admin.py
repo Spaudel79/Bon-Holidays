@@ -4,6 +4,7 @@ from django.contrib.admin import ModelAdmin, register
 from imagekit.admin import AdminThumbnail
 from django.utils.html import format_html
 from apps.accounts.models import User, UserProfile
+from .forms import PackageForm
 
 # Register your models here.
 
@@ -33,23 +34,22 @@ class DestinationAdmin(ModelAdmin):
 
 
 
-class PackageAdmin(ModelAdmin):
-    icon_name = 'explore'
-    # autocomplete_fields = ['destination']
+# class PackageAdmin(ModelAdmin):
+#     icon_name = 'explore'
+#     # autocomplete_fields = ['destination']
+#
+#     def edit(self, obj):
+#         return format_html('<a class="btn-btn" href="/admin/packages/package/{}/change/">Change</a>', obj.id)
+#
+#     def delete(self, obj):
+#         return format_html('<a class="btn-btn" href="/admin/packages/package/{}/delete/">Delete</a>', obj.id)
+#
+#     list_display = ('package_name',  'featured', 'price', 'discounted_price',
+#                     'savings', 'fix_departure', 'rating',
+#                      'date_created', 'edit', 'delete')
+#
+#     # readonly_fields = ['operator']
 
-    def edit(self, obj):
-        return format_html('<a class="btn-btn" href="/admin/packages/package/{}/change/">Change</a>', obj.id)
-
-    def delete(self, obj):
-        return format_html('<a class="btn-btn" href="/admin/packages/package/{}/delete/">Delete</a>', obj.id)
-
-    list_display = ('package_name',  'featured', 'price', 'discounted_price',
-                    'savings', 'fix_departure', 'rating',
-                     'date_created', 'edit', 'delete')
-
-    # image_display = AdminThumbnail(image_field='thumbnail')
-    # image_display.short_description = 'Image'
-    # readonly_fields = ['image_display']
 
 
 
