@@ -1,16 +1,11 @@
 from django.contrib import admin
 from django.contrib.auth.admin import UserAdmin
-from .models import * #UserGroup
+from .models import *
 from django.contrib.admin import ModelAdmin
 from imagekit.admin import AdminThumbnail
 from django.utils.html import format_html
-from django.utils.translation import gettext as _
-
-from django.contrib.auth.models import Group
 
 
-from apps.accounts import models
-# Register your models here.
 class UsersAdmin(UserAdmin):
 
     def edit(self, obj):
@@ -36,8 +31,6 @@ class UsersAdmin(UserAdmin):
     )
 
     icon_name = 'person'
-
-
 
 
 class UserProfileAdmin(ModelAdmin):
@@ -67,26 +60,5 @@ class UserProfileAdmin(ModelAdmin):
             return abc.filter(user=user)
 
 
-#already commented out
-# class UserGroupAdmin(ModelAdmin):
-#     icon_name = 'people'
-
-
-# class PartnerApplicationAdmin(ModelAdmin):
-#     list_display = ('first_name', 'last_name', 'company_name', 'email_address', 'phone', 'state')
-#     icon_name = 'people'
-#
-# class BookmundiAccountAdmin(ModelAdmin):
-#     list_display = ('title', 'first_name', 'middle_name', 'last_name',
-#                     'date_of_birth', 'nationality', 'occupation', 'email',
-#                     'phone_number', 'passport_number', 'expiry_date')
-#     icon_name = 'person'
-
 admin.site.register(User, UsersAdmin)
 admin.site.register(UserProfile, UserProfileAdmin)
-# #already commented out
-# # admin.site.register(UserGroup, UserGroupAdmin)
-# # admin.site.unregister(Group)
-#
-# admin.site.register(PartnerApplication, PartnerApplicationAdmin)
-# admin.site.register(BookmundiAccount, BookmundiAccountAdmin)
