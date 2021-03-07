@@ -19,3 +19,29 @@ Runserver
 
 Admin Dashboard
 * `http://127.0.0.1:8000/admin/`
+
+
+*** Server Configiration
+
+/etc/systemd/system/gunicorn.service
+
+[Unit]
+Description=gunicorn daemon
+After=network.target
+
+[Service]
+User=aakashlabs
+Group=www-data
+WorkingDirectory=/home/aakashlabs/rupseonline
+ExecStart=/home/aakashlabs/rupseonline/venv/bin/gunicorn --access-logfile - --workers 3 --bind unix:/run/gunicorn.sock travel_crm.wsgi:application
+
+[Install]
+WantedBy=multi-user.target
+
+
+** 
+sudo systemctl start gunicorn
+sudo systemctl enable gunicorn
+
+ systemctl daemon-reload
+ 

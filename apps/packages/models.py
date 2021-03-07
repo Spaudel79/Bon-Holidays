@@ -66,14 +66,15 @@ class Package(models.Model):
     package_name = models.CharField(max_length=255)
     city = models.CharField(max_length=255)
     featured = models.BooleanField(default=False)
-    price = models.IntegerField()
+    price = models.IntegerField(verbose_name="Price in Nrs")
+    price_2 = models.IntegerField(verbose_name="Price in $")
     duration = models.IntegerField(default=5)
-    discount = models.CharField(max_length=255, default="15% OFF")
-    discounted_price = models.IntegerField(default=230)
-    savings = models.IntegerField(default=230)
+    discount = models.IntegerField(verbose_name="Discount %", default=15)
+    #discounted_price = models.IntegerField(default=230)
+    #savings = models.IntegerField(default=230)
     tour_type = models.CharField(max_length=100, choices=TOUR_TYPE, default='Group Tour')
     new_activity = models.ManyToManyField(NewActivity)
-    accommodation = models.CharField(max_length=255,default='Guest House & Hotel')
+    accommodation = models.CharField(max_length=255, default='Guest House & Hotel')
     transport = models.CharField(max_length=150, default='Flight')
     age_range = models.CharField(max_length=100, default='6 to 79 years old')
     fix_departure = models.BooleanField(default=False)
@@ -84,7 +85,7 @@ class Package(models.Model):
                                           (5, 5))
                                  )
 
-    image = models.ImageField(blank=True)
+    image = models.ImageField(blank=True, verbose_name="Thumbnail Image-Vertical")
     # thumbnail = ImageSpecField(source='image',
     #                                   processors=[ResizeToFill(100, 50)],
     #                                   format='JPEG',
@@ -95,9 +96,9 @@ class Package(models.Model):
     exclusions = RichTextField()
     # itinerary = models.ManyToManyField(Itinerary)
     itinerary_text = RichTextField()
-    image_1= models.ImageField(blank=True,null = True)
-    image_2= models.ImageField(blank=True,null = True)
-    image_3= models.ImageField(blank=True,null = True)
+    image_1= models.ImageField(blank=True,null = True,verbose_name="Image-Horizontal")
+    image_2= models.ImageField(blank=True,null = True,verbose_name="Image-Square")
+    image_3= models.ImageField(blank=True,null = True,verbose_name="Image-Sqaure")
     date_created = models.DateField()
 
 

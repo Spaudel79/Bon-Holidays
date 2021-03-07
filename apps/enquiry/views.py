@@ -26,6 +26,9 @@ class ContactListAPIView(ListAPIView):
     queryset = Contact.objects.all()
     serializer_class = ContactInfoSerializer
 
+    def get_queryset(self):
+        return Contact.objects.order_by('-date_created')[:1]
+
 class ContactCreateAPIView(CreateAPIView):
 
     queryset = ContactForm.objects.all()

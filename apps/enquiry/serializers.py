@@ -5,6 +5,7 @@ class ContactInfoSerializer(serializers.ModelSerializer):
     class Meta:
         model = Contact
         fields = '__all__'
+        depth = 1
 
 class ContactSerializer(serializers.ModelSerializer):
     class Meta:
