@@ -27,3 +27,20 @@ class AboutUs(models.Model):
 
     class Meta:
         verbose_name_plural = "About Us Info"
+
+class Testimonial(models.Model):
+    full_name = models.CharField(max_length=255,blank=True,null=True)
+    pic = models.ImageField(blank=True,null=True)
+    description = RichTextField(blank=True,null=True)
+    tour_title = models.CharField(max_length=500, blank=True,null=True)
+    rating = models.IntegerField(choices=((1, 1),
+                                          (2, 2),
+                                          (3, 3),
+                                          (4, 4),
+                                          (5, 5))
+                                 )
+
+    def __str__(self):
+        return self.full_name
+
+
