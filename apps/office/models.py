@@ -44,4 +44,33 @@ class Testimonial(models.Model):
     def __str__(self):
         return self.full_name
 
+class Partner(models.Model):
+    title = models.CharField(max_length=255,blank=True,null=True)
+    description = RichTextField(blank=True,null=True)
+    join_title1 = models.CharField(max_length=255,blank=True,null=True)
+    description_1 = RichTextField(blank=True,null=True)
+    join_title2 = models.CharField(max_length=255, blank=True, null=True)
+    description_2 = RichTextField(blank=True, null=True)
+    join_title3 = models.CharField(max_length=255, blank=True, null=True)
+    description_3 = RichTextField(blank=True, null=True)
+
+    def __str__(self):
+        return self.title
+
+    class Meta:
+        verbose_name_plural = "Partner Info"
+
+class BecomePartner(models.Model):
+    first_name = models.CharField(max_length=255,blank=True,null=True)
+    last_name = models.CharField(max_length=255, blank=True, null=True)
+    company_name = models.CharField(max_length=255)
+    email = models.EmailField()
+    phone = models.CharField(max_length=50, blank=True, null=True)
+
+    def __str__(self):
+        return self.email
+
+    class Meta:
+        verbose_name_plural = "Potential Partners"
+
 
