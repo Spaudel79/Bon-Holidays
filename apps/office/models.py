@@ -15,7 +15,7 @@ class ChooseUs(models.Model):
 class AboutUs(models.Model):
     welcome_title = models.CharField(max_length=500,blank=True)
     pic = models.ImageField(blank=True,null=True,verbose_name="Banner Image")
-    welcome_description = RichTextField(blank=True,null=True)
+    welcome_description = models.TextField(blank=True,null=True)
     welcome_pic = models.ImageField(blank=True,null=True)
     happy_travellers = models.CharField(max_length=255,blank=True,null=True)
     satisfied_tours = models.CharField(max_length=255,blank=True,null=True)
