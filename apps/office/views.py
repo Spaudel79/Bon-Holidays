@@ -7,7 +7,7 @@ from rest_framework.permissions import AllowAny
 # Create your views here.
 
 class TestimonialAPIView(ListAPIView):
-    queryset = Testimonial.objects.all().order_by('-id')[:1]
+    queryset = Testimonial.objects.all()
     serializer_class = TestimonialSerializer
 
 class AboutUsAPIView(ListAPIView):
