@@ -30,6 +30,7 @@ class AboutUs(models.Model):
 
 class Testimonial(models.Model):
     full_name = models.CharField(max_length=255,blank=True,null=True)
+    native_place = models.CharField(max_length=255,blank=True,null=True)
     pic = models.ImageField(blank=True,null=True)
     description = RichTextField(blank=True,null=True)
     tour_title = models.CharField(max_length=500, blank=True,null=True)
