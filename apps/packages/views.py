@@ -8,9 +8,7 @@ from .filter import PackageFilter, ContinentFilter
 from django.http import QueryDict
 from django.db.models import Q
 from django_filters.rest_framework import DjangoFilterBackend
-from rest_framework.generics import (
-CreateAPIView, DestroyAPIView, ListCreateAPIView,
-ListAPIView, UpdateAPIView,
+from rest_framework.generics import (CreateAPIView, DestroyAPIView, ListCreateAPIView,ListAPIView, UpdateAPIView,
 RetrieveUpdateAPIView, RetrieveAPIView
 )
 from rest_framework.views import APIView
@@ -125,7 +123,7 @@ class AllPackageAPIView(ListAPIView):
                         operator_values = operator.split(",")
                         return Package.objects.filter(new_activity__title__in=new_activity_values,
                                               tour_type__in=tour_type_values,
-                                                  operator__in=operator_values)
+                                                  operator__company_name__in=operator_values)
                     else:
                         return Package.objects.filter(new_activity__title__in=new_activity_values,
                                                   tour_type__in=tour_type_values,)

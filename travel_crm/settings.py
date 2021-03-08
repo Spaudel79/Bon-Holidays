@@ -51,6 +51,7 @@ INSTALLED_APPS = [
     'apps.payment',
     'apps.booking',
     'apps.logo',
+    'apps.office',
     #third party apps
     'rest_framework',
     'rest_framework.authtoken',
@@ -181,7 +182,7 @@ else:
             'ENGINE': 'django.db.backends.mysql',
             'NAME': 'traveldb',
             'USER': 'root',
-            'PASSWORD': 'root',
+            'PASSWORD': '1234',
             'HOST': 'localhost',
             'PORT': '3306',
         }
