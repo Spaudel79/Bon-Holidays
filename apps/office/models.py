@@ -14,11 +14,12 @@ class ChooseUs(models.Model):
 
 class AboutUs(models.Model):
     welcome_title = models.CharField(max_length=500,blank=True)
+    pic = models.ImageField(blank=True,null=True,verbose_name="Banner Image")
     welcome_description = RichTextField(blank=True,null=True)
     welcome_pic = models.ImageField(blank=True,null=True)
-    happy_travellers = models.PositiveIntegerField(blank=True,null=True)
-    satisfied_tours = models.PositiveIntegerField(blank=True,null=True)
-    total_destination = models.PositiveIntegerField(blank=True,null=True)
+    happy_travellers = models.CharField(max_length=255,blank=True,null=True)
+    satisfied_tours = models.CharField(max_length=255,blank=True,null=True)
+    total_destination = models.CharField(max_length=255,blank=True,null=True)
     choose_info = models.ManyToManyField(ChooseUs,blank=True,null=True,verbose_name='Choose Info'
                                                                                     '(Add only three infos)')
 
@@ -46,6 +47,7 @@ class Testimonial(models.Model):
 
 class Partner(models.Model):
     title = models.CharField(max_length=255,blank=True,null=True)
+    pic = models.ImageField(blank=True, null=True, verbose_name="Banner Image")
     description = RichTextField(blank=True,null=True)
     join_title1 = models.CharField(max_length=255,blank=True,null=True)
     description_1 = RichTextField(blank=True,null=True)
