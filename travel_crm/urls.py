@@ -28,6 +28,7 @@ urlpatterns = [
     path('', include('apps.packages.urls')),
     path('', include('apps.booking.urls')),
     path('', include('apps.logo.urls')),
+    path('', include('apps.office.urls')),
     path('ckeditor', include('ckeditor_uploader.urls')),
 
 
