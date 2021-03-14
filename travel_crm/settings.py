@@ -103,6 +103,7 @@ CORS_ORIGIN_WHITELIST = (
     "http://127.0.0.1:9000",
     "http://bonholidays.com.np",
     "https://bonholidays.com.np",
+    "https://www.bonholidays.com.np",
 )
 
 CORS_ALLOW_METHODS = [
