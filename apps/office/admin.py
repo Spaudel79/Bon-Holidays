@@ -14,5 +14,15 @@ class AboutUsAdmin(admin.ModelAdmin):
 
 @register(Testimonial)
 class TestimonialAdmin(admin.ModelAdmin):
-    list_display = ('full_name','tour_title','rating')
+    list_display = ('full_name','tour_title','rating',)
+    icon_name = 'feedback'
+
+@register(Partner)
+class PartnerAdmin(admin.ModelAdmin):
+    list_display = ('title',)
+    icon_name = 'feedback'
+
+@register(BecomePartner)
+class PartnerAdmin(admin.ModelAdmin):
+    list_display = ('first_name','company_name','email','phone',)
     icon_name = 'feedback'
