@@ -42,8 +42,9 @@ class ContactCreateAPIView(CreateAPIView):
         subject = serializer.data['subject']
         send_mail('New Contact ', f"Contact has been made by {name} "
                                   f"having email {email} "
-                                  f"and subject {subject}",
-                  email, ['sales6@bonholidays.com.np'],
+                                  f"and subject '{subject}'",
+                  email, ['sales6@bonholidays.com.np','shreya.aakashlabs@gmail.com',
+                          'ankur.aakashlabs@gmail.com'],
                   fail_silently=False)
 
 class FeedbackListAPIView(CreateAPIView):

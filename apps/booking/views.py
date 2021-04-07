@@ -42,6 +42,12 @@ class BookingCreateAPIView(ListCreateAPIView):
                   email , ['sales6@bonholidays.com.np'],
                   fail_silently=False)
 
+        # send_mail('New Booking ', f"Booking has been made by {name} "
+        #                           f"having email {email} "
+        #                           f"and phone number {phone}",
+        #           email, ['shreya.aakashlabs@gmail.com'],
+        #           fail_silently=False)
+
     # def send_email(request):
     #     email = ('New booking is created')
     #     email.send()
