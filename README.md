@@ -21,7 +21,7 @@ Admin Dashboard
 * `http://127.0.0.1:8000/admin/`
 
 
-*** Server Configiration
+*** Deployment Configuration
 
 /etc/systemd/system/gunicorn.service
 
@@ -42,6 +42,5 @@ WantedBy=multi-user.target
 ** 
 sudo systemctl start gunicorn
 sudo systemctl enable gunicorn
-
- systemctl daemon-reload
+systemctl daemon-reload
  
