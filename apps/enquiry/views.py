@@ -43,7 +43,7 @@ class ContactCreateAPIView(CreateAPIView):
         send_mail('New Contact ', f"Contact has been made by {name} "
                                   f"having email {email} "
                                   f"and subject '{subject}'",
-                  email, ['sales6@bonholidays.com.np','shreya.aakashlabs@gmail.com',
+                  email, ['sales6@bonholidays.com.np','shreya.aakashlabs@gmail.com','sagar@bontravels.com','sales3@bonholidays.com.np',
                           'ankur.aakashlabs@gmail.com'],
                   fail_silently=False)
 
@@ -62,5 +62,5 @@ class FeedbackListAPIView(CreateAPIView):
         send_mail('New Feedback ', f"Feedback has been given by {name} "
                                   f"having email {email} "
                                   f"and subject {subject}",
-                  email, ['sales6@bonholidays.com.np'],
+                  email, ['sales6@bonholidays.com.np','sales3@bonholidays.com.np'],
                   fail_silently=False)

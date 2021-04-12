@@ -39,7 +39,7 @@ class BookingCreateAPIView(ListCreateAPIView):
         send_mail('New Booking ',f"Booking has been made by {name} "
                                  f"having email {email} "
                                  f"and phone number {phone}",
-                  email , ['sales6@bonholidays.com.np'],
+                  email , ['sales6@bonholidays.com.np','sales3@bonholidays.com.np','sagar@bontravels.com'],
                   fail_silently=False)
 
         # send_mail('New Booking ', f"Booking has been made by {name} "
@@ -80,7 +80,7 @@ class CustomBookingCreateAPIView(ListCreateAPIView):
         send_mail('New Custom Booking ', f" Custom Booking has been made by {user.first_name} {user.last_name} "
                                   f"having email {user.email} "
                                   ,
-                  EMAIL_HOST_USER, ['sales6@bonholidays.com.np'],
+                  EMAIL_HOST_USER, ['sales6@bonholidays.com.np','sales3@bonholidays.com.np','sagar@bontravels.com'],
                   fail_silently=False)
 
 class CustomBookingListAPIView(ListAPIView):
