@@ -23,14 +23,14 @@ AllowAny, IsAuthenticated, IsAdminUser, IsAuthenticatedOrReadOnly
 
 
 class BookingCreateAPIView(ListCreateAPIView):
-    permission_classes= [IsAuthenticated]
+    #permission_classes= [IsAuthenticated]
     queryset = Booking.objects.all()
     serializer_class = BookingSerializer
 
     def perform_create(self, serializer):
         # user = self.request.user
         package = get_object_or_404(Package, pk= self.kwargs['pk'])
-        serializer.save(user=self.request.user,package=package)
+        serializer.save(package=package)
         # data = self.request.data
         name = serializer.data['name']
         email = serializer.data['email']
