@@ -5,7 +5,7 @@ from ckeditor.fields import RichTextField
 
 # Create your models here.
 class Booking(models.Model):
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    user = models.ForeignKey(User, on_delete=models.CASCADE,blank=True,null=True)
     package = models.ForeignKey(Package, on_delete=models.CASCADE, related_name='package')
     contacted = models.BooleanField(default=False)
     name = models.CharField(max_length=255)

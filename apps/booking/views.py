@@ -93,10 +93,6 @@ class CustomBookingListAPIView(ListAPIView):
         serializer = self.get_serializer(bookings, many=True)
         return Response({"booking_history": serializer.data})
 
-
-
-
-
     # def get_queryset(self):
     #     return Booking.objects.filter(user=self.user)
 
