@@ -36,9 +36,9 @@ class BookingCreateAPIView(ListCreateAPIView):
         email = serializer.data['email']
         phone = serializer.data['phone']
 
-        send_mail('New Booking ',f"Booking has been made by {name} "
-                                 f"having email {email}"
-                                 f"and phone number {phone}",
+        send_mail('New Booking ',f"Booking has been made by {name} having \n "
+                                 f"Email: {email} \n"
+                                 f"Phone: {phone}\n",
                   email , ['sales6@bonholidays.com.np','sales3@bonholidays.com.np','sagar@bontravels.com'],
                   fail_silently=False)
 

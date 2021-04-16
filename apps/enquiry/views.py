@@ -59,8 +59,8 @@ class FeedbackListAPIView(CreateAPIView):
         name = serializer.data['name']
         email = serializer.data['email']
         subject = serializer.data['subject']
-        send_mail('New Feedback ', f"Feedback has been given by {name} "
-                                  f"having email {email} "
-                                  f"and subject {subject}",
+        send_mail('New Feedback ', f"Feedback has been given by '{name}' "                                   
+                                  f"  email {email} "
+                                  f" and subject {subject}",
                   email, ['sales6@bonholidays.com.np','sales3@bonholidays.com.np'],
                   fail_silently=False)
