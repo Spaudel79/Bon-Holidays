@@ -83,11 +83,33 @@ class CustomBookingCreateAPIView(ListCreateAPIView):
         user = self.request.user
         # package = get_object_or_404(Package, pk= self.kwargs['pk'])
         serializer.save(user=user)
-
-        send_mail('New Custom Booking ', f" Custom Booking has been made by {user.first_name} {user.last_name} "
-                                  f"having email {user.email} "
+        people = serializer.data['people']
+        number_of_children = serializer.data['number_of_children']
+        number_of_adults = serializer.data['number_of_adults']
+        country = serializer.data['country']
+        bookedfor = serializer.data['bookedfor']
+        age_group = serializer.data['age_group']
+        tour_type = serializer.data['tour_type']
+        accomodation = serializer.data['accomodation']
+        budget = serializer.data['budget']
+        trip_stage = serializer.data['trip_stage']
+        send_mail('New Custom Booking ', f" Custom Booking Information\n {user.first_name} {user.last_name} "
+                                  f"First Name: {user.first_name}\n"
+                                  f"Last Name: {user.last_name}\n"       
+                                  f"Email: {user.email}\n"
+                                  f"PEOPLE CHOICES: {people}\n"
+                                         f"No. of children: {number_of_children}\n"
+                                         f"No. of adults: {number_of_adults}\n"
+                                         f"Country of Package: {country}\n"
+                                         f"Booked For: {bookedfor}\n"
+                                         f"Age Group: {age_group}\n"
+                                         f"Tour Type: {tour_type}\n"
+                                         f"Accomodation: {accomodation}\n"
+                                         f"Budget: {budget}\n"
+                                         f"Trip Stage: {trip_stage}\n"
                                   ,
-                  EMAIL_HOST_USER, ['sales6@bonholidays.com.np','sales3@bonholidays.com.np','sagar@bontravels.com'],
+                  EMAIL_HOST_USER, ['sales6@bonholidays.com.np','sales3@bonholidays.com.np','sagar@bontravels.com'
+                                    ,'ankur.aakashlabs@gmail.com','shreya.aakashlabs@gmail.com'],
                   fail_silently=False)
 
 class CustomBookingListAPIView(ListAPIView):
