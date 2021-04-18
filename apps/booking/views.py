@@ -93,7 +93,7 @@ class CustomBookingCreateAPIView(ListCreateAPIView):
         accomodation = serializer.data['accomodation']
         budget = serializer.data['budget']
         trip_stage = serializer.data['trip_stage']
-        send_mail('New Custom Booking ', f" Custom Booking Information\n {user.first_name} {user.last_name} "
+        send_mail('New Custom Booking ', f" Custom Booking Information\n\n"
                                   f"First Name: {user.first_name}\n"
                                   f"Last Name: {user.last_name}\n"       
                                   f"Email: {user.email}\n"
