@@ -38,11 +38,16 @@ class ContactCreateAPIView(CreateAPIView):
 
         serializer.save()
         name = serializer.data['full_name']
+        #phone = serializer.data['phone']
         email = serializer.data['email']
         subject = serializer.data['subject']
-        send_mail('New Contact ', f"Contact has been made by {name} "
-                                  f"having email {email} "
-                                  f"and subject '{subject}'",
+        message = serializer.data['description']
+        send_mail('New Contact ', f"Contact Information\n\n"
+                                  f"Name: {name}\n"
+                                  
+                                  f"Email: {email}\n"
+                                  f"Subject: {subject}\n"
+                                  f"Message: {message}",
                   email, ['sales6@bonholidays.com.np','shreya.aakashlabs@gmail.com','sagar@bontravels.com','sales3@bonholidays.com.np',
                           'ankur.aakashlabs@gmail.com'],
                   fail_silently=False)
@@ -59,8 +64,13 @@ class FeedbackListAPIView(CreateAPIView):
         name = serializer.data['name']
         email = serializer.data['email']
         subject = serializer.data['subject']
-        send_mail('New Feedback ', f"Feedback has been given by '{name}' "                                   
-                                  f"  email {email} "
-                                  f" and subject {subject}",
-                  email, ['sales6@bonholidays.com.np','sales3@bonholidays.com.np'],
+        message = serializer.data['message']
+        send_mail('New Feedback ', f"Feedback Information\n\n" 
+                                   f"Name: {name}\n"
+                                   f"Email: {email}\n"
+                                   f"Subject: {subject}\n"
+                                   f"Feedback: {message}",
+                  email, ['sales6@bonholidays.com.np','sales3@bonholidays.com.np',
+                          'shreya.aakashlabs@gmail.com','sagar@bontravels.com',
+                          'ankur.aakashlabs@gmail.com'],
                   fail_silently=False)
