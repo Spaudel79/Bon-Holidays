@@ -38,13 +38,13 @@ class ContactCreateAPIView(CreateAPIView):
 
         serializer.save()
         name = serializer.data['full_name']
-        #phone = serializer.data['phone']
+        phone = serializer.data['phone']
         email = serializer.data['email']
         subject = serializer.data['subject']
         message = serializer.data['description']
         send_mail('New Contact ', f"Contact Information\n\n"
                                   f"Name: {name}\n"
-                                  
+                                  f"Phone: {phone}\n"
                                   f"Email: {email}\n"
                                   f"Subject: {subject}\n"
                                   f"Message: {message}",
