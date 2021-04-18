@@ -4,9 +4,10 @@ from .models import *
 
 class BookingSerializer(serializers.ModelSerializer):
     # blog = serializers.StringRelatedField()
+    package = serializers.CharField(read_only=True)
     class Meta:
         model = Booking
-        fields = ['name', 'email', 'phone', 'bookedfor']
+        fields = ['name','package', 'email', 'phone', 'bookedfor']
         # fields = '__all__'
 
 class BookingListSerializer(serializers.ModelSerializer):
