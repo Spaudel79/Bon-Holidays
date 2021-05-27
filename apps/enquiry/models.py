@@ -33,6 +33,7 @@ class ContactForm(models.Model):
     subject = models.CharField(max_length=255, blank=True)
     full_name = models.CharField(max_length=255)
     email = models.EmailField(default="hello@hello.com")
+    phone = models.CharField(max_length=255)
     description = RichTextField(blank=True)
 
 

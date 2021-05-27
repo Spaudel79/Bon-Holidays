@@ -17,6 +17,8 @@ class BookingAdmin(ModelAdmin):
 
     list_display = ('user', 'package','contacted', 'name', 'email', 'phone', 'bookedfor', 'created_at', 'edit', 'delete')
     icon_name = 'assignment'
+    list_display_links = ['package']
+
 
 
 # @register(Test)
