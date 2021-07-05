@@ -34,6 +34,9 @@ class Destination(models.Model):
 
     date_created = models.DateField()
 
+    class Meta:
+        ordering = ("-id" ,)
+
 class Itinerary(models.Model):
     day = models.IntegerField()
     title = models.CharField(max_length=255)
@@ -107,6 +110,9 @@ class Package(models.Model):
 
     # def is_featured(self):
     #     return self.featured
+
+    class Meta:
+        ordering = ("-id" ,)
 
 
 

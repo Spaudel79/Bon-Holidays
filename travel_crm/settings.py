@@ -61,7 +61,14 @@ INSTALLED_APPS = [
     'corsheaders',
     'django_filters',
     'storages',
+    'debug_toolbar',
     # "taggit",
+]
+
+INTERNAL_IPS = [
+    # ...
+    '127.0.0.1',
+    # ...
 ]
 
 CKEDITOR_BASEPATH = "/static/ckeditor/ckeditor/"
@@ -88,6 +95,7 @@ MIDDLEWARE = [
     # django cors headers
     'corsheaders.middleware.CorsMiddleware',
     'django.middleware.common.CommonMiddleware',
+    'debug_toolbar.middleware.DebugToolbarMiddleware',
     #addedforoperatorpackage
     # 'django.contrib.operator.middleware.CurrentSiteMiddleware',
 ]

@@ -47,9 +47,8 @@ class PackageAdmin(ModelAdmin):
                      'fix_departure', 'rating',
                      'date_created', 'edit', 'delete')
 
-    # image_display = AdminThumbnail(image_field='thumbnail')
-    # image_display.short_description = 'Image'
-    # readonly_fields = ['image_display']
+    search_fields = ['package_name','city']
+    list_filter = ('package_name','destination','city')
 
 
 
