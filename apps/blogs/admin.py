@@ -19,6 +19,7 @@ class TagAdmin(admin.ModelAdmin):
     icon_name = 'assignment'
 
 
+
 @register(BlogPost)
 class BlogPostAdmin(ModelAdmin):
 
