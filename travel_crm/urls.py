@@ -19,6 +19,7 @@ from django.conf import settings
 from django.conf.urls import url
 from django.conf.urls.static import static
 import debug_toolbar
+from rest_framework.authtoken.models import Token
 
 urlpatterns = [
     path('admin/', admin.site.urls),
@@ -43,5 +44,5 @@ urlpatterns = [
 # if settings.DEBUG is True:
 #     urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
 
-
+admin.site.unregister(Token)
 
