@@ -99,6 +99,7 @@ class Package(models.Model):
     exclusions = RichTextField()
     # itinerary = models.ManyToManyField(Itinerary)
     itinerary_text = RichTextField()
+    faqs = RichTextField(blank=True)
     image_1= models.ImageField(blank=True,null = True,verbose_name="Image-Horizontal")
     image_2= models.ImageField(blank=True,null = True,verbose_name="Image-Square")
     image_3= models.ImageField(blank=True,null = True,verbose_name="Image-Sqaure")
