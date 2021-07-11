@@ -7,9 +7,9 @@ import django.db.models.deletion
 
 class Migration(migrations.Migration):
 
-    dependencies = [
-        ('booking', '0002_auto_20210115_1507'),
-    ]
+    # dependencies = [
+    #     ('booking', '0002_auto_20210115_1507'),
+    # ]
 
     operations = [
         migrations.AlterField(
