@@ -14,7 +14,6 @@ django-filter==2.3.0
 django-imagekit==4.0.2
 django-js-asset==1.2.2
 django-material-admin==1.7.4
-django-debug-toolbar==0.9.4
 django-storages==1.6.3
 django-utils-six==2.0
 djangorestframework==3.11.1
