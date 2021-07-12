@@ -16,7 +16,7 @@ class TagAdmin(admin.ModelAdmin):
         return format_html('<a class="btn-btn" href="/admin/blogs/tag/{}/delete/">Delete</a>', obj.id)
 
     list_display = ('tagname','edit', 'delete')
-    icon_name = 'assignment'
+    icon_name = 'insert_link'
 
 
 
@@ -32,7 +32,7 @@ class BlogPostAdmin(ModelAdmin):
         return format_html('<a class="btn-btn" href="/admin/blogs/blogpost/{}/delete/">Delete</a>', obj.id)
 
     list_display = ('categories', 'title', 'date_created','edit', 'delete')
-    icon_name = 'assignment'
+    icon_name = 'chrome_reader_mode'
     # inlines = [TagInline]
 
 
