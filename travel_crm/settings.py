@@ -62,6 +62,8 @@ INSTALLED_APPS = [
     'django_filters',
     'storages',
     'debug_toolbar',
+    # 'easy_thumbnails',
+    'image_cropping',
     # "taggit",
 ]
 

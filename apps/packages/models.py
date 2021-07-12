@@ -4,6 +4,7 @@ from imagekit.processors import ResizeToFill
 # from django_random_queryset import RandomManager
 from ckeditor.fields import RichTextField
 from apps.accounts.models import UserProfile, User
+from image_cropping.fields import ImageRatioField, ImageCropField
 
 class Destination(models.Model):
     Continent_Name = (
@@ -49,6 +50,7 @@ class Itinerary(models.Model):
 class NewActivity(models.Model):
     title = models.CharField(max_length=64)
 
+
     class Meta:
         # verbose_name = "New Activity"
         verbose_name_plural = "Activities"
@@ -72,7 +74,7 @@ class Package(models.Model):
     price = models.IntegerField(verbose_name="Price in Nrs")
     price_2 = models.IntegerField(verbose_name="Price in $")
     duration = models.IntegerField(default=5)
-    duration_hours = models.IntegerField(default=10,verbose_name="Hours If One day Tour")
+    duration_hours = models.IntegerField(blank=True,null=True,verbose_name="Hours If One day Tour")
     discount = models.IntegerField(verbose_name="Discount %", default=15)
     #discounted_price = models.IntegerField(default=230)
     #savings = models.IntegerField(default=230)
