@@ -74,7 +74,7 @@ class Package(models.Model):
     price = models.IntegerField(verbose_name="Price in Nrs")
     price_2 = models.IntegerField(verbose_name="Price in $")
     duration = models.IntegerField(default=5)
-    duration_hours = models.IntegerField(blank=True,null=True,verbose_name="Hours If One day Tour")
+    duration_hours = models.PositiveIntegerField(blank=True,null=True,verbose_name="Hours If One day Tour")
     discount = models.IntegerField(verbose_name="Discount %", default=15)
     #discounted_price = models.IntegerField(default=230)
     #savings = models.IntegerField(default=230)
