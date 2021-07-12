@@ -127,3 +127,13 @@ class BookmundiAccount(models.Model):
     passport_number = models.CharField(max_length=255)
     issue_date = models.DateField()
     expiry_date = models.DateField()
+
+class Subscribers(models.Model):
+    email = models.EmailField(unique=True)
+    date_subscribed = models.DateField(auto_now_add=True)
+
+    def __str__(self):
+        return self.email
+
+    class Meta:
+        verbose_name_plural = "Newsletter Subscribers"

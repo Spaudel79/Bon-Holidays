@@ -7,10 +7,14 @@ from django.contrib.admin import ModelAdmin, register
 class ChooseUsAdmin(ModelAdmin):
     icon_name = 'pan_tool'
 
-@register(AboutUs)
+# class ChooseUsAdmin(admin.TabularInline):
+#     model = ChooseUs
+
+# @register(AboutUs)
 class AboutUsAdmin(admin.ModelAdmin):
     list_display = ('welcome_title','happy_travellers','total_destination')
     icon_name = 'portrait'
+    # inlines = [ChooseUsAdmin]
 
 @register(Testimonial)
 class TestimonialAdmin(admin.ModelAdmin):
@@ -26,3 +30,5 @@ class PartnerAdmin(admin.ModelAdmin):
 class PartnerAdmin(admin.ModelAdmin):
     list_display = ('first_name','company_name','email','phone',)
     icon_name = 'person_add'
+
+admin.site.register(AboutUs,AboutUsAdmin)
