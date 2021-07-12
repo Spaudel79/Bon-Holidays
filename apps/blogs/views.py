@@ -155,4 +155,10 @@ class TagsAPIView(ListAPIView):
     queryset = Tag.objects.all()
     serializer_class = TagSerializer
 
-
+from apps.blogs.admin import BlogForm
+def blogform(request):
+    if request.method == 'POST':
+        form = BlogForm(request.POST)
+        if form.is_valid():
+            form.save()
+            # return redirect('charterform')

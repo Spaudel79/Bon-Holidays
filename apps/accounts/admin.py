@@ -59,6 +59,12 @@ class UserProfileAdmin(ModelAdmin):
             user = request.user.id
             return abc.filter(user=user)
 
+class SubscribersAdmin(admin.ModelAdmin):
+    list_display = ['email','date_subscribed']
+    list_display_links = ['email']
+    icon_name = 'sentiment_very_satisfied'
+
 
 admin.site.register(User, UsersAdmin)
 admin.site.register(UserProfile, UserProfileAdmin)
+admin.site.register(Subscribers,SubscribersAdmin)
