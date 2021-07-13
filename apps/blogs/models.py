@@ -1,9 +1,12 @@
 from django.db import models
 from ckeditor.fields import RichTextField
-from apps.accounts.models import UserProfile, User
+from apps.accounts.models import User
 from ckeditor_uploader.fields import RichTextUploadingField
 from django.contrib.contenttypes.models import ContentType
 from ckeditor.fields import RichTextField
+# from django.contrib.auth import get_user_model
+#
+# User = get_user_model()
 
 class Tag(models.Model):
     tagname= models.CharField(max_length=255)
@@ -49,9 +52,14 @@ class BlogPost(models.Model):
     # def comments(self):
     #     return self.comments_set.all()
 
+
+
+
+
+
 class Comment(models.Model):
     # blog = models.ForeignKey(BlogPost, on_delete=models.CASCADE, default=1)
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    user = models.ForeignKey('accounts.User', on_delete=models.CASCADE)
     blog = models.ForeignKey(BlogPost, on_delete=models.CASCADE, related_name='comments')
     name = models.CharField(max_length=255)
     email = models.EmailField()

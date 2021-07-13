@@ -10,4 +10,6 @@ urlpatterns = [
     path('api/profile', views.ProfileListView.as_view(), name='api-profile'),
     # path('blog-post/<int:pk>', views.BlogPostDetailsListAPIView.as_view(), name='api-blog-post_details'),
     # path('comments/', views.CommentCreateAPIView.as_view(), name='api-comments'),
+    path('api/subscriber',views.SubscribersView.as_view(),name='api-subsciber')
+
 ]

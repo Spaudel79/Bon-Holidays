@@ -9,7 +9,7 @@ from rest_framework.permissions import (
 AllowAny, IsAuthenticated, IsAdminUser, IsAuthenticatedOrReadOnly,
 )
 from rest_framework.authentication import TokenAuthentication
-
+from rest_framework.views import APIView
 from .models import *
 from .serializers import *
 from django.contrib.auth.models import Permission
@@ -90,6 +90,18 @@ class ProfileListView(ListAPIView):
     # permission_classes = [AllowAny]
     serializer_class = ProfileListSerializer
     queryset = UserProfile.objects.all()
+
+
+class SubscribersView(APIView):
+    permission_classes = [AllowAny]
+
+    def post(self,request,*args,**kwargs):
+        serializer = SubscriberSerializer(data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response(status=status.HTTP_201_CREATED)
+        return Response(serializer.errors)
+
 
 
 

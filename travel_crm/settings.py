@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'django.utils',
     # 'storages',
+
     # custom apps
     'apps.accounts',
     'apps.blogs',
@@ -52,6 +53,7 @@ INSTALLED_APPS = [
     'apps.booking',
     'apps.logo',
     'apps.office',
+
     #third party apps
     'rest_framework',
     'rest_framework.authtoken',
@@ -236,7 +238,7 @@ USE_L10N = True
 
 USE_TZ = True
 
-AUTH_USER_MODEL = 'accounts.User'
+# AUTH_USER_MODEL = 'auth.User'
 
 # MATERIAL_ADMIN_SITE = {
 #     'HEADER':  ('My site header'),  # Admin site header
@@ -287,7 +289,7 @@ MATERIAL_ADMIN_SITE = {
 #     #     'site': 'contact_mail',
 #     # }
 #
-
+AUTH_USER_MODEL = 'accounts.User'
 
 # REST Framework settings
 REST_FRAMEWORK = {

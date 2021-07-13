@@ -90,3 +90,11 @@ class ProfileListSerializer(serializers.ModelSerializer):
         model = UserProfile
         exclude = ['group', 'user', 'commission', 'last_updated']
         depth = 1
+
+
+class SubscriberSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Subscribers
+        fields = '__all__'
+
+

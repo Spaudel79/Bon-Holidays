@@ -1,10 +1,16 @@
 from django.db import models
 from django.conf import settings
 from django.contrib.auth.models import BaseUserManager, AbstractBaseUser, PermissionsMixin
+from django.contrib.auth import get_user_model
 from imagekit.models import ImageSpecField
 from imagekit.processors import ResizeToFill
 from ckeditor.fields import RichTextField
 from django.contrib.auth.models import Group
+# from apps.blogs.models import BlogPost
+# from django.core.mail import send_mail
+# from travel_crm.settings import EMAIL_HOST_USER
+# from django.db.models.signals import post_save
+# from django.dispatch import receiver
 
 
 class UserManager(BaseUserManager):
@@ -42,6 +48,7 @@ class User(AbstractBaseUser, PermissionsMixin):
     objects = UserManager()
     USERNAME_FIELD = 'email'
 
+User = get_user_model()
 
 class UserProfile(models.Model):
     USER_TYPES = (
@@ -137,3 +144,16 @@ class Subscribers(models.Model):
 
     class Meta:
         verbose_name_plural = "Newsletter Subscribers"
+
+    # binding signal:
+    # @receiver(post_save,sender=BlogPost)
+    # def send_mails(sender,instance,created,**kwargs):
+    #     subscribers = Subscribers.objects.all()
+    #     if created:
+    #         for abc in subscribers:
+    #             emailad = abc.email
+    #             send_mail('New Blog Post ', f" Checkout our new blog with title {instance.title} ",
+    #                       emailad, [emailad],
+    #                       fail_silently=False)
+    #     else:
+    #         return
