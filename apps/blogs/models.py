@@ -7,6 +7,11 @@ from ckeditor.fields import RichTextField
 # from django.contrib.auth import get_user_model
 #
 # User = get_user_model()
+from travel_crm.settings import EMAIL_HOST_USER
+from django.core.mail import send_mail
+from travel_crm.settings import EMAIL_HOST_USER
+from django.db.models.signals import post_save
+from django.dispatch import receiver
 
 class Tag(models.Model):
     tagname= models.CharField(max_length=255)
@@ -78,3 +83,28 @@ class Comment(models.Model):
 
     # jpt = models.CharField(max_length=255)
 
+
+class Subscribers(models.Model):
+    email = models.EmailField(unique=True)
+    date_subscribed = models.DateField(auto_now_add=True)
+
+    def __str__(self):
+        return self.email
+
+    class Meta:
+        verbose_name_plural = "Newsletter Subscribers"
+
+    # binding signal:
+    @receiver(post_save,sender=BlogPost)
+    def send_mails(sender,instance,created,**kwargs):
+        subscribers = Subscribers.objects.all()
+
+        if created:
+            blog = BlogPost.objects.latest('date_created')
+            for abc in subscribers:
+                emailad = abc.email
+                send_mail('New Blog Post ', f" Checkout our new blog with title {blog.title} ",
+                          EMAIL_HOST_USER, [emailad],
+                          fail_silently=False)
+        else:
+            return

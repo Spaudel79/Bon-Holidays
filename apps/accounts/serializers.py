@@ -92,9 +92,5 @@ class ProfileListSerializer(serializers.ModelSerializer):
         depth = 1
 
 
-class SubscriberSerializer(serializers.ModelSerializer):
-    class Meta:
-        model = Subscribers
-        fields = '__all__'
 
 

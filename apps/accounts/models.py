@@ -7,10 +7,7 @@ from imagekit.processors import ResizeToFill
 from ckeditor.fields import RichTextField
 from django.contrib.auth.models import Group
 # from apps.blogs.models import BlogPost
-# from django.core.mail import send_mail
-# from travel_crm.settings import EMAIL_HOST_USER
-# from django.db.models.signals import post_save
-# from django.dispatch import receiver
+
 
 
 class UserManager(BaseUserManager):
@@ -135,25 +132,4 @@ class BookmundiAccount(models.Model):
     issue_date = models.DateField()
     expiry_date = models.DateField()
 
-class Subscribers(models.Model):
-    email = models.EmailField(unique=True)
-    date_subscribed = models.DateField(auto_now_add=True)
 
-    def __str__(self):
-        return self.email
-
-    class Meta:
-        verbose_name_plural = "Newsletter Subscribers"
-
-    # binding signal:
-    # @receiver(post_save,sender=BlogPost)
-    # def send_mails(sender,instance,created,**kwargs):
-    #     subscribers = Subscribers.objects.all()
-    #     if created:
-    #         for abc in subscribers:
-    #             emailad = abc.email
-    #             send_mail('New Blog Post ', f" Checkout our new blog with title {instance.title} ",
-    #                       emailad, [emailad],
-    #                       fail_silently=False)
-    #     else:
-    #         return

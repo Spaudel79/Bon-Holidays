@@ -92,15 +92,7 @@ class ProfileListView(ListAPIView):
     queryset = UserProfile.objects.all()
 
 
-class SubscribersView(APIView):
-    permission_classes = [AllowAny]
 
-    def post(self,request,*args,**kwargs):
-        serializer = SubscriberSerializer(data=request.data)
-        if serializer.is_valid():
-            serializer.save()
-            return Response(status=status.HTTP_201_CREATED)
-        return Response(serializer.errors)
 
 
 

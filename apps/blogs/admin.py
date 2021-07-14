@@ -78,5 +78,11 @@ class CommentAdmin(ModelAdmin):
     list_display = ('blog','name', 'email', 'subject', 'created_at','edit', 'delete')
     icon_name = 'comment'
 
+class SubscribersAdmin(admin.ModelAdmin):
+    list_display = ['email','date_subscribed']
+    list_display_links = ['email']
+    icon_name = 'sentiment_very_satisfied'
 
+
+admin.site.register(Subscribers, SubscribersAdmin)
 
