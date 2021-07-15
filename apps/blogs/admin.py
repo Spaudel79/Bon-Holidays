@@ -32,17 +32,17 @@ class BlogForm(forms.ModelForm):
         fields = ['author','image', 'title','categories',
                   'caption','content','tag','date_created']
 
-    def save(self, commit=True):
-        data = self.cleaned_data
-        blog = BlogPost(author = data['author'],
-                        image = data['image'],
-                        title = data['title'],
-                        categories = data['categories'],
-                        caption = data['caption'],
-                        content = data['content'],
-                        tag = data['tag'],
-                        date_created = data['date_created'])
-        blog.save()
+    # def save(self, commit=True):
+    #     data = self.cleaned_data
+    #     blog = BlogPost(author = data['author'],
+    #                     image = data['image'],
+    #                     title = data['title'],
+    #                     categories = data['categories'],
+    #                     caption = data['caption'],
+    #                     content = data['content'],
+    #                     tag = data['tag'],
+    #                     date_created = data['date_created'])
+    #     blog.save()
 
 
 @register(BlogPost)
@@ -78,5 +78,11 @@ class CommentAdmin(ModelAdmin):
     list_display = ('blog','name', 'email', 'subject', 'created_at','edit', 'delete')
     icon_name = 'comment'
 
+class SubscribersAdmin(admin.ModelAdmin):
+    list_display = ['email','date_subscribed']
+    list_display_links = ['email']
+    icon_name = 'sentiment_very_satisfied'
 
+
+admin.site.register(Subscribers, SubscribersAdmin)
 

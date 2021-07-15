@@ -93,6 +93,10 @@ class BlogPostCommentSerializer(serializers.ModelSerializer):
 
 
 
+class SubscriberSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Subscribers
+        fields = '__all__'
 
 
 

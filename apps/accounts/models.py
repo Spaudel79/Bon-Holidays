@@ -1,10 +1,13 @@
 from django.db import models
 from django.conf import settings
 from django.contrib.auth.models import BaseUserManager, AbstractBaseUser, PermissionsMixin
+from django.contrib.auth import get_user_model
 from imagekit.models import ImageSpecField
 from imagekit.processors import ResizeToFill
 from ckeditor.fields import RichTextField
 from django.contrib.auth.models import Group
+# from apps.blogs.models import BlogPost
+
 
 
 class UserManager(BaseUserManager):
@@ -42,6 +45,7 @@ class User(AbstractBaseUser, PermissionsMixin):
     objects = UserManager()
     USERNAME_FIELD = 'email'
 
+User = get_user_model()
 
 class UserProfile(models.Model):
     USER_TYPES = (
@@ -128,12 +132,4 @@ class BookmundiAccount(models.Model):
     issue_date = models.DateField()
     expiry_date = models.DateField()
 
-class Subscribers(models.Model):
-    email = models.EmailField(unique=True)
-    date_subscribed = models.DateField(auto_now_add=True)
 
-    def __str__(self):
-        return self.email
-
-    class Meta:
-        verbose_name_plural = "Newsletter Subscribers"

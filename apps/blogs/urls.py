@@ -24,7 +24,7 @@ urlpatterns = [
         path('api/blog-post/<int:pk>', views.BlogPostDetailsListAPIView.as_view(), name='api-blog-post_details'),
         path('api/comments/<int:blog>', views.CommentListAPIView.as_view(), name='api-comments'),
         path('api/blog-post/<int:pk>/postcomment', views.CommentCreateAPIView.as_view(), name='api-postcomment'),
-
+        path('api/subscriber',views.SubscribersView.as_view(),name='api-subsciber')
 ]
 
 
