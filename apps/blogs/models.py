@@ -1,17 +1,10 @@
 from django.db import models
-from ckeditor.fields import RichTextField
-from apps.accounts.models import User
 from ckeditor_uploader.fields import RichTextUploadingField
-from django.contrib.contenttypes.models import ContentType
 from ckeditor.fields import RichTextField
 # from django.contrib.auth import get_user_model
 #
 # User = get_user_model()
-from travel_crm.settings import EMAIL_HOST_USER
-from django.core.mail import send_mail
-from travel_crm.settings import EMAIL_HOST_USER
-from django.db.models.signals import post_save
-from django.dispatch import receiver
+
 
 class Tag(models.Model):
     tagname= models.CharField(max_length=255)
@@ -76,6 +69,7 @@ class Comment(models.Model):
     class Meta:
         ordering = ('created_at',)
 
+    # send_mails.delay(5)
 
 
     # def __str__(self):
@@ -93,6 +87,18 @@ class Subscribers(models.Model):
 
     class Meta:
         verbose_name_plural = "Newsletter Subscribers"
+
+    # @receiver(post_save, sender=BlogPost)
+    # def email_task(sender, instance, created, **kwargs):
+    #     print(123456789)
+    #     if created:
+    #         subscribers = Subscribers.objects.all()
+    #         blog = BlogPost.objects.latest('date_created')
+    #         print(blog)
+    #         # task = send_mails(subscribers, blog)
+    #         # task.delay()
+    #         send_mails.delay(subscribers,blog)
+
 
     # binding signal:
     # @receiver(post_save,sender=BlogPost)
