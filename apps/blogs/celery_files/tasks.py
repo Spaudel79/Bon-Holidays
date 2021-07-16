@@ -9,10 +9,12 @@ from django.core.mail import send_mail
 from travel_crm.settings import EMAIL_HOST_USER
 
 @shared_task
-def send_mails(self,*args, **kwargs):
-
-    subscribers = self.kwargs['subscribers']
-    blog = self.kwargs['blog']
+def send_mails(*args, **kwargs):
+    print("I am here")
+    # subscribers = kwargs['subscribers']
+    # blog = kwargs
+    subscribers = Subscribers.objects.all()
+    blog = BlogPost.objects.latest('date_created')
     for abc in subscribers:
         emailad = abc.email
         send_mail('New Blog Post ', f" Checkout our new blog with title {blog.title} ",
@@ -29,7 +31,7 @@ def send_mails(self,*args, **kwargs):
     # else:
     #     return
 
-
+# import blogs.celery_files.signals # noqa
 
 
 
