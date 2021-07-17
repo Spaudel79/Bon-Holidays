@@ -2,8 +2,15 @@ from django.apps import AppConfig
 
 
 class BlogsConfig(AppConfig):
-    name = 'blogs'
+    name = 'apps.blogs'
 
     def ready(self):
-        import apps.blogs.celery_files.signals # noqa
+        # print("working")
+        from apps.blogs import signals #noqa
+
+
+
+
+
+
 

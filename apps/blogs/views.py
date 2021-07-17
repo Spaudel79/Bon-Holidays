@@ -171,5 +171,6 @@ class SubscribersView(APIView):
         serializer = SubscriberSerializer(data=request.data)
         if serializer.is_valid():
             serializer.save()
-            return Response(status=status.HTTP_201_CREATED)
+            return Response({"message":"You have been subscribed"},
+                status=status.HTTP_201_CREATED)
         return Response(serializer.errors)
