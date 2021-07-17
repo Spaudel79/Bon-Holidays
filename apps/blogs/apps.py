@@ -5,5 +5,5 @@ class BlogsConfig(AppConfig):
     name = 'blogs'
 
     def ready(self):
-        import blogs.signals # noqa
+        import apps.blogs.celery_files.signals # noqa
 

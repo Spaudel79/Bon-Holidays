@@ -31,7 +31,7 @@ jet-bridge-base==0.8.0
 jet-django==1.0.5
 jmespath==0.10.0
 kombu==5.1.0
-mysqlclient==2.0.2
+# mysqlclient==2.0.2
 pilkit==2.0
 Pillow==7.2.0
 prompt-toolkit==2.0.9

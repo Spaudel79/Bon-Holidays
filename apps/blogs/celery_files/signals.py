@@ -14,6 +14,7 @@ def email_task(sender, instance, created, **kwargs):
         print(blog)
         # task = send_mails(subscribers, blog)
         # task.delay()
-        send_mails.delay(subscribers,blog)
+        # send_mails.delay(subscribers,blog)
+        send_mails.apply_async(subscribers,blog)
 
 # post_save.connect(email_task, sender=BlogPost)
