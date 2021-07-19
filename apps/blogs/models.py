@@ -5,6 +5,10 @@ from ckeditor.fields import RichTextField
 #
 # User = get_user_model()
 
+from .tasks import say
+
+from django.db.models.signals import post_save
+
 
 class Tag(models.Model):
     tagname= models.CharField(max_length=255)
@@ -87,6 +91,20 @@ class Subscribers(models.Model):
 
     class Meta:
         verbose_name_plural = "Newsletter Subscribers"
+
+
+def email_task(sender, instance, created, **kwargs):
+    print(123456789)
+    if created:
+        # say.delay(1)
+        say.apply_async(args=(1, ))
+        print(56789)
+        # say(1)
+        # send_mails.delay()
+
+
+post_save.connect(email_task, sender=BlogPost, dispatch_uid="email_task")
+
 
     # @receiver(post_save, sender=BlogPost)
     # def email_task(sender, instance, created, **kwargs):
