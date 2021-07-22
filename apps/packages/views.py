@@ -44,7 +44,7 @@ from django_filters import rest_framework as filters
 class DestinationFrontListAPIView(ListAPIView):
     # queryset = Destination.objects.all().order_by('?')[:4]
     # queryset = Destination.objects.all().order_by('-date_created')[:4]
-    queryset = Destination.objects.all().order_by('-date_created').annotate(packages_count=Count('package'))
+    queryset = Destination.objects.all().order_by('-date_created').annotate(packages_count=Count('packages'))
     # queryset = Destination.objects.all().order_by('-date_created')
 
     serializer_class = DestinationFrontSerializer
@@ -59,7 +59,7 @@ class DestinationPackageListAPIView(RetrieveAPIView):
     serializer_class = DestinationwithPackageSerializer
 
 class PackageCountView(ListAPIView):
-    queryset = Destination.objects.annotate(packages_count=Count('package'))
+    queryset = Destination.objects.annotate(packages_count=Count('packages'))
     serializer_class = DestinationwithPackageSerializer
 
 class PackageAPIView(ListAPIView):
@@ -287,7 +287,7 @@ class TopActivitiesListAPIView(ListAPIView):
     serializer_class = TopActivitiesSerializer
     filter_backends = [DjangoFilterBackend]
     filterset_fields = [
-       'destination', 'activity'
+       'destinations', 'activity'
     ]
 
     # def get_queryset(self):
