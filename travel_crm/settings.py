@@ -43,7 +43,10 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'django.utils',
     # 'storages',
+
     # custom apps
+    # ...,
+    # 'blogs.apps.BlogsConfig',
     'apps.accounts',
     'apps.blogs',
     'apps.enquiry',
@@ -52,6 +55,7 @@ INSTALLED_APPS = [
     'apps.booking',
     'apps.logo',
     'apps.office',
+
     #third party apps
     'rest_framework',
     'rest_framework.authtoken',
@@ -61,7 +65,16 @@ INSTALLED_APPS = [
     'corsheaders',
     'django_filters',
     'storages',
+    'debug_toolbar',
+    # 'easy_thumbnails',
+    'image_cropping',
     # "taggit",
+]
+
+INTERNAL_IPS = [
+    # ...
+    '127.0.0.1',
+    # ...
 ]
 
 CKEDITOR_BASEPATH = "/static/ckeditor/ckeditor/"
@@ -88,6 +101,7 @@ MIDDLEWARE = [
     # django cors headers
     'corsheaders.middleware.CorsMiddleware',
     'django.middleware.common.CommonMiddleware',
+    'debug_toolbar.middleware.DebugToolbarMiddleware',
     #addedforoperatorpackage
     # 'django.contrib.operator.middleware.CurrentSiteMiddleware',
 ]
@@ -226,58 +240,17 @@ USE_L10N = True
 
 USE_TZ = True
 
-AUTH_USER_MODEL = 'accounts.User'
+# AUTH_USER_MODEL = 'auth.User'
 
-# MATERIAL_ADMIN_SITE = {
-#     'HEADER':  ('My site header'),  # Admin site header
-#     'TITLE':  ('Bonholidays'),  # Admin site title
-    # 'FAVICON':  'path/to/favicon',  # Admin site favicon (path to static should be specified)
-    # 'MAIN_BG_COLOR':  'blue',  # Admin site main color, css color should be specified
-    # 'MAIN_HOVER_COLOR':  'green',  # Admin site main hover color, css color should be specified
-    # 'PROFILE_PICTURE':  'path/to/image',  # Admin site profile picture (path to static should be specified)
-    # 'PROFILE_BG':  'path/to/image',  # Admin site profile background (path to static should be specified)
-    # 'LOGIN_LOGO':  'path/to/image',  # Admin site logo on login page (path to static should be specified)
-    # 'LOGOUT_BG':  'path/to/image',  # Admin site background on login/logout pages (path to static should be specified)
-    # 'SHOW_THEMES':  True,  #  Show default admin themes button
-    # 'TRAY_REVERSE': True,  # Hide object-tools and additional-submit-line by default
-    # 'NAVBAR_REVERSE': True,  # Hide side navbar by default
-    # 'SHOW_COUNTS': True, # Show instances counts for each model
-    # 'APP_ICONS': {  # Set icons for applications(lowercase), including 3rd party apps, {'application_name': 'material_icon_name', ...}
-    #     'accounts': 'person',
-    #     'blogs': 'assignment',
-    #     'enquiry': 'video_call',
-    #     'notifications': 'alarm',
-    #     'packages': 'spa',
-    #     'payment': 'attach_money',
-    #     'reportings': 'bug_report',
-    # },
-    # 'MODEL_ICONS': {  # Set icons for models(lowercase), including 3rd party models, {'model_name': 'material_icon_name', ...}
-    #     # 'travels': 'room', eg: does not work
-    # }
-# }
-#
+
 MATERIAL_ADMIN_SITE = {
     'HEADER':  "Bonholidays",  # Admin site header
     'TITLE':  "Bonholidays",  # Admin site title
-#     # 'FAVICON':  'path/to/favicon',  # Admin site favicon (path to static should be specified)
-#     # 'MAIN_BG_COLOR':  'color',  # Admin site main color, css color should be specified
-#     'MAIN_HOVER_COLOR':  'color',  # Admin site main hover color, css color should be specified
-#     'PROFILE_PICTURE':  'static/admin/img/icon-alert.svg',  # Admin site profile picture (path to static should be specified)
-#     'PROFILE_BG':  'static/admin/img/gerrard.jpg',  # Admin site profile background (path to static should be specified)
-#     # 'LOGIN_LOGO':  '',  # Admin site logo on login page (path to static should be specified)
-#     # 'LOGOUT_BG':  'path/to/image',  # Admin site background on login/logout pages (path to static should be specified)
-#     # 'SHOW_THEMES':  True,  #  Show default admin themes button
-#     # 'TRAY_REVERSE': True,  # Hide object-tools and additional-submit-line by default
-#     # 'NAVBAR_REVERSE': True,  # Hide side navbar by default
-    'SHOW_COUNTS': True, # Show instances counts for each model
-#     # 'APP_ICONS': {  # Set icons for applications(lowercase), including 3rd party apps, {'application_name': 'material_icon_name', ...}
-#     #     'sites': 'send',
-    }
-#     # 'MODEL_ICONS': {  # Set icons for models(lowercase), including 3rd party models, {'model_name': 'material_icon_name', ...}
-#     #     'site': 'contact_mail',
-#     # }
-#
 
+    'SHOW_COUNTS': True,
+    }
+
+AUTH_USER_MODEL = 'accounts.User'
 
 # REST Framework settings
 REST_FRAMEWORK = {
@@ -318,7 +291,15 @@ EMAIL_PORT = 587
 #saroj.aakashlabs@gmail.com
 #2000-01-01
 
+"""""
+ celery settings
+"""
 
-
+CELERY_BROKER_URL = 'redis://localhost:6379'
+CELERY_RESULT_BACKEND = 'redis://localhost:6379'
+CELERY_ACCEPT_CONTENT = ['application/json']
+CELERY_TASK_SERIALIZER = 'json'
+CELERY_RESULT_SERIALIZER = 'json'
+CELERY_TIMEZONE = 'Asia/Kathmandu'
 
 

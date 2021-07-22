@@ -1,9 +1,14 @@
 from django.db import models
-from ckeditor.fields import RichTextField
-from apps.accounts.models import UserProfile, User
 from ckeditor_uploader.fields import RichTextUploadingField
-from django.contrib.contenttypes.models import ContentType
 from ckeditor.fields import RichTextField
+# from django.contrib.auth import get_user_model
+#
+# User = get_user_model()
+
+from .tasks import say
+
+from django.db.models.signals import post_save
+
 
 class Tag(models.Model):
     tagname= models.CharField(max_length=255)
@@ -49,9 +54,14 @@ class BlogPost(models.Model):
     # def comments(self):
     #     return self.comments_set.all()
 
+
+
+
+
+
 class Comment(models.Model):
     # blog = models.ForeignKey(BlogPost, on_delete=models.CASCADE, default=1)
-    user = models.ForeignKey(User, on_delete=models.CASCADE)
+    user = models.ForeignKey('accounts.User', on_delete=models.CASCADE)
     blog = models.ForeignKey(BlogPost, on_delete=models.CASCADE, related_name='comments')
     name = models.CharField(max_length=255)
     email = models.EmailField()
@@ -63,6 +73,7 @@ class Comment(models.Model):
     class Meta:
         ordering = ('created_at',)
 
+    # send_mails.delay(5)
 
 
     # def __str__(self):
@@ -70,3 +81,54 @@ class Comment(models.Model):
 
     # jpt = models.CharField(max_length=255)
 
+
+class Subscribers(models.Model):
+    email = models.EmailField(unique=True)
+    date_subscribed = models.DateField(auto_now_add=True)
+
+    def __str__(self):
+        return self.email
+
+    class Meta:
+        verbose_name_plural = "Newsletter Subscribers"
+
+
+def email_task(sender, instance, created, **kwargs):
+    print(123456789)
+    if created:
+        # say.delay(1)
+        say.apply_async(args=(1, ))
+        print(56789)
+        # say(1)
+        # send_mails.delay()
+
+
+post_save.connect(email_task, sender=BlogPost, dispatch_uid="email_task")
+
+
+    # @receiver(post_save, sender=BlogPost)
+    # def email_task(sender, instance, created, **kwargs):
+    #     print(123456789)
+    #     if created:
+    #         subscribers = Subscribers.objects.all()
+    #         blog = BlogPost.objects.latest('date_created')
+    #         print(blog)
+    #         # task = send_mails(subscribers, blog)
+    #         # task.delay()
+    #         send_mails.delay(subscribers,blog)
+
+
+    # binding signal:
+    # @receiver(post_save,sender=BlogPost)
+    # def send_mails(sender,instance,created,**kwargs):
+    #     subscribers = Subscribers.objects.all()
+    #
+    #     if created:
+    #         blog = BlogPost.objects.latest('date_created')
+    #         for abc in subscribers:
+    #             emailad = abc.email
+    #             send_mail('New Blog Post ', f" Checkout our new blog with title {blog.title} ",
+    #                       EMAIL_HOST_USER, [emailad],
+    #                       fail_silently=False)
+    #     else:
+    #         return

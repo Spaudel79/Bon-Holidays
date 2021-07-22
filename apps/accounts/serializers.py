@@ -90,3 +90,7 @@ class ProfileListSerializer(serializers.ModelSerializer):
         model = UserProfile
         exclude = ['group', 'user', 'commission', 'last_updated']
         depth = 1
+
+
+
+

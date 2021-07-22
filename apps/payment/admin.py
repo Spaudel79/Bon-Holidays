@@ -7,4 +7,4 @@ from django.contrib.admin import ModelAdmin, register
 @register(Payment)
 class PaymentAdmin(ModelAdmin):
     list_display = ('name',)
-    # icon_name = ''
+    icon_name = 'attach_money'

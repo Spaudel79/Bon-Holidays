@@ -10,7 +10,7 @@ from django_filters.rest_framework import DjangoFilterBackend
 from rest_framework import filters
 from django.core.mail import send_mail
 from travel_crm.settings import EMAIL_HOST_USER
-
+from rest_framework import status
 
 from rest_framework.generics import (
 CreateAPIView, DestroyAPIView,
@@ -155,4 +155,22 @@ class TagsAPIView(ListAPIView):
     queryset = Tag.objects.all()
     serializer_class = TagSerializer
 
+from apps.blogs.admin import BlogForm
+def blogform(request):
+    if request.method == 'POST':
+        form = BlogForm(request.POST)
+        if form.is_valid():
+            form.save()
+            # return redirect('charterform')
 
+
+class SubscribersView(APIView):
+    permission_classes = [AllowAny]
+
+    def post(self,request,*args,**kwargs):
+        serializer = SubscriberSerializer(data=request.data)
+        if serializer.is_valid():
+            serializer.save()
+            return Response({"message":"You have been subscribed"},
+                status=status.HTTP_201_CREATED)
+        return Response(serializer.errors)

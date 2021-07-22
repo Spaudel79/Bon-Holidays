@@ -17,7 +17,7 @@ class ContactAdmin(ModelAdmin):
 @register(ContactForm)
 class ContactFormAdmin(ModelAdmin):
     list_display = ('subject', 'contacted', 'full_name', 'email',)
-    icon_name = 'call'
+    icon_name = 'call_end'
 
 @register(Feedback)
 class FeedbackAdmin(ModelAdmin):

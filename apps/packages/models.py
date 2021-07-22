@@ -4,6 +4,7 @@ from imagekit.processors import ResizeToFill
 # from django_random_queryset import RandomManager
 from ckeditor.fields import RichTextField
 from apps.accounts.models import UserProfile, User
+from image_cropping.fields import ImageRatioField, ImageCropField
 
 class Destination(models.Model):
     Continent_Name = (
@@ -34,6 +35,9 @@ class Destination(models.Model):
 
     date_created = models.DateField()
 
+    class Meta:
+        ordering = ("-id" ,)
+
 class Itinerary(models.Model):
     day = models.IntegerField()
     title = models.CharField(max_length=255)
@@ -45,6 +49,7 @@ class Itinerary(models.Model):
 
 class NewActivity(models.Model):
     title = models.CharField(max_length=64)
+
 
     class Meta:
         # verbose_name = "New Activity"
@@ -69,6 +74,7 @@ class Package(models.Model):
     price = models.IntegerField(verbose_name="Price in Nrs")
     price_2 = models.IntegerField(verbose_name="Price in $")
     duration = models.IntegerField(default=5)
+    duration_hours = models.PositiveIntegerField(blank=True,null=True,verbose_name="Hours If One day Tour")
     discount = models.IntegerField(verbose_name="Discount %", default=15)
     #discounted_price = models.IntegerField(default=230)
     #savings = models.IntegerField(default=230)
@@ -96,6 +102,7 @@ class Package(models.Model):
     exclusions = RichTextField()
     # itinerary = models.ManyToManyField(Itinerary)
     itinerary_text = RichTextField()
+    faqs = RichTextField(blank=True)
     image_1= models.ImageField(blank=True,null = True,verbose_name="Image-Horizontal")
     image_2= models.ImageField(blank=True,null = True,verbose_name="Image-Square")
     image_3= models.ImageField(blank=True,null = True,verbose_name="Image-Sqaure")
@@ -107,6 +114,9 @@ class Package(models.Model):
 
     # def is_featured(self):
     #     return self.featured
+
+    class Meta:
+        ordering = ("-id" ,)
 
 
 

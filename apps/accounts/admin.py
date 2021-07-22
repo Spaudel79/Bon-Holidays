@@ -60,5 +60,7 @@ class UserProfileAdmin(ModelAdmin):
             return abc.filter(user=user)
 
 
+
+
 admin.site.register(User, UsersAdmin)
 admin.site.register(UserProfile, UserProfileAdmin)

@@ -21,4 +21,4 @@ class LogoAdmin(ModelAdmin):
     # image_display = AdminThumbnail(image_field='thumbnail')
     # image_display.short_description = 'Image'
     # readonly_fields = ['image_display']
-    icon_name = 'explore'
+    icon_name = 'spa'

@@ -9,7 +9,7 @@ from rest_framework.permissions import (
 AllowAny, IsAuthenticated, IsAdminUser, IsAuthenticatedOrReadOnly,
 )
 from rest_framework.authentication import TokenAuthentication
-
+from rest_framework.views import APIView
 from .models import *
 from .serializers import *
 from django.contrib.auth.models import Permission
@@ -90,6 +90,10 @@ class ProfileListView(ListAPIView):
     # permission_classes = [AllowAny]
     serializer_class = ProfileListSerializer
     queryset = UserProfile.objects.all()
+
+
+
+
 
 
 

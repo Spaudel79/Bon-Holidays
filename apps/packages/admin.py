@@ -22,7 +22,7 @@ class DestinationAdmin(ModelAdmin):
     # image_display = AdminThumbnail(image_field='thumbnail')
     # image_display.short_description = 'Image'
     # readonly_fields = ['image_display']
-    icon_name = 'explore'
+    icon_name = 'beach_access'
 
     def changelist_view(self, request, extra_context=None):
         if not request.user.is_superuser:
@@ -47,10 +47,9 @@ class PackageAdmin(ModelAdmin):
                      'fix_departure', 'rating',
                      'date_created', 'edit', 'delete')
 
-    # image_display = AdminThumbnail(image_field='thumbnail')
-    # image_display.short_description = 'Image'
-    # readonly_fields = ['image_display']
-
+    search_fields = ['package_name','city']
+    list_filter = ('package_name','destination','city')
+    icon_name = 'subway'
 
 
     def get_queryset(self, request):
@@ -75,7 +74,7 @@ class ReviewAdmin(ModelAdmin):
         return format_html('<a class="btn-btn" href="/admin/package/review/{}/delete/">Delete</a>', obj.id)
 
     list_display = ('user', 'package', 'user_rating', 'full_name', 'created_at', 'edit', 'delete')
-    icon_name = 'assignment'
+    icon_name = 'comment'
 
 # @register(TopAttractions)
 # class TopAttractionsAdmin(ModelAdmin):
@@ -116,7 +115,7 @@ class NewActivityAdmin(ModelAdmin):
         return format_html('<a class="btn-btn" href="/admin/packages/newactivity/{}/delete/">Delete</a>', obj.id)
 
     list_display = ('title',  'edit', 'delete')
-    icon_name = 'layers'
+    icon_name = 'directions_bike'
 
 # class PackageInline(admin.TabularInline):
 #     model = Package
