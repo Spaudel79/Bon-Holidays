@@ -67,7 +67,8 @@ class Package(models.Model):
     )
 
     operator = models.ForeignKey(UserProfile, on_delete=models.CASCADE)
-    destination = models.ForeignKey(Destination, on_delete=models.CASCADE)
+    # destination = models.ForeignKey(Destination, on_delete=models.CASCADE,related_name='package')
+    destinations = models.ManyToManyField(Destination,related_name='packages')
     package_name = models.CharField(max_length=255)
     city = models.CharField(max_length=255)
     featured = models.BooleanField(default=False)

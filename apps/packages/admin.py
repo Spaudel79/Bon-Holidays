@@ -48,7 +48,7 @@ class PackageAdmin(ModelAdmin):
                      'date_created', 'edit', 'delete')
 
     search_fields = ['package_name','city']
-    list_filter = ('package_name','destination','city')
+    list_filter = ('package_name','destinations','city')
     icon_name = 'subway'
 
 

@@ -195,7 +195,7 @@ else:
     DATABASES = {
         'default': {
             'ENGINE': 'django.db.backends.mysql',
-            'NAME': 'traveldb',
+            'NAME': 'new_traveldb',
             'USER': 'root',
             'PASSWORD': '1234',
             'HOST': 'localhost',
@@ -302,4 +302,20 @@ CELERY_TASK_SERIALIZER = 'json'
 CELERY_RESULT_SERIALIZER = 'json'
 CELERY_TIMEZONE = 'Asia/Kathmandu'
 
+"""""
+ imagekit package settings for thumnail generation,
+ prolly not needed this if imagekit <= 2.0,
+ initially not needed but asked when celery package was installed,
+ not sure if they are related to each other.
+"""
 
+IMAGEKIT_DEFAULT_CACHEFILE_BACKEND = 'imagekit.cachefiles.backends.Simple'
+IMAGEKIT_CACHEFILE_NAMER = 'imagekit.cachefiles.namers.hash'
+IMAGEKIT_CACHEFILE_DIR = 'CACHE/images'
+IMAGEKIT_DEFAULT_FILE_STORAGE = 'django.core.files.storage.FileSystemStorage'
+IMAGEKIT_DEFAULT_CACHEFILE_STRATEGY = 'imagekit.cachefiles.strategies.Optimistic'
+IMAGEKIT_CACHE_BACKEND = 'default'
+IMAGEKIT_SPEC_CACHEFILE_NAMER = 'imagekit.cachefiles.namers.source_name_as_path'
+IMAGEKIT_CACHE_PREFIX = 'imagekit:'
+IMAGEKIT_USE_MEMCACHED_SAFE_CACHE_KEY =u''
+IMAGEKIT_CACHE_TIMEOUT = 300
