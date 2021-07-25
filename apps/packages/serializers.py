@@ -64,7 +64,7 @@ class PackageSerializer(serializers.ModelSerializer):
 
 
 class DestinationwithPackageSerializer(serializers.ModelSerializer):
-    packages = PackageSerializer(many= True)
+    packages = PackageDetailSerializer(many= True)
 
     class Meta:
         model = Destination
