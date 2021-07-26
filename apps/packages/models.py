@@ -19,6 +19,7 @@ class Destination(models.Model):
     )
     name = models.CharField(max_length=255, unique=True)
     continent = models.CharField(max_length=255, choices=Continent_Name, default='Europe')
+    short_description = RichTextField(blank=True)
     top = models.BooleanField(default=False)
     dest_image = models.ImageField(blank=True)
     # thumbnail = ImageSpecField(source='dest_image',
@@ -85,6 +86,8 @@ class Package(models.Model):
     transport = models.CharField(max_length=150, default='Flight')
     age_range = models.CharField(max_length=100, default='6 to 79 years old')
     fix_departure = models.BooleanField(default=False)
+    fixed_price_nrs = models.IntegerField(verbose_name="Price in Nrs for fixed departures")
+    fixed_price_dollar = models.IntegerField(verbose_name="Price in $ for fixed departures")
     rating = models.IntegerField(choices=((1, 1),
                                           (2, 2),
                                           (3, 3),

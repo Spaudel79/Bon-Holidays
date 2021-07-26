@@ -39,7 +39,7 @@ class PackageDetailSerializer(serializers.ModelSerializer):
     class Meta:
         model = Package
         fields = ['id', 'destinations', 'package_name', 'city', 'image', 'duration',
-                  'featured','price','price_2', 'discount','faqs','duration_hours',
+                  'featured','price','price_2', 'discount','fixed_price_dollar','fixed_price_nrs','faqs','duration_hours',
                   'content', 'highlights', 'inclusions', 'exclusions',
                   'image_1', 'image_2', 'image_3', 'itinerary_text',  'date_created', 'reviews', 'activities']
 
@@ -56,7 +56,7 @@ class PackageSerializer(serializers.ModelSerializer):
     class Meta:
         model = Package
         fields = ['id', 'operator','destinations', 'package_name', 'duration', 'featured', 'price','price_2', 'discount',
-                   'city', 'tour_type','new_activity', 'accommodation', 'transport', 'age_range',
+                  'fixed_price_dollar','fixed_price_nrs', 'city', 'tour_type','new_activity', 'accommodation', 'transport', 'age_range',
                    'fix_departure', 'rating', 'image', 'date_created', ]
         # fields = '__all__'
         depth = 1
@@ -85,7 +85,7 @@ class DestinationFrontSerializer(serializers.ModelSerializer):
     class Meta:
         model = Destination
         # fields = ['id', 'package']
-        fields = ['packages_count','id', 'name', 'dest_image','continent','top',]
+        fields = ['packages_count','id', 'name', 'dest_image','continent','top','short_description']
         # depth = 1
 
 
