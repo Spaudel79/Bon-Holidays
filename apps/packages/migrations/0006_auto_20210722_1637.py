@@ -7,8 +7,8 @@ from django.db import models, migrations
 
 def make_many_destinations(apps, schema_editor):
     """
-        Adds the Author object in Book.author to the
-        many-to-many relationship in Book.authors
+        Adds the destination object in Package.destination to the
+        many-to-many relationship in Package.destinations
     """
     Package = apps.get_model('packages', 'Package')
 

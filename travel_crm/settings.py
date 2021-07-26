@@ -113,7 +113,7 @@ CORS_ORIGIN_WHITELIST = (
     "http://localhost:8080",
     "http://localhost:3000",
     "http://27.34.13.130",
-    "http://192.168.1.178:3000",
+    "http://dhwg6rfx6iym9.cloudfront.net",
     "http://127.0.0.1:9000",
     "http://bonholidays.com.np",
     "https://bonholidays.com.np",
