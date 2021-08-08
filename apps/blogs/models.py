@@ -1,6 +1,9 @@
 from django.db import models
 from ckeditor_uploader.fields import RichTextUploadingField
 from ckeditor.fields import RichTextField
+from django.core.mail import send_mail
+from django.dispatch import receiver
+from django.conf import settings
 # from django.contrib.auth import get_user_model
 #
 # User = get_user_model()
@@ -93,17 +96,17 @@ class Subscribers(models.Model):
         verbose_name_plural = "Newsletter Subscribers"
 
 
-def email_task(sender, instance, created, **kwargs):
-    print(123456789)
-    if created:
-        # say.delay(1)
-        say.apply_async(args=(1, ))
-        print(56789)
-        # say(1)
-        # send_mails.delay()
-
-
-post_save.connect(email_task, sender=BlogPost, dispatch_uid="email_task")
+# def email_task(sender, instance, created, **kwargs):
+#     print(123456789)
+#     if created:
+#         # say.delay(1)
+#         say.apply_async(args=(1, ))
+#         print(56789)
+#         # say(1)
+#         # send_mails.delay()
+#
+#
+# post_save.connect(email_task, sender=BlogPost, dispatch_uid="email_task")
 
 
     # @receiver(post_save, sender=BlogPost)
@@ -119,16 +122,14 @@ post_save.connect(email_task, sender=BlogPost, dispatch_uid="email_task")
 
 
     # binding signal:
-    # @receiver(post_save,sender=BlogPost)
-    # def send_mails(sender,instance,created,**kwargs):
-    #     subscribers = Subscribers.objects.all()
-    #
-    #     if created:
-    #         blog = BlogPost.objects.latest('date_created')
-    #         for abc in subscribers:
-    #             emailad = abc.email
-    #             send_mail('New Blog Post ', f" Checkout our new blog with title {blog.title} ",
-    #                       EMAIL_HOST_USER, [emailad],
-    #                       fail_silently=False)
-    #     else:
-    #         return
+    @receiver(post_save,sender=BlogPost)
+    def send_mails(sender,instance,created,**kwargs):
+        subscribers = Subscribers.objects.all()
+
+        if created:
+            blog = BlogPost.objects.latest('date_created')
+            for abc in subscribers:
+                emailad = abc.email
+                send_mail('New Blog Post ', f" Checkout our new blog with title {blog.title} ",
+                          settings.EMAIL_HOST_USER, [emailad],
+                          fail_silently=False)
