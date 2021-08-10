@@ -30,6 +30,7 @@ class RegisterUserSerializer(serializers.ModelSerializer):
     def validate(self, attrs):
         first_name = attrs.get('first_name', '')
         last_name = attrs.get('last_name', '')
+        email = attrs.get('email')
 
         if first_name:
             if not first_name.isalnum():
@@ -38,6 +39,12 @@ class RegisterUserSerializer(serializers.ModelSerializer):
         if last_name:
             if not last_name.isalnum():
                 raise serializers.ValidationError('Enter only alphanumeric value for last name')
+
+
+        #email = unique already provided in the model
+        # user = User.objects.filter(Q(email=email)).distinct()
+        # if user.exists() and user.count() == 1:
+        #     raise serializers.ValidationError('User hello with this email already exists')
 
         return attrs
 
