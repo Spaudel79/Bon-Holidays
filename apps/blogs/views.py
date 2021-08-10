@@ -33,8 +33,8 @@ AllowAny, IsAuthenticated, IsAdminUser, IsAuthenticatedOrReadOnly
 
 class BlogPostListFrontAPIView(ListAPIView):
     permission_classes = [AllowAny]
-    # queryset = BlogPost.objects.all().order_by('-date_created')[:3]
-    queryset = BlogPost.objects.all()
+    queryset = BlogPost.objects.all().order_by('-date_created')[:3]
+    # queryset = BlogPost.objects.all()
     serializer_class = BlogPostFrontPageSerializer
 
 
