@@ -32,5 +32,7 @@ urlpatterns = [
         path('api/activities/', views.TopActivitiesListAPIView.as_view(), name='api-activities'),
         path('api/activities/<int:pk>', views.TopActivitiesDetailsListAPIView.as_view(), name='api-activites_details'),
         path('api/newactivities', views.NewActivityListAPIView.as_view(), name='api-newactivities'),
+        path('api/destinationsblog', views.DestinationsBlogRelatedView.as_view(), name='api-destinations-blog')
+
 ]
 

@@ -1,5 +1,6 @@
 from rest_framework import serializers
 from .models import *
+from apps.blogs.serializers import *
 
 class ActivitiesSerializer(serializers.ModelSerializer):
     class Meta:
@@ -57,10 +58,16 @@ class PackageSerializer(serializers.ModelSerializer):
         model = Package
         fields = ['id', 'operator','destinations', 'package_name', 'duration', 'featured', 'price','price_2', 'discount',
                   'fixed_price_dollar','fixed_price_nrs', 'city', 'tour_type','new_activity', 'accommodation', 'transport', 'age_range',
-                   'fix_departure', 'rating', 'image', 'date_created', ]
+                   'fix_departure', 'rating', 'image', 'date_created',]
         # fields = '__all__'
         depth = 1
 
+class DestinationBlogSerializer(serializers.ModelSerializer):
+
+    class Meta:
+        model = Destination
+        fields = ['id', 'name', 'dest_image','continent','top','short_description',]
+        # depth = 1
 
 
 class DestinationwithPackageSerializer(serializers.ModelSerializer):
@@ -75,12 +82,11 @@ class DestinationwithPackageSerializer(serializers.ModelSerializer):
 # class Destinationwith
 
 class DestinationFrontSerializer(serializers.ModelSerializer):
-    #destination name instead of foreigen key id
+    #destination name instead of foreign key id
     # destination = serializers.StringRelatedField()
     # destination = serializers.ReadOnlyField(source='destination.name')
     # url = serializers.HyperlinkedIdentityField(view_name='api-packages', read_only=True)
-    # package = DestinationPackageSerializer(many= True)
-    # packages = PackageSerializer(many=True)
+
     packages_count = serializers.IntegerField()
     class Meta:
         model = Destination

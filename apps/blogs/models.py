@@ -4,6 +4,7 @@ from ckeditor.fields import RichTextField
 from django.core.mail import send_mail
 from django.dispatch import receiver
 from django.conf import settings
+from apps.packages.models import *
 # from django.contrib.auth import get_user_model
 #
 # User = get_user_model()
@@ -20,7 +21,7 @@ class Tag(models.Model):
         return self.tagname
 
 class BlogPost(models.Model):
-
+    destination = models.ForeignKey(Destination,on_delete=models.SET_NULL,blank=True, null=True,related_name='blogpost')
     author = models.CharField(max_length=64, default='Admin')
     CATEGORY_CHOICES = (
         ('travel_news', 'Travel News',),

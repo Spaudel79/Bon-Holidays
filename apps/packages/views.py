@@ -20,7 +20,7 @@ from django.core.mail import send_mail
 from travel_crm.settings import EMAIL_HOST_USER
 
 from django_filters import rest_framework as filters
-
+from rest_framework import filters
 
 # class DestinationViewSet(generics.ListAPIView, generics.RetrieveAPIView, viewsets.GenericViewSet):
 #     queryset = Destination.objects.all()
@@ -52,11 +52,26 @@ class DestinationFrontListAPIView(ListAPIView):
     filterset_fields = ['top', 'continent']
     # filterset_class = ContinentFilter #filterset_class and filterset_fields dont work together
 
+class DestinationsBlogRelatedView(ListAPIView):
+    queryset = Destination.objects.all()
+    serializer_class = DestinationBlogSerializer
+    filter_backends = [filters.SearchFilter]
+    search_fields = ['blogpost__caption','blogpost__title','blogpost__content','name']
+
+    # below is the q lookup which also works
+    # def get_queryset(self):
+    #     qur = self.request.query_params.get('search')
+    #     if qur is not None:
+    #         item = Destination.objects.filter(Q(blogpost__title__icontains=qur)).distinct()
+    #         return item
+    #     else:
+    #         return Destination.objects.all()
 
 class DestinationPackageListAPIView(RetrieveAPIView):
     queryset = Destination.objects.all()
     # queryset = Destination.objects.annotate(package_count=Count('package'))
     serializer_class = DestinationwithPackageSerializer
+
 
 class PackageCountView(ListAPIView):
     queryset = Destination.objects.annotate(packages_count=Count('packages'))
@@ -65,6 +80,7 @@ class PackageCountView(ListAPIView):
 class PackageAPIView(ListAPIView):
     queryset = Package.objects.all()
     serializer_class = PackageSerializer
+
 
 class AllPackageAPIView(ListAPIView):
     queryset = Package.objects.all()

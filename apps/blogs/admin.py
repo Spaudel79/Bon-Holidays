@@ -29,7 +29,7 @@ class BlogForm(forms.ModelForm):
 
     class Meta:
         model = BlogPost
-        fields = ['author','image', 'title','categories',
+        fields = ['author','destination','image', 'title','categories',
                   'caption','content','tag','date_created']
 
     # def save(self, commit=True):
