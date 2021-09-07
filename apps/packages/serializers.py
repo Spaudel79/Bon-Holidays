@@ -35,8 +35,10 @@ class PackageDetailSerializer(serializers.ModelSerializer):
     destinations = serializers.StringRelatedField()
     reviews = ReviewSerializer(many=True)
     activities = ActivitiesSerializer (many=True)
-
-
+    price = serializers.SerializerMethodField('get_price')
+    price_2 = serializers.SerializerMethodField('get_price_2')
+    fixed_price_dollar = serializers.SerializerMethodField('get_fixed_price_dollar')
+    fixed_price_nrs = serializers.SerializerMethodField('get_fixed_price_nrs')
     class Meta:
         model = Package
         fields = ['id', 'destinations', 'package_name', 'city', 'image', 'duration',
@@ -46,7 +48,21 @@ class PackageDetailSerializer(serializers.ModelSerializer):
 
         depth = 1
 
+    def get_price(self,obj):
+        price = obj.price
+        return f"{price:,}"
 
+    def get_price_2(self,obj):
+        price_2 = obj.price_2
+        return f"{price_2:,}"
+
+    def get_fixed_price_dollar(self,obj):
+        fixed_price_dollar = obj.fixed_price_dollar
+        return f"{fixed_price_dollar:,}"
+
+    def get_fixed_price_nrs(self,obj):
+        fixed_price_nrs = obj.fixed_price_nrs
+        return f"{fixed_price_nrs:,}"
 
 class PackageSerializer(serializers.ModelSerializer):
     #destination name instead of foreigen key id
@@ -54,6 +70,8 @@ class PackageSerializer(serializers.ModelSerializer):
     # destination = serializers.ReadOnlyField(source='destination.name')
     # url = serializers.HyperlinkedIdentityField(view_name='api-packages', read_only=True)
     # activities = ActivitiesSerializer(many=True)
+    price = serializers.SerializerMethodField('get_price')
+    price_2 = serializers.SerializerMethodField('get_price_2')
     class Meta:
         model = Package
         fields = ['id', 'operator','destinations', 'package_name', 'duration', 'featured', 'price','price_2', 'discount',
@@ -61,6 +79,14 @@ class PackageSerializer(serializers.ModelSerializer):
                    'fix_departure', 'rating', 'image', 'date_created',]
         # fields = '__all__'
         depth = 1
+
+    def get_price(self,obj):
+        price = obj.price
+        return f"{price:,}"
+
+    def get_price_2(self,obj):
+        price_2 = obj.price_2
+        return f"{price_2:,}"
 
 class DestinationBlogSerializer(serializers.ModelSerializer):
 
