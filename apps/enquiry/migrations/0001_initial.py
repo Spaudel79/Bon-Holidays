@@ -8,50 +8,89 @@ class Migration(migrations.Migration):
 
     initial = True
 
-    dependencies = [
-    ]
+    dependencies = []
 
     operations = [
         migrations.CreateModel(
-            name='AddressInfo',
+            name="AddressInfo",
             fields=[
-                ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('full_address', models.CharField(max_length=255)),
+                (
+                    "id",
+                    models.AutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                ("full_address", models.CharField(max_length=255)),
             ],
         ),
         migrations.CreateModel(
-            name='ContactForm',
+            name="ContactForm",
             fields=[
-                ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('contacted', models.BooleanField(default=False)),
-                ('subject', models.CharField(blank=True, max_length=255)),
-                ('full_name', models.CharField(max_length=255)),
-                ('email', models.EmailField(default='hello@hello.com', max_length=254)),
-                ('phone', models.CharField(max_length=255)),
-                ('description', ckeditor.fields.RichTextField(blank=True)),
+                (
+                    "id",
+                    models.AutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                ("contacted", models.BooleanField(default=False)),
+                ("subject", models.CharField(blank=True, max_length=255)),
+                ("full_name", models.CharField(max_length=255)),
+                ("email", models.EmailField(default="hello@hello.com", max_length=254)),
+                ("phone", models.CharField(max_length=255)),
+                ("description", ckeditor.fields.RichTextField(blank=True)),
             ],
         ),
         migrations.CreateModel(
-            name='Feedback',
+            name="Feedback",
             fields=[
-                ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('contacted', models.BooleanField(default=False)),
-                ('name', models.CharField(max_length=255)),
-                ('email', models.EmailField(max_length=254)),
-                ('subject', models.CharField(max_length=255)),
-                ('message', ckeditor.fields.RichTextField(blank=True)),
+                (
+                    "id",
+                    models.AutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                ("contacted", models.BooleanField(default=False)),
+                ("name", models.CharField(max_length=255)),
+                ("email", models.EmailField(max_length=254)),
+                ("subject", models.CharField(max_length=255)),
+                ("message", ckeditor.fields.RichTextField(blank=True)),
             ],
         ),
         migrations.CreateModel(
-            name='Contact',
+            name="Contact",
             fields=[
-                ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('phone', models.CharField(default='808 - 808', max_length=255)),
-                ('email', models.EmailField(default='hello@hello.com', max_length=254)),
-                ('description', ckeditor.fields.RichTextField(blank=True)),
-                ('opened_till', models.CharField(default='Mondey to Sunday', max_length=255)),
-                ('date_created', models.DateField(auto_now_add=True, null=True)),
-                ('address', models.ManyToManyField(blank=True, null=True, to='enquiry.AddressInfo')),
+                (
+                    "id",
+                    models.AutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                ("phone", models.CharField(default="808 - 808", max_length=255)),
+                ("email", models.EmailField(default="hello@hello.com", max_length=254)),
+                ("description", ckeditor.fields.RichTextField(blank=True)),
+                (
+                    "opened_till",
+                    models.CharField(default="Mondey to Sunday", max_length=255),
+                ),
+                ("date_created", models.DateField(auto_now_add=True, null=True)),
+                (
+                    "address",
+                    models.ManyToManyField(
+                        blank=True, null=True, to="enquiry.AddressInfo"
+                    ),
+                ),
             ],
         ),
     ]

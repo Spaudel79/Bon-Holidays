@@ -17,45 +17,94 @@ class Migration(migrations.Migration):
 
     operations = [
         migrations.CreateModel(
-            name='BlogPost',
+            name="BlogPost",
             fields=[
-                ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('author', models.CharField(default='Admin', max_length=64)),
-                ('image', models.ImageField(blank=True, null=True, upload_to='')),
-                ('title', models.CharField(max_length=255)),
-                ('categories', models.CharField(choices=[('travel_news', 'Travel News'), ('travel_tips', 'Travel Tips'), ('things_to_do', 'Things to Do'), ('places_to_go', 'Places to Go')], default='travel_news', max_length=64)),
-                ('caption', models.CharField(max_length=500)),
-                ('content', ckeditor_uploader.fields.RichTextUploadingField()),
-                ('date_created', models.DateField()),
+                (
+                    "id",
+                    models.AutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                ("author", models.CharField(default="Admin", max_length=64)),
+                ("image", models.ImageField(blank=True, null=True, upload_to="")),
+                ("title", models.CharField(max_length=255)),
+                (
+                    "categories",
+                    models.CharField(
+                        choices=[
+                            ("travel_news", "Travel News"),
+                            ("travel_tips", "Travel Tips"),
+                            ("things_to_do", "Things to Do"),
+                            ("places_to_go", "Places to Go"),
+                        ],
+                        default="travel_news",
+                        max_length=64,
+                    ),
+                ),
+                ("caption", models.CharField(max_length=500)),
+                ("content", ckeditor_uploader.fields.RichTextUploadingField()),
+                ("date_created", models.DateField()),
             ],
         ),
         migrations.CreateModel(
-            name='Tag',
+            name="Tag",
             fields=[
-                ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('tagname', models.CharField(max_length=255)),
+                (
+                    "id",
+                    models.AutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                ("tagname", models.CharField(max_length=255)),
             ],
         ),
         migrations.CreateModel(
-            name='Comment',
+            name="Comment",
             fields=[
-                ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('name', models.CharField(max_length=255)),
-                ('email', models.EmailField(max_length=254)),
-                ('subject', models.CharField(max_length=255)),
-                ('comment', ckeditor.fields.RichTextField(blank=True)),
-                ('created_at', models.DateTimeField(auto_now_add=True)),
-                ('is_active', models.BooleanField(default=True)),
-                ('blog', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='comments', to='blogs.BlogPost')),
-                ('user', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to=settings.AUTH_USER_MODEL)),
+                (
+                    "id",
+                    models.AutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                ("name", models.CharField(max_length=255)),
+                ("email", models.EmailField(max_length=254)),
+                ("subject", models.CharField(max_length=255)),
+                ("comment", ckeditor.fields.RichTextField(blank=True)),
+                ("created_at", models.DateTimeField(auto_now_add=True)),
+                ("is_active", models.BooleanField(default=True)),
+                (
+                    "blog",
+                    models.ForeignKey(
+                        on_delete=django.db.models.deletion.CASCADE,
+                        related_name="comments",
+                        to="blogs.BlogPost",
+                    ),
+                ),
+                (
+                    "user",
+                    models.ForeignKey(
+                        on_delete=django.db.models.deletion.CASCADE,
+                        to=settings.AUTH_USER_MODEL,
+                    ),
+                ),
             ],
             options={
-                'ordering': ('created_at',),
+                "ordering": ("created_at",),
             },
         ),
         migrations.AddField(
-            model_name='blogpost',
-            name='tag',
-            field=models.ManyToManyField(to='blogs.Tag'),
+            model_name="blogpost",
+            name="tag",
+            field=models.ManyToManyField(to="blogs.Tag"),
         ),
     ]

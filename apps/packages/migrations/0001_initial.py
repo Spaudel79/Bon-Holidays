@@ -11,111 +11,277 @@ class Migration(migrations.Migration):
     initial = True
 
     dependencies = [
-        ('accounts', '0001_initial'),
+        ("accounts", "0001_initial"),
         migrations.swappable_dependency(settings.AUTH_USER_MODEL),
     ]
 
     operations = [
         migrations.CreateModel(
-            name='Destination',
+            name="Destination",
             fields=[
-                ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('name', models.CharField(max_length=255, unique=True)),
-                ('continent', models.CharField(choices=[('Europe', 'Europe'), ('Asia', 'Asia'), ('North America', 'North America'), ('South America', 'South America'), ('Africa', 'Africa'), ('Oceania', 'Oceania'), ('Polar', 'Polar'), ('Regions', 'Regions')], default='Europe', max_length=255)),
-                ('top', models.BooleanField(default=False)),
-                ('dest_image', models.ImageField(blank=True, upload_to='')),
-                ('date_created', models.DateField()),
+                (
+                    "id",
+                    models.AutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                ("name", models.CharField(max_length=255, unique=True)),
+                (
+                    "continent",
+                    models.CharField(
+                        choices=[
+                            ("Europe", "Europe"),
+                            ("Asia", "Asia"),
+                            ("North America", "North America"),
+                            ("South America", "South America"),
+                            ("Africa", "Africa"),
+                            ("Oceania", "Oceania"),
+                            ("Polar", "Polar"),
+                            ("Regions", "Regions"),
+                        ],
+                        default="Europe",
+                        max_length=255,
+                    ),
+                ),
+                ("top", models.BooleanField(default=False)),
+                ("dest_image", models.ImageField(blank=True, upload_to="")),
+                ("date_created", models.DateField()),
             ],
             options={
-                'ordering': ('-id',),
+                "ordering": ("-id",),
             },
         ),
         migrations.CreateModel(
-            name='Itinerary',
+            name="Itinerary",
             fields=[
-                ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('day', models.IntegerField()),
-                ('title', models.CharField(max_length=255)),
-                ('content', ckeditor.fields.RichTextField()),
+                (
+                    "id",
+                    models.AutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                ("day", models.IntegerField()),
+                ("title", models.CharField(max_length=255)),
+                ("content", ckeditor.fields.RichTextField()),
             ],
         ),
         migrations.CreateModel(
-            name='NewActivity',
+            name="NewActivity",
             fields=[
-                ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('title', models.CharField(max_length=64)),
+                (
+                    "id",
+                    models.AutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                ("title", models.CharField(max_length=64)),
             ],
             options={
-                'verbose_name_plural': 'Activities',
+                "verbose_name_plural": "Activities",
             },
         ),
         migrations.CreateModel(
-            name='Package',
+            name="Package",
             fields=[
-                ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('package_name', models.CharField(max_length=255)),
-                ('city', models.CharField(max_length=255)),
-                ('featured', models.BooleanField(default=False)),
-                ('price', models.IntegerField(verbose_name='Price in Nrs')),
-                ('price_2', models.IntegerField(verbose_name='Price in $')),
-                ('duration', models.IntegerField(default=5)),
-                ('discount', models.IntegerField(default=15, verbose_name='Discount %')),
-                ('tour_type', models.CharField(choices=[('Custom-made trip with guide and/or driver', 'Custom-made trip with guide and/or driver'), ('Custom-made trip without guide and driver', 'Custom-made trip without guide and driver'), ('Group Tour', 'Group Tour'), ('Cruise Tour', 'Cruise Tour')], default='Group Tour', max_length=100)),
-                ('accommodation', models.CharField(default='Guest House & Hotel', max_length=255)),
-                ('transport', models.CharField(default='Flight', max_length=150)),
-                ('age_range', models.CharField(default='6 to 79 years old', max_length=100)),
-                ('fix_departure', models.BooleanField(default=False)),
-                ('rating', models.IntegerField(choices=[(1, 1), (2, 2), (3, 3), (4, 4), (5, 5)])),
-                ('image', models.ImageField(blank=True, upload_to='', verbose_name='Thumbnail Image-Vertical')),
-                ('content', ckeditor.fields.RichTextField()),
-                ('highlights', ckeditor.fields.RichTextField()),
-                ('inclusions', ckeditor.fields.RichTextField()),
-                ('exclusions', ckeditor.fields.RichTextField()),
-                ('itinerary_text', ckeditor.fields.RichTextField()),
-                ('faqs', ckeditor.fields.RichTextField(blank=True)),
-                ('image_1', models.ImageField(blank=True, null=True, upload_to='', verbose_name='Image-Horizontal')),
-                ('image_2', models.ImageField(blank=True, null=True, upload_to='', verbose_name='Image-Square')),
-                ('image_3', models.ImageField(blank=True, null=True, upload_to='', verbose_name='Image-Sqaure')),
-                ('date_created', models.DateField()),
-                ('destination', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='packages.Destination')),
-                ('new_activity', models.ManyToManyField(to='packages.NewActivity')),
-                ('operator', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to='accounts.UserProfile')),
+                (
+                    "id",
+                    models.AutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                ("package_name", models.CharField(max_length=255)),
+                ("city", models.CharField(max_length=255)),
+                ("featured", models.BooleanField(default=False)),
+                ("price", models.IntegerField(verbose_name="Price in Nrs")),
+                ("price_2", models.IntegerField(verbose_name="Price in $")),
+                ("duration", models.IntegerField(default=5)),
+                (
+                    "discount",
+                    models.IntegerField(default=15, verbose_name="Discount %"),
+                ),
+                (
+                    "tour_type",
+                    models.CharField(
+                        choices=[
+                            (
+                                "Custom-made trip with guide and/or driver",
+                                "Custom-made trip with guide and/or driver",
+                            ),
+                            (
+                                "Custom-made trip without guide and driver",
+                                "Custom-made trip without guide and driver",
+                            ),
+                            ("Group Tour", "Group Tour"),
+                            ("Cruise Tour", "Cruise Tour"),
+                        ],
+                        default="Group Tour",
+                        max_length=100,
+                    ),
+                ),
+                (
+                    "accommodation",
+                    models.CharField(default="Guest House & Hotel", max_length=255),
+                ),
+                ("transport", models.CharField(default="Flight", max_length=150)),
+                (
+                    "age_range",
+                    models.CharField(default="6 to 79 years old", max_length=100),
+                ),
+                ("fix_departure", models.BooleanField(default=False)),
+                (
+                    "rating",
+                    models.IntegerField(
+                        choices=[(1, 1), (2, 2), (3, 3), (4, 4), (5, 5)]
+                    ),
+                ),
+                (
+                    "image",
+                    models.ImageField(
+                        blank=True,
+                        upload_to="",
+                        verbose_name="Thumbnail Image-Vertical",
+                    ),
+                ),
+                ("content", ckeditor.fields.RichTextField()),
+                ("highlights", ckeditor.fields.RichTextField()),
+                ("inclusions", ckeditor.fields.RichTextField()),
+                ("exclusions", ckeditor.fields.RichTextField()),
+                ("itinerary_text", ckeditor.fields.RichTextField()),
+                ("faqs", ckeditor.fields.RichTextField(blank=True)),
+                (
+                    "image_1",
+                    models.ImageField(
+                        blank=True,
+                        null=True,
+                        upload_to="",
+                        verbose_name="Image-Horizontal",
+                    ),
+                ),
+                (
+                    "image_2",
+                    models.ImageField(
+                        blank=True, null=True, upload_to="", verbose_name="Image-Square"
+                    ),
+                ),
+                (
+                    "image_3",
+                    models.ImageField(
+                        blank=True, null=True, upload_to="", verbose_name="Image-Sqaure"
+                    ),
+                ),
+                ("date_created", models.DateField()),
+                (
+                    "destination",
+                    models.ForeignKey(
+                        on_delete=django.db.models.deletion.CASCADE,
+                        to="packages.Destination",
+                    ),
+                ),
+                ("new_activity", models.ManyToManyField(to="packages.NewActivity")),
+                (
+                    "operator",
+                    models.ForeignKey(
+                        on_delete=django.db.models.deletion.CASCADE,
+                        to="accounts.UserProfile",
+                    ),
+                ),
             ],
             options={
-                'ordering': ('-id',),
+                "ordering": ("-id",),
             },
         ),
         migrations.CreateModel(
-            name='TopAttractions',
+            name="TopAttractions",
             fields=[
-                ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('image', models.ImageField(blank=True, upload_to='')),
-                ('title', models.CharField(max_length=64)),
+                (
+                    "id",
+                    models.AutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                ("image", models.ImageField(blank=True, upload_to="")),
+                ("title", models.CharField(max_length=64)),
             ],
         ),
         migrations.CreateModel(
-            name='TopActivities',
+            name="TopActivities",
             fields=[
-                ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('image', models.ImageField(blank=True, upload_to='')),
-                ('activity', models.CharField(max_length=64)),
-                ('description', ckeditor.fields.RichTextField(blank=True)),
-                ('package', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='activities', to='packages.Package')),
+                (
+                    "id",
+                    models.AutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                ("image", models.ImageField(blank=True, upload_to="")),
+                ("activity", models.CharField(max_length=64)),
+                ("description", ckeditor.fields.RichTextField(blank=True)),
+                (
+                    "package",
+                    models.ForeignKey(
+                        on_delete=django.db.models.deletion.CASCADE,
+                        related_name="activities",
+                        to="packages.Package",
+                    ),
+                ),
             ],
         ),
         migrations.CreateModel(
-            name='Review',
+            name="Review",
             fields=[
-                ('id', models.AutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('user_rating', models.IntegerField(choices=[(1, 1), (2, 2), (3, 3), (4, 4), (5, 5)])),
-                ('full_name', models.CharField(max_length=255)),
-                ('review', ckeditor.fields.RichTextField()),
-                ('created_at', models.DateTimeField(auto_now_add=True)),
-                ('package', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='reviews', to='packages.Package')),
-                ('user', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, to=settings.AUTH_USER_MODEL)),
+                (
+                    "id",
+                    models.AutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                (
+                    "user_rating",
+                    models.IntegerField(
+                        choices=[(1, 1), (2, 2), (3, 3), (4, 4), (5, 5)]
+                    ),
+                ),
+                ("full_name", models.CharField(max_length=255)),
+                ("review", ckeditor.fields.RichTextField()),
+                ("created_at", models.DateTimeField(auto_now_add=True)),
+                (
+                    "package",
+                    models.ForeignKey(
+                        on_delete=django.db.models.deletion.CASCADE,
+                        related_name="reviews",
+                        to="packages.Package",
+                    ),
+                ),
+                (
+                    "user",
+                    models.ForeignKey(
+                        on_delete=django.db.models.deletion.CASCADE,
+                        to=settings.AUTH_USER_MODEL,
+                    ),
+                ),
             ],
             options={
-                'ordering': ('created_at',),
+                "ordering": ("created_at",),
             },
         ),
     ]

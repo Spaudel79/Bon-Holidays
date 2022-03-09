@@ -1,8 +1,9 @@
 from django.urls import include, path
 from rest_framework import routers
+
 # from .views import BlogPostViewSet, CommentViewSet
 from django.urls import path, re_path, include
-from .import views
+from . import views
 
 # router = routers.DefaultRouter()
 # router.register(r'blog-post', BlogPostViewSet)
@@ -16,16 +17,30 @@ from .import views
 # ]
 
 
-
 urlpatterns = [
-        path('api/tags', views.TagsAPIView.as_view(), name='api-tags'),
-        path('api/blog-post', views.BlogPostListFrontAPIView.as_view(), name='api-blog-post'),
-        path('api/blog-post/all', views.BlogPostAllListAPIView.as_view(), name='api-blog-post'),
-        path('api/blog-post/<int:pk>', views.BlogPostDetailsListAPIView.as_view(), name='api-blog-post_details'),
-        path('api/comments/<int:blog>', views.CommentListAPIView.as_view(), name='api-comments'),
-        path('api/blog-post/<int:pk>/postcomment', views.CommentCreateAPIView.as_view(), name='api-postcomment'),
-        path('api/subscriber',views.SubscribersView.as_view(),name='api-subsciber')
+    path("api/tags", views.TagsAPIView.as_view(), name="api-tags"),
+    path(
+        "api/blog-post", views.BlogPostListFrontAPIView.as_view(), name="api-blog-post"
+    ),
+    path(
+        "api/blog-post/all",
+        views.BlogPostAllListAPIView.as_view(),
+        name="api-blog-post",
+    ),
+    path(
+        "api/blog-post/<int:pk>",
+        views.BlogPostDetailsListAPIView.as_view(),
+        name="api-blog-post_details",
+    ),
+    path(
+        "api/comments/<int:blog>",
+        views.CommentListAPIView.as_view(),
+        name="api-comments",
+    ),
+    path(
+        "api/blog-post/<int:pk>/postcomment",
+        views.CommentCreateAPIView.as_view(),
+        name="api-postcomment",
+    ),
+    path("api/subscriber", views.SubscribersView.as_view(), name="api-subsciber"),
 ]
-
-
-

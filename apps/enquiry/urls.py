@@ -1,9 +1,10 @@
 # enquiry/urls.py
 from django.urls import include, path
 from rest_framework import routers
+
 # from .views import ContactViewSet, FeedbackViewset
 from django.urls import path, re_path, include
-from .import views
+from . import views
 
 # router = routers.DefaultRouter()
 # router.register(r'contact', ContactViewSet)
@@ -16,11 +17,8 @@ from .import views
 # ]
 
 urlpatterns = [
-
-        path('api/contactinfo', views.ContactListAPIView.as_view(), name='api-contactinfo'),
-        path('api/contact', views.ContactCreateAPIView.as_view(), name='api-contact'),
-        # path('blog-post/<int:pk>', views.BlogPostDetailsListAPIView.as_view(), name='api-blog-post_details'),
-        path('api/feedback', views.FeedbackListAPIView.as_view(), name='api-feedback'),
-
-
+    path("api/contactinfo", views.ContactListAPIView.as_view(), name="api-contactinfo"),
+    path("api/contact", views.ContactCreateAPIView.as_view(), name="api-contact"),
+    # path('blog-post/<int:pk>', views.BlogPostDetailsListAPIView.as_view(), name='api-blog-post_details'),
+    path("api/feedback", views.FeedbackListAPIView.as_view(), name="api-feedback"),
 ]

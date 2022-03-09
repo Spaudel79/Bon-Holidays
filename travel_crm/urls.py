@@ -22,29 +22,22 @@ import debug_toolbar
 from rest_framework.authtoken.models import Token
 
 urlpatterns = [
-
-
-    path('', include('apps.accounts.urls')),
-    path('', include('apps.blogs.urls')),
-    path('', include('apps.enquiry.urls')),
-    path('', include('apps.packages.urls')),
-    path('', include('apps.booking.urls')),
-    path('', include('apps.logo.urls')),
-    path('', include('apps.office.urls')),
-    path('', admin.site.urls),
-    path('admin/', admin.site.urls),
-    path('ckeditor', include('ckeditor_uploader.urls')),
-    path('__debug__/', include(debug_toolbar.urls)),
-
-
-                ]+static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
-              # ]+static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
-
-
+    path("", include("apps.accounts.urls")),
+    path("", include("apps.blogs.urls")),
+    path("", include("apps.enquiry.urls")),
+    path("", include("apps.packages.urls")),
+    path("", include("apps.booking.urls")),
+    path("", include("apps.logo.urls")),
+    path("", include("apps.office.urls")),
+    path("", admin.site.urls),
+    path("admin/", admin.site.urls),
+    path("ckeditor", include("ckeditor_uploader.urls")),
+    path("__debug__/", include(debug_toolbar.urls)),
+] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+# ]+static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
 
 
 # if settings.DEBUG is True:
 #     urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
 
 admin.site.unregister(Token)
-

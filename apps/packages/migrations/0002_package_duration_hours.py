@@ -6,13 +6,13 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('packages', '0001_initial'),
+        ("packages", "0001_initial"),
     ]
 
     operations = [
         migrations.AddField(
-            model_name='package',
-            name='duration_hours',
-            field=models.IntegerField(default=10, verbose_name='Hours If One day Tour'),
+            model_name="package",
+            name="duration_hours",
+            field=models.IntegerField(default=10, verbose_name="Hours If One day Tour"),
         ),
     ]

@@ -1,21 +1,24 @@
 from django.db import models
 from django.conf import settings
-from django.contrib.auth.models import BaseUserManager, AbstractBaseUser, PermissionsMixin
+from django.contrib.auth.models import (
+    BaseUserManager,
+    AbstractBaseUser,
+    PermissionsMixin,
+)
 from django.contrib.auth import get_user_model
 from imagekit.models import ImageSpecField
 from imagekit.processors import ResizeToFill
 from ckeditor.fields import RichTextField
 from django.contrib.auth.models import Group
+
 # from apps.blogs.models import BlogPost
 
 
-
 class UserManager(BaseUserManager):
-
     def create_user(self, email, password=None, **kwargs):
         """Creating new user and saving the user."""
         if not email:
-            raise ValueError('Admin must have a valid email')
+            raise ValueError("Admin must have a valid email")
         user = self.model(email=self.normalize_email(email), **kwargs)
         user.set_password(password)
         user.save(using=self._db)
@@ -33,7 +36,7 @@ class UserManager(BaseUserManager):
 
 
 class User(AbstractBaseUser, PermissionsMixin):
-    """ Custom user model that supports using email instead of username """
+    """Custom user model that supports using email instead of username"""
 
     email = models.EmailField(max_length=255, unique=True)
     first_name = models.CharField(max_length=255)
@@ -43,20 +46,23 @@ class User(AbstractBaseUser, PermissionsMixin):
     # is_agent = models.BooleanField(default=False)
 
     objects = UserManager()
-    USERNAME_FIELD = 'email'
+    USERNAME_FIELD = "email"
+
 
 User = get_user_model()
 
+
 class UserProfile(models.Model):
     USER_TYPES = (
-        ('b', 'Bon-Admin'),
-        ('g', 'Agent'),
-        ('c', 'Customer'),
+        ("b", "Bon-Admin"),
+        ("g", "Agent"),
+        ("c", "Customer"),
     )
-    user = models.OneToOneField(settings.AUTH_USER_MODEL,
-                                related_name='profile', on_delete=models.CASCADE)
+    user = models.OneToOneField(
+        settings.AUTH_USER_MODEL, related_name="profile", on_delete=models.CASCADE
+    )
     group = models.ForeignKey(Group, on_delete=models.CASCADE)
-    user_type = models.CharField(max_length=1, choices=USER_TYPES, default='g')
+    user_type = models.CharField(max_length=1, choices=USER_TYPES, default="g")
     first_name = models.CharField(max_length=255, default="")
     last_name = models.CharField(max_length=255, default="")
     company_name = models.CharField(max_length=255, default="")
@@ -66,10 +72,12 @@ class UserProfile(models.Model):
     commission = models.CharField(max_length=50, default="15%")
     avatar = models.ImageField(blank=False)
 
-    thumbnail = ImageSpecField(source='avatar',
-                               processors=[ResizeToFill(100, 50)],
-                               format='JPEG',
-                               options={'quality': 60})
+    thumbnail = ImageSpecField(
+        source="avatar",
+        processors=[ResizeToFill(100, 50)],
+        format="JPEG",
+        options={"quality": 60},
+    )
     # cover_photo = models.ImageField(blank=True, null=True)
     languages = models.CharField(max_length=255)
     expert_countries = models.TextField()
@@ -92,13 +100,13 @@ class UserProfile(models.Model):
     #     return target
 
     def is_admin(self):
-        return self.user_type == 'a'
+        return self.user_type == "a"
 
     def is_agent(self):
-        return self.user_type == 'g'
+        return self.user_type == "g"
 
     def is_customer(self):
-        return self.user_type == 'c'
+        return self.user_type == "c"
 
 
 class PartnerApplication(models.Model):
@@ -131,5 +139,3 @@ class BookmundiAccount(models.Model):
     passport_number = models.CharField(max_length=255)
     issue_date = models.DateField()
     expiry_date = models.DateField()
-
-

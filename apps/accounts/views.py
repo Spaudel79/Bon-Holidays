@@ -6,17 +6,25 @@ from rest_framework.permissions import IsAuthenticated
 from django.contrib import auth
 from rest_framework.authtoken.models import Token
 from rest_framework.permissions import (
-AllowAny, IsAuthenticated, IsAdminUser, IsAuthenticatedOrReadOnly,
+    AllowAny,
+    IsAuthenticated,
+    IsAdminUser,
+    IsAuthenticatedOrReadOnly,
 )
 from rest_framework.authentication import TokenAuthentication
 from rest_framework.views import APIView
 from .models import *
 from .serializers import *
 from django.contrib.auth.models import Permission
-from rest_framework.generics import (GenericAPIView,
-CreateAPIView, DestroyAPIView, ListCreateAPIView,
-ListAPIView, UpdateAPIView,
-RetrieveUpdateAPIView, RetrieveAPIView
+from rest_framework.generics import (
+    GenericAPIView,
+    CreateAPIView,
+    DestroyAPIView,
+    ListCreateAPIView,
+    ListAPIView,
+    UpdateAPIView,
+    RetrieveUpdateAPIView,
+    RetrieveAPIView,
 )
 from rest_framework.authtoken.models import Token
 from rest_framework.authentication import TokenAuthentication
@@ -24,7 +32,7 @@ from rest_framework.response import Response
 
 
 class Homepage(GenericAPIView):
-    def get(self,request):
+    def get(self, request):
         return Response(status=status.HTTP_200_OK)
 
 
@@ -65,9 +73,10 @@ class LoginUserView(GenericAPIView):
         serializer = self.get_serializer(user)
         token, created = Token.objects.get_or_create(user=user)
         # return response.Response(new_data, status=status.HTTP_200_OK)
-        return response.Response({"token": token.key,
-                                  "serializer.data": serializer.data},
-                                   status=status.HTTP_200_OK)
+        return response.Response(
+            {"token": token.key, "serializer.data": serializer.data},
+            status=status.HTTP_200_OK,
+        )
 
 
 class Logout(GenericAPIView):
@@ -90,38 +99,6 @@ class ProfileListView(ListAPIView):
     # permission_classes = [AllowAny]
     serializer_class = ProfileListSerializer
     queryset = UserProfile.objects.all()
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 # from django.shortcuts import redirect

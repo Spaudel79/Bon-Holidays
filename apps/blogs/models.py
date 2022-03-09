@@ -1,29 +1,42 @@
 from django.db import models
 from ckeditor_uploader.fields import RichTextUploadingField
 from ckeditor.fields import RichTextField
+
 # from django.contrib.auth import get_user_model
 #
 # User = get_user_model()
 
 
 class Tag(models.Model):
-    tagname= models.CharField(max_length=255)
+    tagname = models.CharField(max_length=255)
 
     def __str__(self):
         return self.tagname
 
+
 class BlogPost(models.Model):
 
-    author = models.CharField(max_length=64, default='Admin')
+    author = models.CharField(max_length=64, default="Admin")
     CATEGORY_CHOICES = (
-        ('travel_news', 'Travel News',),
-        ('travel_tips', 'Travel Tips',),
-        ('things_to_do', 'Things to Do',),
-        ('places_to_go', 'Places to Go'),
+        (
+            "travel_news",
+            "Travel News",
+        ),
+        (
+            "travel_tips",
+            "Travel Tips",
+        ),
+        (
+            "things_to_do",
+            "Things to Do",
+        ),
+        ("places_to_go", "Places to Go"),
     )
     image = models.ImageField(blank=True, null=True)
     title = models.CharField(max_length=255)
-    categories = models.CharField(max_length=64, choices=CATEGORY_CHOICES, default='travel_news')
+    categories = models.CharField(
+        max_length=64, choices=CATEGORY_CHOICES, default="travel_news"
+    )
     caption = models.CharField(max_length=500)
     content = RichTextUploadingField()
 
@@ -34,8 +47,9 @@ class BlogPost(models.Model):
 
     @property
     def html_stripped(self):
-       from django.utils.html import strip_tags
-       return strip_tags(self.content)
+        from django.utils.html import strip_tags
+
+        return strip_tags(self.content)
 
     def __str__(self):
         return self.title
@@ -51,14 +65,12 @@ class BlogPost(models.Model):
     #     return self.comments_set.all()
 
 
-
-
-
-
 class Comment(models.Model):
     # blog = models.ForeignKey(BlogPost, on_delete=models.CASCADE, default=1)
-    user = models.ForeignKey('accounts.User', on_delete=models.CASCADE)
-    blog = models.ForeignKey(BlogPost, on_delete=models.CASCADE, related_name='comments')
+    user = models.ForeignKey("accounts.User", on_delete=models.CASCADE)
+    blog = models.ForeignKey(
+        BlogPost, on_delete=models.CASCADE, related_name="comments"
+    )
     name = models.CharField(max_length=255)
     email = models.EmailField()
     subject = models.CharField(max_length=255)
@@ -67,10 +79,9 @@ class Comment(models.Model):
     is_active = models.BooleanField(default=True)
 
     class Meta:
-        ordering = ('created_at',)
+        ordering = ("created_at",)
 
     # send_mails.delay(5)
-
 
     # def __str__(self):
     #     return f'Comment by {self.author.username} on {self.post}'
@@ -98,7 +109,6 @@ class Subscribers(models.Model):
     #         # task = send_mails(subscribers, blog)
     #         # task.delay()
     #         send_mails.delay(subscribers,blog)
-
 
     # binding signal:
     # @receiver(post_save,sender=BlogPost)

@@ -4,6 +4,7 @@ from imagekit.processors import ResizeToFill
 
 # Create your models here.
 
+
 class Logo(models.Model):
     image = models.ImageField(blank=True, null=True)
     # thumbnail = ImageSpecField(source='image',

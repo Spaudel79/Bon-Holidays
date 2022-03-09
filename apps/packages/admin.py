@@ -10,47 +10,76 @@ from apps.accounts.models import User, UserProfile
 
 class DestinationAdmin(ModelAdmin):
 
-    search_fields = ['name']
+    search_fields = ["name"]
 
     def edit(self, obj):
-        return format_html('<a class="btn-btn" href="/admin/packages/destination/{}/change/">Change</a>', obj.id)
+        return format_html(
+            '<a class="btn-btn" href="/admin/packages/destination/{}/change/">Change</a>',
+            obj.id,
+        )
 
     def delete(self, obj):
-        return format_html('<a class="btn-btn" href="/admin/packages/destination/{}/delete/">Delete</a>', obj.id)
+        return format_html(
+            '<a class="btn-btn" href="/admin/packages/destination/{}/delete/">Delete</a>',
+            obj.id,
+        )
 
-    list_display = ('name', 'continent', 'top', 'date_created',  'edit', 'delete')
+    list_display = ("name", "continent", "top", "date_created", "edit", "delete")
     # image_display = AdminThumbnail(image_field='thumbnail')
     # image_display.short_description = 'Image'
     # readonly_fields = ['image_display']
-    icon_name = 'beach_access'
+    icon_name = "beach_access"
 
     def changelist_view(self, request, extra_context=None):
         if not request.user.is_superuser:
-            self.list_display = ('name', 'top', 'continent', 'date_created',)
+            self.list_display = (
+                "name",
+                "top",
+                "continent",
+                "date_created",
+            )
         else:
-            self.list_display = ('name', 'top', 'continent', 'date_created',  'edit', 'delete')
+            self.list_display = (
+                "name",
+                "top",
+                "continent",
+                "date_created",
+                "edit",
+                "delete",
+            )
         return super(DestinationAdmin, self).changelist_view(request, extra_context)
 
 
-
 class PackageAdmin(ModelAdmin):
-    icon_name = 'explore'
+    icon_name = "explore"
     # autocomplete_fields = ['destination']
 
     def edit(self, obj):
-        return format_html('<a class="btn-btn" href="/admin/packages/package/{}/change/">Change</a>', obj.id)
+        return format_html(
+            '<a class="btn-btn" href="/admin/packages/package/{}/change/">Change</a>',
+            obj.id,
+        )
 
     def delete(self, obj):
-        return format_html('<a class="btn-btn" href="/admin/packages/package/{}/delete/">Delete</a>', obj.id)
+        return format_html(
+            '<a class="btn-btn" href="/admin/packages/package/{}/delete/">Delete</a>',
+            obj.id,
+        )
 
-    list_display = ('package_name',  'featured', 'price',
-                     'fix_departure', 'rating',
-                     'date_created', 'edit', 'delete')
+    list_display = (
+        "package_name",
+        "featured",
+        "price",
+        "fix_departure",
+        "rating",
+        "date_created",
+        "edit",
+        "delete",
+    )
 
-    search_fields = ['package_name','city']
-    list_filter = ('package_name','destination','city')
-    icon_name = 'subway'
-
+    search_fields = ["package_name", "city"]
+    list_filter = ("package_name", "destination", "city")
+    icon_name = "subway"
 
     def get_queryset(self, request):
         abc = super(PackageAdmin, self).get_queryset(request)
@@ -63,18 +92,34 @@ class PackageAdmin(ModelAdmin):
     # class Media:
     #     js = ('ckeditor.js','configuration-ckeditor.js')
 
+
 @register(Review)
 class ReviewAdmin(ModelAdmin):
 
     # autocomplete_fields = ['author']
     def edit(self, obj):
-        return format_html('<a class="btn-btn" href="/admin/package/review/{}/change/">Change</a>', obj.id)
+        return format_html(
+            '<a class="btn-btn" href="/admin/package/review/{}/change/">Change</a>',
+            obj.id,
+        )
 
     def delete(self, obj):
-        return format_html('<a class="btn-btn" href="/admin/package/review/{}/delete/">Delete</a>', obj.id)
+        return format_html(
+            '<a class="btn-btn" href="/admin/package/review/{}/delete/">Delete</a>',
+            obj.id,
+        )
 
-    list_display = ('user', 'package', 'user_rating', 'full_name', 'created_at', 'edit', 'delete')
-    icon_name = 'comment'
+    list_display = (
+        "user",
+        "package",
+        "user_rating",
+        "full_name",
+        "created_at",
+        "edit",
+        "delete",
+    )
+    icon_name = "comment"
+
 
 # @register(TopAttractions)
 # class TopAttractionsAdmin(ModelAdmin):
@@ -106,16 +151,24 @@ class ReviewAdmin(ModelAdmin):
 #     readonly_fields = ['image_display']
 #     icon_name = 'layers'
 
+
 @register(NewActivity)
 class NewActivityAdmin(ModelAdmin):
     def edit(self, obj):
-        return format_html('<a class="btn-btn" href="/admin/packages/newactivity/{}/change/">Change</a>', obj.id)
+        return format_html(
+            '<a class="btn-btn" href="/admin/packages/newactivity/{}/change/">Change</a>',
+            obj.id,
+        )
 
     def delete(self, obj):
-        return format_html('<a class="btn-btn" href="/admin/packages/newactivity/{}/delete/">Delete</a>', obj.id)
+        return format_html(
+            '<a class="btn-btn" href="/admin/packages/newactivity/{}/delete/">Delete</a>',
+            obj.id,
+        )
 
-    list_display = ('title',  'edit', 'delete')
-    icon_name = 'directions_bike'
+    list_display = ("title", "edit", "delete")
+    icon_name = "directions_bike"
+
 
 # class PackageInline(admin.TabularInline):
 #     model = Package
@@ -128,4 +181,4 @@ admin.site.register(Destination, DestinationAdmin)
 admin.site.register(Package, PackageAdmin)
 # admin.site.register(Itinerary)
 
-admin.site.site_header = 'Bon Holidays'
+admin.site.site_header = "Bon Holidays"

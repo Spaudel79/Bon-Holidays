@@ -6,13 +6,13 @@ from django.db.models import Q
 class PartnerApplicationSerializer(serializers.ModelSerializer):
     class Meta:
         model = PartnerApplication
-        fields = '__all__'
+        fields = "__all__"
 
 
 class BookmundiAccountSerializer(serializers.ModelSerializer):
     class Meta:
         model = BookmundiAccount
-        fields = '__all__'
+        fields = "__all__"
 
 
 class RegisterUserSerializer(serializers.ModelSerializer):
@@ -20,24 +20,28 @@ class RegisterUserSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = User
-        fields = ['email', 'first_name', 'last_name', 'password']
+        fields = ["email", "first_name", "last_name", "password"]
         extra_kwargs = {
             "password": {"write_only": True},
-            'first_name': {'required': False},
-            'last_name': {'required': False}
+            "first_name": {"required": False},
+            "last_name": {"required": False},
         }
 
     def validate(self, attrs):
-        first_name = attrs.get('first_name', '')
-        last_name = attrs.get('last_name', '')
+        first_name = attrs.get("first_name", "")
+        last_name = attrs.get("last_name", "")
 
         if first_name:
             if not first_name.isalnum():
-                raise serializers.ValidationError('Enter only alphanumeric value for first name')
+                raise serializers.ValidationError(
+                    "Enter only alphanumeric value for first name"
+                )
 
         if last_name:
             if not last_name.isalnum():
-                raise serializers.ValidationError('Enter only alphanumeric value for last name')
+                raise serializers.ValidationError(
+                    "Enter only alphanumeric value for last name"
+                )
 
         return attrs
 
@@ -47,16 +51,17 @@ class RegisterUserSerializer(serializers.ModelSerializer):
 
 class UserLoginSerializer(serializers.ModelSerializer):
     # token = serializers.CharField(allow_blank=True, read_only=True)
-    email = serializers.EmailField(label='Email Address')
+    email = serializers.EmailField(label="Email Address")
 
     class Meta:
         model = User
         fields = [
-            'id', 'email', 'password',
+            "id",
+            "email",
+            "password",
         ]
         # fields = '__all__'
-        extra_kwargs = {"password":
-                            {"write_only": True}}
+        extra_kwargs = {"password": {"write_only": True}}
 
     def validate(self, data):
         user = None
@@ -75,22 +80,18 @@ class UserLoginSerializer(serializers.ModelSerializer):
             if not user.check_password(password):
                 raise serializers.ValidationError("Incorrect password")
 
-        data['user'] = user
+        data["user"] = user
         return data
 
 
 class UserListSerializer(serializers.ModelSerializer):
     class Meta:
         model = User
-        fields = '__all__'
+        fields = "__all__"
 
 
 class ProfileListSerializer(serializers.ModelSerializer):
     class Meta:
         model = UserProfile
-        exclude = ['group', 'user', 'commission', 'last_updated']
+        exclude = ["group", "user", "commission", "last_updated"]
         depth = 1
-
-
-
-

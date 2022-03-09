@@ -2,24 +2,34 @@ from rest_framework import serializers
 from .models import *
 from .serializers import *
 
+
 class CommentSerializer(serializers.ModelSerializer):
     # blog = serializers.StringRelatedField()
     class Meta:
         model = Comment
-        fields = ['name', 'email', 'subject', 'comment']
+        fields = ["name", "email", "subject", "comment"]
         # depth = 1
+
 
 class CommentListSerializer(serializers.ModelSerializer):
     # blog = serializers.StringRelatedField()
     class Meta:
         model = Comment
-        fields = ['name', 'email', 'subject', 'comment']
+        fields = ["name", "email", "subject", "comment"]
+
 
 class BlogPostFrontPageSerializer(serializers.ModelSerializer):
-
     class Meta:
         model = BlogPost
-        fields = ['id', 'image', 'title', 'caption', 'categories', 'tag', 'date_created']
+        fields = [
+            "id",
+            "image",
+            "title",
+            "caption",
+            "categories",
+            "tag",
+            "date_created",
+        ]
         # fields = '__all__'
         depth = 1
 
@@ -29,7 +39,15 @@ class BlogPostAllSerializer(serializers.ModelSerializer):
 
     class Meta:
         model = BlogPost
-        fields = ['id', 'image', 'title', 'caption', 'categories', 'tag', 'date_created', ]
+        fields = [
+            "id",
+            "image",
+            "title",
+            "caption",
+            "categories",
+            "tag",
+            "date_created",
+        ]
         # fields = '__all__'
         depth = 1
 
@@ -43,13 +61,24 @@ class BlogPostAllSerializer(serializers.ModelSerializer):
         # def create(self, validated_data):
         #     comments = validated_data.pop('commnets')
 
+
 class BlogPostDetailSerializer(serializers.ModelSerializer):
     # url = serializers.HyperlinkedIdentityField(view_name='api-blog-post_details', read_only=True)
     comments = CommentSerializer(many=True)
     # tag = serializers.StringRelatedField()
     class Meta:
         model = BlogPost
-        fields = ['id',  'image', 'title', 'categories', 'caption', 'content', 'tag', 'date_created', 'comments']
+        fields = [
+            "id",
+            "image",
+            "title",
+            "categories",
+            "caption",
+            "content",
+            "tag",
+            "date_created",
+            "comments",
+        ]
         # fields = '__all__'
         depth = 1
 
@@ -57,28 +86,31 @@ class BlogPostDetailSerializer(serializers.ModelSerializer):
 class TagSerializer(serializers.ModelSerializer):
     class Meta:
         model = Tag
-        fields = '__all__'
+        fields = "__all__"
 
 
 class CommentListSerializer(serializers.ModelSerializer):
-
     class Meta:
         model = Comment
-        fields = ['name', 'email', 'subject', 'comment']
+        fields = ["name", "email", "subject", "comment"]
 
 
 class CommentPostSerializer(serializers.ModelSerializer):
-
     class Meta:
         model = Comment
         # fields = '__all__'
-        fields = ['name', 'email', 'subject', 'comment',]
+        fields = [
+            "name",
+            "email",
+            "subject",
+            "comment",
+        ]
 
 
 class BlogListSerializer(serializers.ModelSerializer):
     class Meta:
         model = BlogPost
-        fields = '__all__'
+        fields = "__all__"
 
 
 class BlogPostCommentSerializer(serializers.ModelSerializer):
@@ -86,26 +118,20 @@ class BlogPostCommentSerializer(serializers.ModelSerializer):
     # comments = CommentSerializer(source='comments.content')
     # comments = CommentListSerializer(many=True)
     blog = BlogListSerializer(many=False)
+
     class Meta:
         model = Comment
-        fields = ['blog', 'name', 'email', 'subject', 'comment',]
+        fields = [
+            "blog",
+            "name",
+            "email",
+            "subject",
+            "comment",
+        ]
         # fields = '__all__'
-
 
 
 class SubscriberSerializer(serializers.ModelSerializer):
     class Meta:
         model = Subscribers
-        fields = '__all__'
-
-
-
-
-
-
-
-
-
-
-
-
+        fields = "__all__"

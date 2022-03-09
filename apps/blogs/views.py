@@ -13,13 +13,19 @@ from travel_crm.settings import EMAIL_HOST_USER
 from rest_framework import status
 
 from rest_framework.generics import (
-CreateAPIView, DestroyAPIView,
-ListAPIView, UpdateAPIView,
-RetrieveUpdateAPIView, RetrieveAPIView
+    CreateAPIView,
+    DestroyAPIView,
+    ListAPIView,
+    UpdateAPIView,
+    RetrieveUpdateAPIView,
+    RetrieveAPIView,
 )
 
 from rest_framework.permissions import (
-AllowAny, IsAuthenticated, IsAdminUser, IsAuthenticatedOrReadOnly
+    AllowAny,
+    IsAuthenticated,
+    IsAdminUser,
+    IsAuthenticatedOrReadOnly,
 )
 
 
@@ -31,9 +37,10 @@ AllowAny, IsAuthenticated, IsAdminUser, IsAuthenticatedOrReadOnly
 #     queryset = Comment.objects.all()
 #     serializer_class = CommentSerializer
 
+
 class BlogPostListFrontAPIView(ListAPIView):
     permission_classes = [AllowAny]
-    queryset = BlogPost.objects.all().order_by('-date_created')[:3]
+    queryset = BlogPost.objects.all().order_by("-date_created")[:3]
     # queryset = BlogPost.objects.all.order_by('-date_created')[:3]
     serializer_class = BlogPostFrontPageSerializer
 
@@ -45,14 +52,11 @@ class BlogPostAllListAPIView(ListAPIView):
     pagination_class = BlogPostPageNumberPagination
 
     def get_queryset(self):
-        tag = self.request.query_params.get('tag', None)
+        tag = self.request.query_params.get("tag", None)
         if tag is not None:
             return BlogPost.objects.filter(tag__tagname=tag)
         else:
             return BlogPost.objects.all()
-
-
-
 
 
 class BlogPostDetailsListAPIView(ListAPIView):
@@ -62,32 +66,32 @@ class BlogPostDetailsListAPIView(ListAPIView):
 
     # pagination_class = CommentPageNumberPagination
     def get_queryset(self):
-            return BlogPost.objects.filter(pk=self.kwargs['pk'])
-
-
-
+        return BlogPost.objects.filter(pk=self.kwargs["pk"])
 
 
 class CommentCreateAPIView(CreateAPIView):
-    permission_classes= [IsAuthenticated]
+    permission_classes = [IsAuthenticated]
     queryset = Comment.objects.all()
     serializer_class = CommentListSerializer
 
     def perform_create(self, serializer):
         # user = self.request.user
-        blog = get_object_or_404(BlogPost, pk= self.kwargs['pk'])
+        blog = get_object_or_404(BlogPost, pk=self.kwargs["pk"])
         serializer.save(user=self.request.user, blog=blog)
 
-        name = serializer.data['name']
-        email = serializer.data['email']
-        subject = serializer.data['subject']
+        name = serializer.data["name"]
+        email = serializer.data["email"]
+        subject = serializer.data["subject"]
 
-        send_mail('New Comment ', f"Comment has been made by {name} "
-                                  f"having email {email} "
-                                  f"and subject as '{subject}'",
-                  email, ['sales6@bonholidays.com.np'],
-                  fail_silently=False)
-
+        send_mail(
+            "New Comment ",
+            f"Comment has been made by {name} "
+            f"having email {email} "
+            f"and subject as '{subject}'",
+            email,
+            ["sales6@bonholidays.com.np"],
+            fail_silently=False,
+        )
 
     # def get_queryset(self):
     #     return BlogPost.objects.filter(pk=self.kwargs['pk'])
@@ -97,7 +101,7 @@ class CommentCreateAPIView(CreateAPIView):
     #     serailizer = BlogListSerializer(instance)
     #     return Response(serailizer.data)
 
-    #def.....
+    # def.....
     # form.instance.blog_id = self.kwargs['pk']
     # return super().form_valid(form)
 
@@ -119,18 +123,14 @@ class CommentCreateAPIView(CreateAPIView):
     #     if serializer.is_valid():
     #         serializer.save()
     #         return Response(serializer.data, status=serializers.status.HTTP_201_CREATED)
-        # else:
-        #     re
-
-
+    # else:
+    #     re
 
     # def get_context_data(self, **kwargs):
     #     context = super(CommentCreateAPIView, self).get_context_data(**kwargs)
     #     pk = self.kwargs['pk']
     #     context['post'] = BlogPost.objects.filter(id=pk)
     #     return context
-
-
 
     # def post(self, request):
     #     data = request.data
@@ -147,7 +147,7 @@ class CommentListAPIView(ListAPIView):
     serializer_class = CommentListSerializer
 
     def get_queryset(self):
-        return Comment.objects.filter(blog=self.kwargs['blog'])
+        return Comment.objects.filter(blog=self.kwargs["blog"])
 
 
 class TagsAPIView(ListAPIView):
@@ -155,9 +155,12 @@ class TagsAPIView(ListAPIView):
     queryset = Tag.objects.all()
     serializer_class = TagSerializer
 
+
 from apps.blogs.admin import BlogForm
+
+
 def blogform(request):
-    if request.method == 'POST':
+    if request.method == "POST":
         form = BlogForm(request.POST)
         if form.is_valid():
             form.save()
@@ -167,10 +170,11 @@ def blogform(request):
 class SubscribersView(APIView):
     permission_classes = [AllowAny]
 
-    def post(self,request,*args,**kwargs):
+    def post(self, request, *args, **kwargs):
         serializer = SubscriberSerializer(data=request.data)
         if serializer.is_valid():
             serializer.save()
-            return Response({"message":"You have been subscribed"},
-                status=status.HTTP_201_CREATED)
+            return Response(
+                {"message": "You have been subscribed"}, status=status.HTTP_201_CREATED
+            )
         return Response(serializer.errors)

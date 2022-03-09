@@ -39,8 +39,7 @@ ExecStart=/home/aakashlabs/rupseonline/venv/bin/gunicorn --access-logfile - --wo
 WantedBy=multi-user.target
 
 
-** 
+**
 sudo systemctl start gunicorn
 sudo systemctl enable gunicorn
 systemctl daemon-reload
- 

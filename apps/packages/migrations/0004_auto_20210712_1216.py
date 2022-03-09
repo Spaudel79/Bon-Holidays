@@ -6,13 +6,15 @@ from django.db import migrations, models
 class Migration(migrations.Migration):
 
     dependencies = [
-        ('packages', '0003_auto_20210712_1155'),
+        ("packages", "0003_auto_20210712_1155"),
     ]
 
     operations = [
         migrations.AlterField(
-            model_name='package',
-            name='duration_hours',
-            field=models.PositiveIntegerField(blank=True, null=True, verbose_name='Hours If One day Tour'),
+            model_name="package",
+            name="duration_hours",
+            field=models.PositiveIntegerField(
+                blank=True, null=True, verbose_name="Hours If One day Tour"
+            ),
         ),
     ]
