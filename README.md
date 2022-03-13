@@ -43,3 +43,9 @@ WantedBy=multi-user.target
 sudo systemctl start gunicorn
 sudo systemctl enable gunicorn
 systemctl daemon-reload
+
+
+#for eb ssh
+eb ssh
+cd /var/app/current/
+sudo nano travel_crm/settings.py

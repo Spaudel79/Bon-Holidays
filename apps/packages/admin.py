@@ -78,7 +78,7 @@ class PackageAdmin(ModelAdmin):
     )
 
     search_fields = ["package_name", "city"]
-    list_filter = ("package_name", "destination", "city")
+    list_filter = ("package_name", "destinations", "city")
     icon_name = "subway"
 
     def get_queryset(self, request):

@@ -24,7 +24,7 @@ class Booking(models.Model):
 
 
 class Test(models.Model):
-    # user = models.ForeignKey(User, on_delete=models.CASCADE)
+
     package = models.ForeignKey(Package, on_delete=models.CASCADE, related_name="test")
     name = models.CharField(max_length=255)
     email = models.EmailField()
@@ -101,12 +101,7 @@ class CustomBooking(models.Model):
             "Quirky",
         ),
     )
-    # FLEXIBILITY = (
-    #     ('No,this is my maximum budget', 'No,this is my maximum budget',),
-    #     ('Flexible,I can increase up to 20%,if needed', 'Flexible,I can increase up to 20%,if needed',),
-    #     ('Very flexible, plan me the best trip possible', 'Very flexible, plan me the best trip possible',),
-    #
-    # )
+
     STAGE = (
         (
             "I need more information before I can start trip planning",
@@ -140,8 +135,7 @@ class CustomBooking(models.Model):
     trip_stage = models.CharField(
         max_length=255, choices=STAGE, default="I'm ready to start trip planning"
     )
-    # trip_title = models.CharField(max_length=255,blank=True)
-    # description = RichTextField(blank=True)
+
     created_at = models.DateTimeField(auto_now_add=True)
 
     class Meta:

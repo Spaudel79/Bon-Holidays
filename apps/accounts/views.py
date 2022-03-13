@@ -1,30 +1,16 @@
 from django.core.exceptions import ObjectDoesNotExist
 from rest_framework import viewsets, mixins, response, status
-from rest_framework.permissions import AllowAny
-from rest_framework.authtoken.views import obtain_auth_token
-from rest_framework.permissions import IsAuthenticated
-from django.contrib import auth
-from rest_framework.authtoken.models import Token
+
 from rest_framework.permissions import (
     AllowAny,
     IsAuthenticated,
-    IsAdminUser,
-    IsAuthenticatedOrReadOnly,
 )
-from rest_framework.authentication import TokenAuthentication
-from rest_framework.views import APIView
-from .models import *
+
 from .serializers import *
-from django.contrib.auth.models import Permission
+
 from rest_framework.generics import (
     GenericAPIView,
-    CreateAPIView,
-    DestroyAPIView,
-    ListCreateAPIView,
     ListAPIView,
-    UpdateAPIView,
-    RetrieveUpdateAPIView,
-    RetrieveAPIView,
 )
 from rest_framework.authtoken.models import Token
 from rest_framework.authentication import TokenAuthentication
@@ -99,14 +85,3 @@ class ProfileListView(ListAPIView):
     # permission_classes = [AllowAny]
     serializer_class = ProfileListSerializer
     queryset = UserProfile.objects.all()
-
-
-# from django.shortcuts import redirect
-# from django.contrib.auth.decorators import login_required
-# from django.views.generic import DetailView, ListView, UpdateView
-#
-# from .models import UserProfile
-#
-# @login_required
-# def profile_redirector(request):
-#     return redirect('accounts:userprofile', username=request.user.email)

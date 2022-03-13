@@ -47,6 +47,7 @@ class BlogForm(forms.ModelForm):
         model = BlogPost
         fields = [
             "author",
+            "destination",
             "image",
             "title",
             "categories",

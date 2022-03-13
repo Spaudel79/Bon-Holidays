@@ -33,7 +33,7 @@ class ItinerarySerializer(serializers.ModelSerializer):
 
 
 class PackageDetailSerializer(serializers.ModelSerializer):
-    destination = serializers.StringRelatedField()
+    destinations = serializers.StringRelatedField()
     reviews = ReviewSerializer(many=True)
     activities = ActivitiesSerializer(many=True)
 
@@ -41,7 +41,7 @@ class PackageDetailSerializer(serializers.ModelSerializer):
         model = Package
         fields = [
             "id",
-            "destination",
+            "destinations",
             "package_name",
             "city",
             "image",
@@ -69,12 +69,16 @@ class PackageDetailSerializer(serializers.ModelSerializer):
 
 
 class PackageSerializer(serializers.ModelSerializer):
+
+    operator = serializers.StringRelatedField()
+    destinations = serializers.StringRelatedField()
+
     class Meta:
         model = Package
         fields = [
             "id",
             "operator",
-            "destination",
+            "destinations",
             "package_name",
             "duration",
             "featured",
@@ -119,17 +123,17 @@ class DestinationFrontSerializer(serializers.ModelSerializer):
 class AllpackageSerializer(serializers.ModelSerializer):
     class Meta:
         model = Package
-        fields = ["id", "destination", "image", "discount"]
+        fields = ["id", "destinations", "image", "discount"]
 
 
 class TravelDealsSerializer(serializers.ModelSerializer):
-    destination_name = serializers.ReadOnlyField(source="destination.name")
+    destination_name = serializers.ReadOnlyField(source="destinations.name")
 
     class Meta:
         model = Package
         # fields = '__all__'
         fields = [
-            "destination_name",
+            "destinations_name",
         ]
 
 
@@ -147,7 +151,7 @@ class CityNameSerializer(serializers.ModelSerializer):
         model = Package
         fields = [
             "id",
-            "destination",
+            "destinations",
             "package_name",
             "duration",
             "featured",

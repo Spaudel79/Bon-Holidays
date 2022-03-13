@@ -4,15 +4,18 @@ from .models import *
 
 class PackageFilter(filters.FilterSet):
     price = filters.RangeFilter()
+    # destination__name = django_filters.MethodFilter()
 
     class Meta:
         model = Package
-        fields = ["price", "featured", "fix_departure", "destination__id"]
-
-    # def filter_first_filter(self, queryset, value):
-    #     # I expect value to setup with an array of values
-    #     myquery = Q()
-    #     return queryset.filter(myquery)
+        fields = [
+            "price",
+            "featured",
+            "fix_departure",
+            "destinations__id",
+            "destinations__name",
+            "package_name",
+        ]
 
 
 class ContinentFilter(filters.FilterSet):

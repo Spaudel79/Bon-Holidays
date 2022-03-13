@@ -2,7 +2,6 @@ from django.db import models
 from imagekit.models import ImageSpecField
 from imagekit.processors import ResizeToFill
 
-# from django_random_queryset import RandomManager
 from ckeditor.fields import RichTextField
 from apps.accounts.models import UserProfile, User
 from image_cropping.fields import ImageRatioField, ImageCropField
@@ -47,6 +46,7 @@ class Destination(models.Model):
     continent = models.CharField(
         max_length=255, choices=Continent_Name, default="Europe"
     )
+    short_description = RichTextField(blank=True)
     top = models.BooleanField(default=False)
     dest_image = models.ImageField(blank=True)
     # thumbnail = ImageSpecField(source='dest_image',
@@ -62,9 +62,6 @@ class Destination(models.Model):
         return self.package_set.all()
 
     date_created = models.DateField()
-
-    class Meta:
-        ordering = ("-id",)
 
     @property
     def locations(self):
@@ -96,6 +93,9 @@ class Destination(models.Model):
         )
 
         return ls
+
+    class Meta:
+        ordering = ("-id",)
 
 
 class Itinerary(models.Model):
@@ -139,7 +139,8 @@ class Package(models.Model):
     )
 
     operator = models.ForeignKey(UserProfile, on_delete=models.CASCADE)
-    destination = models.ForeignKey(Destination, on_delete=models.CASCADE)
+    # destination = models.ForeignKey(Destination, on_delete=models.CASCADE,related_name='package')
+    destinations = models.ManyToManyField(Destination, related_name="packages")
     package_name = models.CharField(max_length=255)
     city = models.CharField(max_length=255)
     featured = models.BooleanField(default=False)
@@ -150,6 +151,7 @@ class Package(models.Model):
         blank=True, null=True, verbose_name="Hours If One day Tour"
     )
     discount = models.IntegerField(verbose_name="Discount %", default=15)
+
     tour_type = models.CharField(
         max_length=100, choices=TOUR_TYPE, default="Group Tour"
     )
@@ -158,6 +160,12 @@ class Package(models.Model):
     transport = models.CharField(max_length=150, default="Flight")
     age_range = models.CharField(max_length=100, default="6 to 79 years old")
     fix_departure = models.BooleanField(default=False)
+    fixed_price_nrs = models.IntegerField(
+        verbose_name="Price in Nrs for fixed departures"
+    )
+    fixed_price_dollar = models.IntegerField(
+        verbose_name="Price in $ for fixed departures"
+    )
     rating = models.IntegerField(choices=((1, 1), (2, 2), (3, 3), (4, 4), (5, 5)))
 
     image = models.ImageField(blank=True, verbose_name="Thumbnail Image-Vertical")
@@ -169,7 +177,6 @@ class Package(models.Model):
     highlights = RichTextField()
     inclusions = RichTextField()
     exclusions = RichTextField()
-
     itinerary_text = RichTextField()
     faqs = RichTextField(blank=True)
     image_1 = models.ImageField(blank=True, null=True, verbose_name="Image-Horizontal")
