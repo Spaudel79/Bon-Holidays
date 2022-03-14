@@ -12,6 +12,7 @@ from rest_framework.generics import (
     RetrieveAPIView,
 )
 
+
 from .filter import PackageFilter
 from django_filters.rest_framework import DjangoFilterBackend
 from rest_framework.permissions import (
@@ -19,6 +20,7 @@ from rest_framework.permissions import (
 )
 from django.core.mail import send_mail
 from travel_crm.settings import EMAIL_HOST_USER
+from apps.blogs.pagination import PackagesPagination
 
 
 class DestinationFrontListAPIView(ListAPIView):
@@ -47,8 +49,10 @@ class DestinationFrontListAPIView(ListAPIView):
                 )
                 .distinct()
             )
-            serializer = PackageSerializer(qs, many=True)
-            return Response(serializer.data, status=200)
+            paginator = PackagesPagination()
+            result_page = paginator.paginate_queryset(qs, request)
+            serializer = PackageSerializer(result_page, many=True)
+            return paginator.get_paginated_response(serializer.data)
 
         qs = self.get_queryset().prefetch_related("packages")
         serializer = self.get_serializer(qs, many=True)

@@ -7,3 +7,7 @@ class BlogPostPageNumberPagination(PageNumberPagination):
 
 class CommentPageNumberPagination(PageNumberPagination):
     page_size = 2
+
+
+class PackagesPagination(PageNumberPagination):
+    page_size = 6
