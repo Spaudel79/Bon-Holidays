@@ -1,14 +1,6 @@
 from django.db import models
 from ckeditor.fields import RichTextField
 
-# import datetime
-from datetime import datetime
-
-# Create your models here.
-
-# class AddressInfo(models.Model):
-#     full_address = models.CharField(max_length=255,blank=True,null=True)
-
 
 class AddressInfo(models.Model):
     full_address = models.CharField(max_length=255)

@@ -108,9 +108,6 @@ class DestinationwithPackageSerializer(serializers.ModelSerializer):
         fields = ["id", "name", "dest_image", "packages"]
 
 
-# class Destinationwith
-
-
 class DestinationFrontSerializer(serializers.ModelSerializer):
 
     packages_count = serializers.IntegerField()
@@ -141,24 +138,3 @@ class DestinationSerializer(serializers.ModelSerializer):
     class Meta:
         model = Destination
         fields = "__all__"
-
-
-class CityNameSerializer(serializers.ModelSerializer):
-
-    destination = serializers.StringRelatedField()
-
-    class Meta:
-        model = Package
-        fields = [
-            "id",
-            "destinations",
-            "package_name",
-            "duration",
-            "featured",
-            "city",
-            "tour_type",
-            "accommodation",
-            "transport",
-            "age_range",
-            "fix_departure",
-        ]

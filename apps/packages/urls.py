@@ -36,5 +36,4 @@ urlpatterns = [
         views.NewActivityListAPIView.as_view(),
         name="api-newactivities",
     ),
-    path("api/cities", views.PackageSearchAPi.as_view()),
 ]
